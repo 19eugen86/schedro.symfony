@@ -19,6 +19,9 @@ framework:
     csrf_protection: ~
     validation:      { enable_annotations: true }
     #serializer:      { enable_annotations: true }
+    serializer:
+        enabled: true
+
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -48,6 +51,11 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        mapping_types:
+            enum: string
+            set: string
+            varbinary: string
+            tinyblob: text
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
