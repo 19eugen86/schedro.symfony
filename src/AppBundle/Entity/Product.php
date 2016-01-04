@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * City
+ * Product
  *
- * @ORM\Table(name="cities")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CityRepository")
+ * @ORM\Table(name="products")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  */
-class City
+class Product
 {
     /**
      * @var int
@@ -29,10 +29,13 @@ class City
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Country", inversedBy="cities")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * @var int
+     *
+     * @ORM\ManyToOne(targetEntity="ProductCategory", inversedBy="product_categories")
+     * @ORM\JoinColumn(name="product_category_id", referencedColumnName="id")
      */
-    protected $country;
+    private $category;
+
 
     /**
      * Get id
@@ -49,7 +52,7 @@ class City
      *
      * @param string $name
      *
-     * @return City
+     * @return Product
      */
     public function setName($name)
     {
@@ -69,22 +72,22 @@ class City
     }
 
     /**
-     * @param Country $country
+     * @param ProductCategory $productCategory
      * @return $this
      */
-    public function setCountry(Country $country)
+    public function setCategory(ProductCategory $productCategory)
     {
-        $this->country = $country;
+        $this->category = $productCategory;
 
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getCountry()
+    public function getCategory()
     {
-        return $this->country;
+        return $this->category;
     }
 }
 

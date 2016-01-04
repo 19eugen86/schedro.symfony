@@ -14,14 +14,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CountryController extends Controller
 {
     /**
-     * @Route("/countries", name="all_countries")
+     * @Route("/admin/countries", name="all_countries")
      */
     public function indexAction()
     {
@@ -35,13 +34,17 @@ class CountryController extends Controller
     }
 
     /**
-     * @Route("/countries/{id}", name="show_country", requirements={
-     *      "id": "\d+"
-     * })
+     * @Route("/admin/countries/{name}", name="show_country")
      */
-    public function showAction($id)
+    public function showAction($name)
     {
-        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->find($id);
+        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneByName($name);
+        if (!$country) {
+            throw $this->createNotFoundException(
+                'No country found for name '.$name
+            );
+        }
+
         return new Response(
             $this->get('serializer')->serialize($country, 'json'),
             200,
@@ -50,7 +53,7 @@ class CountryController extends Controller
     }
 
     /**
-     * @Route("/countries/new", name="new_country")
+     * @Route("/admin/countries/new", name="new_country")
      */
     public function newAction(Request $request)
     {
@@ -69,6 +72,35 @@ class CountryController extends Controller
             $em->flush();
 
             return $this->redirectToRoute("all_countries");
+        }
+
+        return $this->render('default/new.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/admin/countries/{name}/edit", name="edit_country")
+     */
+    public function editAction(Request $request, $name)
+    {
+        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneByName($name);
+
+        $form = $this->createFormBuilder($country)
+            ->add('name', TextType::class, array('label' => 'Country'))
+            ->add('save', SubmitType::class, array('label' => 'Save'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($country);
+            $em->flush();
+
+            return $this->redirectToRoute("show_country", array(
+                'name' => $country->getName()
+            ));
         }
 
         return $this->render('default/new.html.twig', array(
