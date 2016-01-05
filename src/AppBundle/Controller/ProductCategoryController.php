@@ -17,10 +17,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/admin/product-categories")
+ */
 class ProductCategoryController extends Controller
 {
     /**
-     * @Route("/admin/product-categories", name="all_product_categories")
+     * @Route("/", name="all_product_categories")
      */
     public function indexAction()
     {
@@ -33,26 +36,7 @@ class ProductCategoryController extends Controller
     }
 
     /**
-     * @Route("/admin/product-categories/{name}", name="show_product_category")
-     */
-    public function showAction($name)
-    {
-        $category = $this->getDoctrine()->getRepository('AppBundle:ProductCategory')->findOneByName($name);
-        if (!$category) {
-            throw $this->createNotFoundException(
-                'No product category found for name '.$name
-            );
-        }
-
-        return new Response(
-            $this->get('serializer')->serialize($category, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
-        );
-    }
-
-    /**
-     * @Route("/admin/product-categories/new", name="new_product_category")
+     * @Route("/new", name="new_product_category")
      */
     public function newAction(Request $request)
     {
@@ -79,7 +63,26 @@ class ProductCategoryController extends Controller
     }
 
     /**
-     * @Route("/admin/product-categories/{name}/edit", name="edit_product_category")
+     * @Route("/{name}", name="show_product_category")
+     */
+    public function showAction($name)
+    {
+        $category = $this->getDoctrine()->getRepository('AppBundle:ProductCategory')->findOneByName($name);
+        if (!$category) {
+            throw $this->createNotFoundException(
+                'No product category found for name '.$name
+            );
+        }
+
+        return new Response(
+            $this->get('serializer')->serialize($category, 'json'),
+            200,
+            array('Content-Type' => 'application/json')
+        );
+    }
+
+    /**
+     * @Route("/{name}/edit", name="edit_product_category")
      */
     public function editAction(Request $request, $name)
     {

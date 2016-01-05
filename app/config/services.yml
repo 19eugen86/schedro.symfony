@@ -11,3 +11,5 @@ services:
         class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
         tags:
             - { name: serializer.normalizer }
+    app.slugger:
+        class: AppBundle\Utils\Slugger

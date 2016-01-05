@@ -17,10 +17,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/admin/countries")
+ */
 class CountryController extends Controller
 {
     /**
-     * @Route("/admin/countries", name="all_countries")
+     * @Route("/", name="all_countries")
      */
     public function indexAction()
     {
@@ -34,26 +37,7 @@ class CountryController extends Controller
     }
 
     /**
-     * @Route("/admin/countries/{name}", name="show_country")
-     */
-    public function showAction($name)
-    {
-        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneByName($name);
-        if (!$country) {
-            throw $this->createNotFoundException(
-                'No country found for name '.$name
-            );
-        }
-
-        return new Response(
-            $this->get('serializer')->serialize($country, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
-        );
-    }
-
-    /**
-     * @Route("/admin/countries/new", name="new_country")
+     * @Route("/new", name="new_country")
      */
     public function newAction(Request $request)
     {
@@ -80,7 +64,26 @@ class CountryController extends Controller
     }
 
     /**
-     * @Route("/admin/countries/{name}/edit", name="edit_country")
+     * @Route("/{name}", name="show_country")
+     */
+    public function showAction($name)
+    {
+        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneByName($name);
+        if (!$country) {
+            throw $this->createNotFoundException(
+                'No country found for name '.$name
+            );
+        }
+
+        return new Response(
+            $this->get('serializer')->serialize($country, 'json'),
+            200,
+            array('Content-Type' => 'application/json')
+        );
+    }
+
+    /**
+     * @Route("/{name}/edit", name="edit_country")
      */
     public function editAction(Request $request, $name)
     {
