@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Client
@@ -25,6 +26,8 @@ class Client
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -32,6 +35,8 @@ class Client
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
+     *
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -39,6 +44,8 @@ class Client
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255)
+     *
+     * @Assert\NotBlank()
      */
     private $address;
 
@@ -47,6 +54,8 @@ class Client
      *
      * @ORM\ManyToOne(targetEntity="City", inversedBy="cities")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
+     *
+     * @Assert\NotBlank()
      */
     private $city;
 

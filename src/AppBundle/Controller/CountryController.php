@@ -10,8 +10,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Country;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use AppBundle\Form\Type\CountryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,11 +42,7 @@ class CountryController extends Controller
     {
         $country = new Country();
 
-        $form = $this->createFormBuilder($country)
-            ->add('name', TextType::class, array('label' => 'Country'))
-            ->add('save', SubmitType::class, array('label' => 'Save'))
-            ->getForm();
-
+        $form = $this->createForm(CountryType::class, $country);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -89,11 +84,7 @@ class CountryController extends Controller
     {
         $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneByName($name);
 
-        $form = $this->createFormBuilder($country)
-            ->add('name', TextType::class, array('label' => 'Country'))
-            ->add('save', SubmitType::class, array('label' => 'Save'))
-            ->getForm();
-
+        $form = $this->createForm(CountryType::class, $country);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

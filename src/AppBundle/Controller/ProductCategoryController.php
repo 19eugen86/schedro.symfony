@@ -10,10 +10,9 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\ProductCategory;
+use AppBundle\Form\Type\ProductCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -42,11 +41,7 @@ class ProductCategoryController extends Controller
     {
         $category = new ProductCategory();
 
-        $form = $this->createFormBuilder($category)
-            ->add('name', TextType::class, array('label' => 'Category'))
-            ->add('save', SubmitType::class, array('label' => 'Save'))
-            ->getForm();
-
+        $form = $this->createForm(ProductCategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -93,11 +88,7 @@ class ProductCategoryController extends Controller
             );
         }
 
-        $form = $this->createFormBuilder($category)
-            ->add('name', TextType::class, array('label' => 'Category'))
-            ->add('save', SubmitType::class, array('label' => 'Save'))
-            ->getForm();
-
+        $form = $this->createForm(ProductCategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

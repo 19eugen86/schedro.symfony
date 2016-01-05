@@ -10,10 +10,9 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Product;
+use AppBundle\Form\Type\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -65,16 +64,12 @@ class ProductController extends Controller
         }
 
         $product = new Product();
+        $product->setCategory($category);
 
-        $form = $this->createFormBuilder($product)
-            ->add('name', TextType::class, array('label' => 'Product'))
-            ->add('save', SubmitType::class, array('label' => 'Save'))
-            ->getForm();
+        $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $product->setCategory($category);
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
@@ -132,10 +127,7 @@ class ProductController extends Controller
             );
         }
 
-        $form = $this->createFormBuilder($product)
-            ->add('name', TextType::class, array('label' => 'Product'))
-            ->add('save', SubmitType::class, array('label' => 'Save'))
-            ->getForm();
+        $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
