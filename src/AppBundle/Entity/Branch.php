@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * CompanyBranch
+ * Branch
  *
- * @ORM\Table(name="company_branches")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CompanyBranchRepository")
+ * @ORM\Table(name="branches")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BranchRepository")
  */
-class CompanyBranch
+class Branch
 {
     /**
      * @var int
@@ -52,10 +52,8 @@ class CompanyBranch
     /**
      * @var
      *
-     * @ORM\ManyToOne(targetEntity="City", inversedBy="cities")
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="branches")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
-     *
-     * @Assert\NotBlank()
      */
     private $city;
 
@@ -75,7 +73,7 @@ class CompanyBranch
      *
      * @param string $name
      *
-     * @return CompanyBranch
+     * @return Branch
      */
     public function setName($name)
     {
@@ -99,7 +97,7 @@ class CompanyBranch
      *
      * @param string $description
      *
-     * @return CompanyBranch
+     * @return Branch
      */
     public function setDescription($description)
     {
@@ -123,7 +121,7 @@ class CompanyBranch
      *
      * @param string $address
      *
-     * @return CompanyBranch
+     * @return Branch
      */
     public function setAddress($address)
     {

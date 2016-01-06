@@ -19,16 +19,14 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductController extends Controller
 {
     /**
-     * @Route("/admin/products", name="all_products")
+     * @Route("/admin/products", name="show_all_products")
      */
     public function showAllAction()
     {
         $products = $this->getDoctrine()->getRepository('AppBundle:Product')->findAll();
-        return new Response(
-            $this->get('serializer')->serialize($products, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
-        );
+        return $this->render('product/index.html.twig', array(
+            'products' => $products
+        ));
     }
 
     /**
@@ -52,7 +50,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/admin/product-categories/{categoryName}/products/new", name="new_product")
+     * @Route("/admin/product-categories/{categoryName}/products/new", name="add_new_product")
      */
     public function newAction(Request $request, $categoryName)
     {

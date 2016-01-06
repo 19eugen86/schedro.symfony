@@ -52,7 +52,7 @@ class Factory
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="City", inversedBy="cities")
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="factories")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
      *
      * @Assert\NotBlank()

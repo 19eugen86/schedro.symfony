@@ -34,7 +34,7 @@ class Product
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="ProductCategory", inversedBy="product_categories")
+     * @ORM\ManyToOne(targetEntity="ProductCategory", inversedBy="products")
      * @ORM\JoinColumn(name="product_category_id", referencedColumnName="id")
      *
      * @Assert\Type(type="AppBundle\Entity\ProductCategory")

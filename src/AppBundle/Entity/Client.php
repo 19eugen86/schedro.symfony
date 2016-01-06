@@ -34,7 +34,7 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      *
      * @Assert\NotBlank()
      */
@@ -43,7 +43,7 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="text")
      *
      * @Assert\NotBlank()
      */
@@ -52,10 +52,11 @@ class Client
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="City", inversedBy="cities")
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="clients")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
      *
-     * @Assert\NotBlank()
+     * @Assert\Type(type="AppBundle\Entity\City")
+     * @Assert\Valid()
      */
     private $city;
 

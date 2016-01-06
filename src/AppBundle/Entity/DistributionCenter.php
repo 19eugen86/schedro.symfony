@@ -52,7 +52,7 @@ class DistributionCenter
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="City", inversedBy="cities")
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="distributionCenters")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
      *
      * @Assert\NotBlank()

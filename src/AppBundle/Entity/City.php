@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -39,6 +40,34 @@ class City
      * @Assert\Valid()
      */
     protected $country;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Client", mappedBy="city")
+     */
+    protected $clients;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Factory", mappedBy="city")
+     */
+    protected $factories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="DistributionCenter", mappedBy="city")
+     */
+    protected $distributionCenters;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Branch", mappedBy="city")
+     */
+    protected $branches;
+
+    public function __construct()
+    {
+        $this->clients = new ArrayCollection();
+        $this->factories = new ArrayCollection();
+        $this->distributionCenters = new ArrayCollection();
+        $this->branches = new ArrayCollection();
+    }
 
     /**
      * Get id

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,6 +32,15 @@ class ProductCategory
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     */
+    protected $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * Get id

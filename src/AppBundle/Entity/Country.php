@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,6 +32,15 @@ class Country
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="City", mappedBy="country")
+     */
+    protected $cities;
+
+    public function __construct()
+    {
+        $this->cities = new ArrayCollection;
+    }
 
     /**
      * Get id
