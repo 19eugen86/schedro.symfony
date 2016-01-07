@@ -1,24 +1,37 @@
-<div class="modal fade" id="newClient" tabindex="-1" role="dialog" aria-labelledby="newClientLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="newClientLabel">New client</h4>
-            </div>
-            <div class="modal-body">
-                {{ form_start(form) }}
-                    {{ form_errors(form) }}
+{{ form_start(form, {'action': path('add_new_client'), 'method': 'POST'}) }}
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="newClientLabel">Новый клиент</h4>
+    </div>
+    <div class="modal-body">
+        {{ form_errors(form) }}
 
-                    {{ form_row(form.name) }}
-                    {{ form_row(form.description) }}
-                    {{ form_row(form.address) }}
-                    {{ form_row(form.city) }}
-                {{ form_end(form) }}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.name, 'Клиент') }}</span>
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.description, 'Описание') }}</span>
+            {{ form_errors(form.description) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.address, 'Адрес') }}</span>
+            {{ form_errors(form.address) }}
+            {{ form_widget(form.address, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.city, 'Город') }}</span>
+            {{ form_errors(form.city) }}
+            {{ form_widget(form.city, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
         </div>
     </div>
-</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+{{ form_end(form) }}

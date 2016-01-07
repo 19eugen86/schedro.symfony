@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CountryController extends Controller
 {
     /**
-     * @Route("/", name="all_countries")
+     * @Route("/", name="show_all_countries")
      */
     public function indexAction()
     {
@@ -50,7 +50,7 @@ class CountryController extends Controller
             $em->persist($country);
             $em->flush();
 
-            return $this->redirectToRoute("all_countries");
+            return $this->redirectToRoute("show_all_countries");
         }
 
         return $this->render('default/new.html.twig', array(

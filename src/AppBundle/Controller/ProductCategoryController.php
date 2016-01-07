@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductCategoryController extends Controller
 {
     /**
-     * @Route("/", name="all_product_categories")
+     * @Route("/", name="show_all_product_categories")
      */
     public function indexAction()
     {
@@ -49,7 +49,7 @@ class ProductCategoryController extends Controller
             $em->persist($category);
             $em->flush();
 
-            return $this->redirectToRoute("all_product_categories");
+            return $this->redirectToRoute("show_all_product_categories");
         }
 
         return $this->render('default/new.html.twig', array(
@@ -96,7 +96,7 @@ class ProductCategoryController extends Controller
             $em->persist($category);
             $em->flush();
 
-            return $this->redirectToRoute("all_product_categories");
+            return $this->redirectToRoute("show_all_product_categories");
         }
 
         return $this->render('default/new.html.twig', array(

@@ -34,7 +34,7 @@ class Factory
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      *
      * @Assert\NotBlank()
      */
@@ -43,7 +43,7 @@ class Factory
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="text")
      *
      * @Assert\NotBlank()
      */

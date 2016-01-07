@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/clients")
+ * @Route("/admin/clients")
  */
 class ClientController extends Controller
 {

@@ -27,7 +27,7 @@ class BaseEntityType extends AbstractType
                 'class' => 'AppBundle:City',
                 'choice_label' => 'name'
             ))
-            ->add('save', SubmitType::class)
+//            ->add('save', SubmitType::class)
         ;
     }
 }
