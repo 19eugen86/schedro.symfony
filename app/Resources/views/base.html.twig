@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Щедро &raquo; Склад{% endblock %}</title>
@@ -14,7 +14,7 @@
     </head>
     <body>
         {% include 'top_menu.html.twig' %}
-        <div class="container">
+        <div class="container-fluid">
             {% block body %}{% endblock %}
             <hr>
             <footer>
