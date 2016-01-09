@@ -5,28 +5,25 @@
 {% endblock %}
 
 {% block body %}
-    {% include 'top_menu.html.twig' %}
-    <div class="container">
-        <h3>
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Клиенты
-            <button class="btn btn-default" data-toggle="modal" data-target="#newClient">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Добавить
-            </button>
-        </h3>
-        {% for client in clients %}
-            <div class="row">
-                <div class="col-md-4">{{ client.name }}</div>
-                <div class="col-md-4">{{ client.address }}</div>
-                <div class="col-md-4">{{ client.city.name }} - {{ client.city.country.name }}</div>
-                <div class="col-md-12">{{ client.description }}</div>
-            </div>
-        {% endfor %}
-        <div class="modal fade" id="newClient" tabindex="-1" role="dialog" aria-labelledby="newClientLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    {{ render(controller('AppBundle:Client:new')) }}
-                </div>
+    <h3>
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Клиенты
+        <button class="btn btn-default" data-toggle="modal" data-target="#newClient">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Добавить
+        </button>
+    </h3>
+    {% for client in clients %}
+        <div class="row">
+            <div class="col-md-4">{{ client.name }}</div>
+            <div class="col-md-4">{{ client.address }}</div>
+            <div class="col-md-4">{{ client.city.name }} - {{ client.city.country.name }}</div>
+            <div class="col-md-12">{{ client.description }}</div>
+        </div>
+    {% endfor %}
+    <div class="modal fade" id="newClient" tabindex="-1" role="dialog" aria-labelledby="newClientLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {{ render(controller('AppBundle:Client:new')) }}
             </div>
         </div>
-    </div><!-- /.container -->
+    </div>
 {% endblock %}

@@ -5,14 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    {% include 'top_menu.html.twig' %}
-    <div class="container">
-        <h3><span class="glyphicon glyphicon-barcode" aria-hidden="true"></span> Продукты</h3>
-        {% for product in products %}
-            <div class="row">
-                <div class="col-md-4">{{ product.name }}</div>
-                <div class="col-md-4">{{ product.category.name }}</div>
-            </div>
-        {% endfor %}
-    </div><!-- /.container -->
+    <h3><span class="glyphicon glyphicon-barcode" aria-hidden="true"></span> Продукты</h3>
+    {% for product in products %}
+        <div class="row">
+            <div class="col-md-4">{{ product.name }}</div>
+            <div class="col-md-4">{{ product.category.name }}</div>
+        </div>
+    {% endfor %}
 {% endblock %}

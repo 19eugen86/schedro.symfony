@@ -18,4 +18,12 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ]);
     }
+
+    /**
+     * @Route("/admin", name="admin_dashboard")
+     */
+    public function adminAction()
+    {
+        return $this->render('default/admin/index.html.twig');
+    }
 }
