@@ -1,0 +1,36 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <h2 class="sub-header">
+        Клиенты
+        <button class="btn btn-default" data-toggle="modal" data-target="#newClient">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Добавить
+        </button>
+    </h2>
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Адрес</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.address }}</td>
+                    <td>{# TODO: actions #}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="modal fade" id="newClient" tabindex="-1" role="dialog" aria-labelledby="newClientLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {{ render(controller('AppBundle:Client:new')) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

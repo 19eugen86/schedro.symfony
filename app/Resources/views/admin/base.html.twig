@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ie10-viewport-bug-workaround.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        {% include 'admin/sidebar.html.twig' %}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Панель администратора</h1>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,4 +1,4 @@
-.container {
+.grid-container {
     padding-right: 15px;
     padding-left: 15px;
 }
@@ -6,14 +6,14 @@
 h4 {
     margin-top: 25px;
 }
-.row {
+.grid-row {
     margin-bottom: 20px;
 }
-.row .row {
+.grid-row .grid-row {
     margin-top: 10px;
     margin-bottom: 0;
 }
-[class*="col-"] {
+[class*="grid-col-"] {
     padding-top: 15px;
     padding-bottom: 15px;
     background-color: #eee;

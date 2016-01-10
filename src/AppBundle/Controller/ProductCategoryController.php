@@ -27,15 +27,13 @@ class ProductCategoryController extends Controller
     public function indexAction()
     {
         $categories = $this->getDoctrine()->getRepository('AppBundle:ProductCategory')->findAll();
-        return new Response(
-            $this->get('serializer')->serialize($categories, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
-        );
+        return $this->render('admin/product_category/index.html.twig', array(
+            'categories' => $categories
+        ));
     }
 
     /**
-     * @Route("/new", name="new_product_category")
+     * @Route("/new", name="add_new_product_category")
      */
     public function newAction(Request $request)
     {
@@ -52,7 +50,7 @@ class ProductCategoryController extends Controller
             return $this->redirectToRoute("show_all_product_categories");
         }
 
-        return $this->render('default/new.html.twig', array(
+        return $this->render('admin/product_category/new.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -99,7 +97,7 @@ class ProductCategoryController extends Controller
             return $this->redirectToRoute("show_all_product_categories");
         }
 
-        return $this->render('default/new.html.twig', array(
+        return $this->render('admin/product_category/new.html.twig', array(
             'form' => $form->createView()
         ));
     }

@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function showAllAction()
     {
         $products = $this->getDoctrine()->getRepository('AppBundle:Product')->findAll();
-        return $this->render('product/index.html.twig', array(
+        return $this->render('admin/product/index.html.twig', array(
             'products' => $products
         ));
     }
@@ -50,19 +50,11 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/admin/product-categories/{categoryName}/products/new", name="add_new_product")
+     * @Route("/admin/products/new", name="add_new_product")
      */
-    public function newAction(Request $request, $categoryName)
+    public function newAction(Request $request)
     {
-        $category = $this->getDoctrine()->getRepository('AppBundle:ProductCategory')->findOneByName($categoryName);
-        if (!$category) {
-            throw $this->createNotFoundException(
-                'No category found for name '.$categoryName
-            );
-        }
-
         $product = new Product();
-        $product->setCategory($category);
 
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -72,12 +64,10 @@ class ProductController extends Controller
             $em->persist($product);
             $em->flush();
 
-            return $this->redirectToRoute("category_products", array(
-                'categoryName' => $category->getName()
-            ));
+            return $this->redirectToRoute("show_all_products");
         }
 
-        return $this->render('default/new.html.twig', array(
+        return $this->render('admin/product/new.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -141,7 +131,7 @@ class ProductController extends Controller
             ));
         }
 
-        return $this->render('default/new.html.twig', array(
+        return $this->render('admin/product/new.html.twig', array(
             'form' => $form->createView()
         ));
     }

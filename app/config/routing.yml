@@ -1,3 +1,9 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+default_security_target:
+    path: /
+
+logout:
+    path: /logout

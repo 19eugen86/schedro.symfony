@@ -13,6 +13,10 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute("admin_dashboard");
+        }
+
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
@@ -24,6 +28,6 @@ class DefaultController extends Controller
      */
     public function adminAction()
     {
-        return $this->render('default/admin/index.html.twig');
+        return $this->render('admin/index.html.twig');
     }
 }

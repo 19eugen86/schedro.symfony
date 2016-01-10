@@ -27,7 +27,7 @@ class ClientController extends Controller
     public function indexAction()
     {
         $clients = $this->getDoctrine()->getRepository('AppBundle:Client')->findAll();
-        return $this->render('client/index.html.twig', array(
+        return $this->render('admin/client/index.html.twig', array(
             'clients' => $clients
         ));
     }
@@ -50,7 +50,7 @@ class ClientController extends Controller
             return $this->redirectToRoute("show_all_clients");
         }
 
-        return $this->render('client/new.html.twig', array(
+        return $this->render('admin/client/new.html.twig', array(
             'form' => $form->createView()
         ));
     }

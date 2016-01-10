@@ -2,6 +2,8 @@
 # http://symfony.com/doc/current/book/security.html
 security:
     encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
         AppBundle\Entity\User:
             algorithm: bcrypt
 
@@ -20,7 +22,7 @@ security:
             security: false
 
         main:
-            # anonymous: ~
+            anonymous: ~
             # activate different ways to authenticate
 
             # http_basic: ~
@@ -28,15 +30,13 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            form_login:
+                check_path: /login_check
+                default_target_path: default_security_target
 
-            pattern: ^/
-            http_basic: ~
-            provider: our_db_provider
-
-            #form_login:
-            #    login_path: /login
-            #    check_path: /login_check
+            logout:
+                path:   /logout
+                target: /
 
     access_control:
-        # require ROLE_ADMIN for /admin*
-        - { path: ^/admin, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
