@@ -28,7 +28,8 @@ class CityController extends Controller
     {
         $cities = $this->getDoctrine()->getRepository('AppBundle:City')->findAll();
         return $this->render('admin/city/index.html.twig', array(
-            'cities' => $cities
+            'cities' => $cities,
+            'section' => 'География'
         ));
     }
 
@@ -41,7 +42,8 @@ class CityController extends Controller
     {
         $cities = $this->getDoctrine()->getRepository('AppBundle:City')->findAll();
         return $this->render('admin/city/index.html.twig', array(
-            'cities' => $cities
+            'cities' => $cities,
+            'section' => 'География'
         ));
     }
 

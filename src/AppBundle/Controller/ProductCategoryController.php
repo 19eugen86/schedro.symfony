@@ -28,7 +28,8 @@ class ProductCategoryController extends Controller
     {
         $categories = $this->getDoctrine()->getRepository('AppBundle:ProductCategory')->findAll();
         return $this->render('admin/product_category/index.html.twig', array(
-            'categories' => $categories
+            'categories' => $categories,
+            'section' => 'Продукция'
         ));
     }
 
@@ -41,7 +42,8 @@ class ProductCategoryController extends Controller
     {
         $categories = $this->getDoctrine()->getRepository('AppBundle:ProductCategory')->findAll();
         return $this->render('admin/product_category/index.html.twig', array(
-            'categories' => $categories
+            'categories' => $categories,
+            'section' => 'Продукция'
         ));
     }
 
@@ -120,8 +122,8 @@ class ProductCategoryController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-//        $em->remove($category);
-//        $em->flush();
+        $em->remove($category);
+        $em->flush();
 
         $this->addFlash(
             'success',

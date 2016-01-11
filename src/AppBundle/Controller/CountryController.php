@@ -28,7 +28,8 @@ class CountryController extends Controller
     {
         $countries = $this->getDoctrine()->getRepository('AppBundle:Country')->findAll();
         return $this->render('admin/country/index.html.twig', array(
-            'countries' => $countries
+            'countries' => $countries,
+            'section' => 'География'
         ));
     }
 
@@ -41,7 +42,8 @@ class CountryController extends Controller
     {
         $countries = $this->getDoctrine()->getRepository('AppBundle:Country')->findAll();
         return $this->render('admin/country/index.html.twig', array(
-            'countries' => $countries
+            'countries' => $countries,
+            'section' => 'География'
         ));
     }
 

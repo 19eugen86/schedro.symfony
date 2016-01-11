@@ -9,7 +9,7 @@
     <div class="row">
         {% include 'admin/sidebar.html.twig' %}
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Панель администратора</h1>
+            <h1 class="page-header">Панель администратора {% if section is defined %}&raquo; {{ section }}{% endif %}</h1>
             {% include 'admin/alertsbar.html.twig' %}
             {% block content %}{% endblock %}
         </div>
@@ -17,21 +17,17 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/bootstrap-confirmation.min.js') }}"></script>
     <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
-            {#
-            <script src="{{ asset('js/bootstrap-confirmation.js') }}"></script>
-            $('[data-toggle="confirmation"]').popover()
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover()
             $('[data-toggle="confirmation"]').confirmation({
                 title: 'Вы уверены?',
                 btnOkLabel: '<i class="icon-ok-sign icon-white"></i> Да',
                 btnCancelLabel: '<i class="icon-remove-sign"></i> Нет',
                 singleton: true,
                 popout: true
-            });
-            #}
-
+            })
+        });
     </script>
 {% endblock %}

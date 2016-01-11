@@ -28,7 +28,8 @@ class ProductController extends Controller
     {
         $products = $this->getDoctrine()->getRepository('AppBundle:Product')->findAll();
         return $this->render('admin/product/index.html.twig', array(
-            'products' => $products
+            'products' => $products,
+            'section' => 'РџСЂРѕРґСѓРєС†РёСЏ'
         ));
     }
 
@@ -41,7 +42,8 @@ class ProductController extends Controller
     {
         $products = $this->getDoctrine()->getRepository('AppBundle:Product')->findAll();
         return $this->render('admin/product/index.html.twig', array(
-            'products' => $products
+            'products' => $products,
+            'section' => 'РџСЂРѕРґСѓРєС†РёСЏ'
         ));
     }
 
@@ -62,7 +64,7 @@ class ProductController extends Controller
 
             $this->addFlash(
                 'success',
-                'Продукт успешно добавлен!'
+                'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!'
             );
 
             return $this->redirectToRoute("show_all_products");
@@ -82,7 +84,7 @@ class ProductController extends Controller
     {
         $product = $this->getDoctrine()->getRepository('AppBundle:Product')->find($id);
         if (!$product) {
-            throw $this->createNotFoundException('Продукт не найден');
+            throw $this->createNotFoundException('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
         }
 
         $form = $this->createForm(ProductType::class, $product);
@@ -95,7 +97,7 @@ class ProductController extends Controller
 
             $this->addFlash(
                 'info',
-                'Продукт измемнен!'
+                'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!'
             );
 
             return $this->redirectToRoute("show_all_products");
@@ -116,7 +118,7 @@ class ProductController extends Controller
     {
         $product = $this->getDoctrine()->getRepository('AppBundle:Product')->find($id);
         if (!$product) {
-            throw $this->createNotFoundException('Продукт не найден');
+            throw $this->createNotFoundException('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -125,7 +127,7 @@ class ProductController extends Controller
 
         $this->addFlash(
             'success',
-            'Продукт успешно удален!'
+            'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!'
         );
 
         return $this->redirectToRoute("show_all_products");
