@@ -16,12 +16,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/admin/products")
+ */
 class ProductController extends Controller
 {
     /**
-     * @Route("/admin/products", name="show_all_products")
+     * @Route("/", name="show_all_products")
      */
-    public function showAllAction()
+    public function indexAction()
     {
         $products = $this->getDoctrine()->getRepository('AppBundle:Product')->findAll();
         return $this->render('admin/product/index.html.twig', array(
@@ -30,27 +33,20 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/admin/product-categories/{categoryName}/products", name="category_products")
+     * @Route("/page/{page}", name="show_products_by_page", defaults={"page": 1}, requirements={
+     *      "page": "\d+"
+     * })
      */
-    public function indexAction($categoryName)
+    public function showByPageAction($page)
     {
-        $category = $this->getDoctrine()->getRepository('AppBundle:ProductCategory')->findOneByName($categoryName);
-        if (!$category) {
-            throw $this->createNotFoundException(
-                'No category found for name '.$categoryName
-            );
-        }
-
-        $products = $this->getDoctrine()->getRepository('AppBundle:Product')->findByCategory($category);
-        return new Response(
-            $this->get('serializer')->serialize($products, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
-        );
+        $products = $this->getDoctrine()->getRepository('AppBundle:Product')->findAll();
+        return $this->render('admin/product/index.html.twig', array(
+            'products' => $products
+        ));
     }
 
     /**
-     * @Route("/admin/products/new", name="add_new_product")
+     * @Route("/new", name="add_new_product")
      */
     public function newAction(Request $request)
     {
@@ -64,6 +60,11 @@ class ProductController extends Controller
             $em->persist($product);
             $em->flush();
 
+            $this->addFlash(
+                'success',
+                'Продукт успешно добавлен!'
+            );
+
             return $this->redirectToRoute("show_all_products");
         }
 
@@ -73,46 +74,15 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/admin/product-categories/{categoryName}/products/{productName}", name="show_product")
+     * @Route("/{id}/edit", name="edit_product", requirements={
+     *      "id": "\d+"
+     * })
      */
-    public function showAction($categoryName, $productName)
+    public function editAction(Request $request, $id)
     {
-        $category = $this->getDoctrine()->getRepository('AppBundle:ProductCategory')->findOneByName($categoryName);
-        if (!$category) {
-            throw $this->createNotFoundException(
-                'No category found for name '.$categoryName
-            );
-        }
-
-        $product = $this->getDoctrine()->getRepository('AppBundle:Product')->findOneBy(array(
-            'name' => $productName,
-            'category' => $category
-        ));
-
-        return new Response(
-            $this->get('serializer')->serialize($product, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
-        );
-    }
-
-    /**
-     * @Route("/admin/product-categories/{categoryName}/products/{productName}/edit", name="edit_product")
-     */
-    public function editAction(Request $request, $categoryName, $productName)
-    {
-        $category = $this->getDoctrine()->getRepository('AppBundle:ProductCategory')->findOneByName($categoryName);
-        if (!$category) {
-            throw $this->createNotFoundException(
-                'No category found for name '.$categoryName
-            );
-        }
-
-        $product = $this->getDoctrine()->getRepository('AppBundle:Product')->findOneByName($productName);
+        $product = $this->getDoctrine()->getRepository('AppBundle:Product')->find($id);
         if (!$product) {
-            throw $this->createNotFoundException(
-                'No product found for name '.$productName
-            );
+            throw $this->createNotFoundException('Продукт не найден');
         }
 
         $form = $this->createForm(ProductType::class, $product);
@@ -123,16 +93,41 @@ class ProductController extends Controller
             $em->persist($product);
             $em->flush();
 
-            $em->refresh($product);
+            $this->addFlash(
+                'info',
+                'Продукт измемнен!'
+            );
 
-            return $this->redirectToRoute("show_product", array(
-                'categoryName' => $category->getName(),
-                'productName' => $product->getName()
-            ));
+            return $this->redirectToRoute("show_all_products");
         }
 
-        return $this->render('admin/product/new.html.twig', array(
-            'form' => $form->createView()
+        return $this->render('admin/product/edit.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $product->getId()
         ));
+    }
+
+    /**
+     * @Route("/{id}/delete", name="delete_product", requirements={
+     *      "id": "\d+"
+     * })
+     */
+    public function deleteAction($id)
+    {
+        $product = $this->getDoctrine()->getRepository('AppBundle:Product')->find($id);
+        if (!$product) {
+            throw $this->createNotFoundException('Продукт не найден');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+//        $em->remove($product);
+//        $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Продукт успешно удален!'
+        );
+
+        return $this->redirectToRoute("show_all_products");
     }
 }

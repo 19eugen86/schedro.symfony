@@ -27,16 +27,26 @@ class CountryController extends Controller
     public function indexAction()
     {
         $countries = $this->getDoctrine()->getRepository('AppBundle:Country')->findAll();
-
-        return new Response(
-            $this->get('serializer')->serialize($countries, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
-        );
+        return $this->render('admin/country/index.html.twig', array(
+            'countries' => $countries
+        ));
     }
 
     /**
-     * @Route("/new", name="new_country")
+     * @Route("/page/{page}", name="show_countries_by_page", defaults={"page": 1}, requirements={
+     *      "page": "\d+"
+     * })
+     */
+    public function showByPageAction($page)
+    {
+        $countries = $this->getDoctrine()->getRepository('AppBundle:Country')->findAll();
+        return $this->render('admin/country/index.html.twig', array(
+            'countries' => $countries
+        ));
+    }
+
+    /**
+     * @Route("/new", name="add_new_country")
      */
     public function newAction(Request $request)
     {
@@ -50,39 +60,27 @@ class CountryController extends Controller
             $em->persist($country);
             $em->flush();
 
+            $this->addFlash(
+                'success',
+                'Страна успешно добавлена!'
+            );
+
             return $this->redirectToRoute("show_all_countries");
         }
 
-        return $this->render('default/new.html.twig', array(
+        return $this->render('admin/country/new.html.twig', array(
             'form' => $form->createView()
         ));
     }
 
     /**
-     * @Route("/{name}", name="show_country")
+     * @Route("/{id}/edit", name="edit_country", requirements={
+     *      "id": "\d+"
+     * })
      */
-    public function showAction($name)
+    public function editAction(Request $request, $id)
     {
-        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneByName($name);
-        if (!$country) {
-            throw $this->createNotFoundException(
-                'No country found for name '.$name
-            );
-        }
-
-        return new Response(
-            $this->get('serializer')->serialize($country, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
-        );
-    }
-
-    /**
-     * @Route("/{name}/edit", name="edit_country")
-     */
-    public function editAction(Request $request, $name)
-    {
-        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneByName($name);
+        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->find($id);
 
         $form = $this->createForm(CountryType::class, $country);
         $form->handleRequest($request);
@@ -92,13 +90,41 @@ class CountryController extends Controller
             $em->persist($country);
             $em->flush();
 
-            return $this->redirectToRoute("show_country", array(
-                'name' => $country->getName()
-            ));
+            $this->addFlash(
+                'info',
+                'Страна изменена!'
+            );
+
+            return $this->redirectToRoute("show_all_countries");
         }
 
-        return $this->render('default/new.html.twig', array(
-            'form' => $form->createView()
+        return $this->render('admin/country/edit.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $country->getId()
         ));
+    }
+
+    /**
+     * @Route("/{id}/delete", name="delete_country", requirements={
+     *      "id": "\d+"
+     * })
+     */
+    public function deleteAction($id)
+    {
+        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->find($id);
+        if (!$country) {
+            throw $this->createNotFoundException('Страна не найдена');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+//        $em->remove($country);
+//        $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Страна успешно удалена!'
+        );
+
+        return $this->redirectToRoute("show_all_countries");
     }
 }

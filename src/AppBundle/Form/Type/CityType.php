@@ -9,6 +9,7 @@
 namespace AppBundle\Form\Type;
 
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,13 +20,11 @@ class CityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('label' => 'City'))
-            ->add('countryName', TextType::class, array(
-                'data' => $options['data']->getCountry()->getName(),
-                'mapped' => false,
-                'disabled' => true
+            ->add('name', TextType::class)
+            ->add('country', EntityType::class, array(
+                'class' => 'AppBundle:Country',
+                'choice_label' => 'name'
             ))
-            ->add('save', SubmitType::class, array('label' => 'Save city'))
         ;
     }
 }

@@ -16,57 +16,41 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/admin/cities")
+ */
 class CityController extends Controller
 {
     /**
-     * @Route("/admin/cities", name="all_cities")
+     * @Route("/", name="show_all_cities")
      */
-    public function showAllAction()
+    public function indexAction()
     {
         $cities = $this->getDoctrine()->getRepository('AppBundle:City')->findAll();
-
-        return new Response(
-            $this->get('serializer')->serialize($cities, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
-        );
+        return $this->render('admin/city/index.html.twig', array(
+            'cities' => $cities
+        ));
     }
 
     /**
-     * @Route("/admin/countries/{countryName}/cities", name="country_cities")
+     * @Route("/page/{page}", name="show_cities_by_page", defaults={"page": 1}, requirements={
+     *      "page": "\d+"
+     * })
      */
-    public function indexAction($countryName)
+    public function showByPageAction($page)
     {
-        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneByName($countryName);
-        if (!$country) {
-            throw $this->createNotFoundException(
-                'No country found for name '.$countryName
-            );
-        }
-
-        $cities = $this->getDoctrine()->getRepository('AppBundle:City')->findByCountry($country);
-
-        return new Response(
-            $this->get('serializer')->serialize($cities, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
-        );
+        $cities = $this->getDoctrine()->getRepository('AppBundle:City')->findAll();
+        return $this->render('admin/city/index.html.twig', array(
+            'cities' => $cities
+        ));
     }
 
     /**
-     * @Route("/admin/countries/{countryName}/cities/new", name="new_city")
+     * @Route("/new", name="add_new_city")
      */
-    public function newAction(Request $request, $countryName)
+    public function newAction(Request $request)
     {
-        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneByName($countryName);
-        if (!$country) {
-            throw $this->createNotFoundException(
-                'No country found for name '.$countryName
-            );
-        }
-
         $city = new City();
-        $city->setCountry($country);
 
         $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
@@ -76,37 +60,74 @@ class CityController extends Controller
             $em->persist($city);
             $em->flush();
 
-            return $this->redirectToRoute("country_cities", array(
-                'countryName' => $country->getName()
-            ));
+            $this->addFlash(
+                'success',
+                'Город успешно добавлен!'
+            );
+
+            return $this->redirectToRoute("show_all_cities");
         }
 
-        return $this->render('default/new.html.twig', array(
+        return $this->render('admin/city/new.html.twig', array(
             'form' => $form->createView()
         ));
     }
 
     /**
-     * @Route("/admin/countries/{countryName}/cities/{cityName}", name="show_city")
+     * @Route("/{id}/edit", name="edit_city", requirements={
+     *      "id": "\d+"
+     * })
      */
-    public function showAction($countryName, $cityName)
+    public function editAction(Request $request, $id)
     {
-        $country = $this->getDoctrine()->getRepository('AppBundle:Country')->findOneByName($countryName);
-        if (!$country) {
-            throw $this->createNotFoundException(
-                'No country found for name '.$countryName
-            );
+        $city = $this->getDoctrine()->getRepository("AppBundle:City")->find($id);
+        if (!$city) {
+            throw $this->createNotFoundException('Город не найден');
         }
 
-        $city = $this->getDoctrine()->getRepository('AppBundle:City')->findOneBy(array(
-            'name' => $cityName,
-            'country' => $country
-        ));
+        $form = $this->createForm(CityType::class, $city);
+        $form->handleRequest($request);
 
-        return new Response(
-            $this->get('serializer')->serialize($city, 'json'),
-            200,
-            array('Content-Type' => 'application/json')
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($city);
+            $em->flush();
+
+            $this->addFlash(
+                'info',
+                'Город изменен!'
+            );
+
+            return $this->redirectToRoute("show_all_cities");
+        }
+
+        return $this->render('admin/city/edit.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $city->getId()
+        ));
+    }
+
+    /**
+     * @Route("/{id}/delete", name="delete_city", requirements={
+     *      "id": "\d+"
+     * })
+     */
+    public function deleteAction($id)
+    {
+        $city = $this->getDoctrine()->getRepository("AppBundle:City")->find($id);
+        if (!$city) {
+            throw $this->createNotFoundException('Город не найден');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+//        $em->remove($city);
+//        $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Город успешно удален!'
         );
+
+        return $this->redirectToRoute("show_all_cities");
     }
 }

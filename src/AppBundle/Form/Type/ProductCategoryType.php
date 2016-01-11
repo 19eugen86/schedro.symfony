@@ -20,7 +20,7 @@ class ProductCategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('label' => 'Category'))
+            ->add('name', TextType::class)
         ;
     }
 

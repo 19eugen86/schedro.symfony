@@ -33,6 +33,19 @@ class ClientController extends Controller
     }
 
     /**
+     * @Route("/page/{page}", name="show_clients_by_page", defaults={"page": 1}, requirements={
+     *      "page": "\d+"
+     * })
+     */
+    public function showByPageAction()
+    {
+        $clients = $this->getDoctrine()->getRepository('AppBundle:Client')->findAll();
+        return $this->render('admin/client/index.html.twig', array(
+            'clients' => $clients
+        ));
+    }
+
+    /**
      * @Route("/new", name="add_new_client")
      */
     public function newAction(Request $request)
@@ -53,5 +66,63 @@ class ClientController extends Controller
         return $this->render('admin/client/new.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * @Route("/{id}/edit", name="edit_client", requirements={
+     *      "id": "\d+"
+     * })
+     */
+    public function editAction(Request $request, $id)
+    {
+        $client = $this->getDoctrine()->getRepository('AppBundle:Client')->find($id);
+        if (!$client) {
+            throw $this->createNotFoundException('Клиент не найден');
+        }
+
+        $form = $this->createForm(ClientType::class, $client);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($client);
+            $em->flush();
+
+            $this->addFlash(
+                'info',
+                'Клиент изменен!'
+            );
+
+            return $this->redirectToRoute("show_all_clients");
+        }
+
+        return $this->render('admin/client/edit.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $client->getId()
+        ));
+    }
+
+    /**
+     * @Route("/{id}/delete", name="delete_client", requirements={
+     *      "id": "\d+"
+     * })
+     */
+    public function deleteAction($id)
+    {
+        $client = $this->getDoctrine()->getRepository('AppBundle:Client')->find($id);
+        if (!$client) {
+            throw $this->createNotFoundException('Клиент не найден');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+//        $em->remove($client);
+//        $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Клинт удален!'
+        );
+
+        return $this->redirectToRoute("show_all_clients");
     }
 }
