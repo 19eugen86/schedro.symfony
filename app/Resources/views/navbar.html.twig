@@ -54,7 +54,7 @@
                     <li role="separator" class="divider-vertical"></li>
                     <li><a href="{{ url("logout") }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Выход</a></li>
                 </ul>
-            {% else %}
+            {% elseif app.request.get('_route') != 'login_route' %}
                 {% include 'login.html.twig' %}
             {% endif %}
         </div><!-- /.navbar-collapse -->
