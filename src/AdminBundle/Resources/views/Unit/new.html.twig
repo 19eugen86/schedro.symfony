@@ -1,0 +1,31 @@
+{% form_theme form 'AdminBundle:Unit:fields.html.twig' %}
+
+{{ form_start(form, {'action': url('add_new_unit'), 'method': 'POST'}) }}
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="newCountryLabel">Новая единица измерения</h4>
+    </div>
+    <div class="modal-body">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.name, 'Название') }}</span>
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.name, 'Сокращение') }}</span>
+            {{ form_errors(form.shortName) }}
+            {{ form_widget(form.shortName, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.name, 'Единица') }}</span>
+            {{ form_errors(form.type) }}
+            {{ form_widget(form.type, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+{{ form_end(form) }}

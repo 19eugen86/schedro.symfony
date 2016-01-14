@@ -1,0 +1,86 @@
+{% extends '@Admin/base.html.twig' %}
+
+{% block content %}
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#">Пропорции</a></li>
+        <li role="presentation" class="active"><a href="{{ url("show_all_units") }}">Едининцы измерения</a></li>
+        <li role="presentation"><a href="{{ url("show_system_settings") }}">Системные настройки</a></li>
+    </ul>
+    <h2 class="sub-header">
+        Едининцы измерения
+        <button class="btn btn-default" data-toggle="modal" data-target="#newUnit">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Добавить
+        </button>
+    </h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Сокращение</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for unit in units %}
+                <tr>
+                    <td>{{ unit.name }}</td>
+                    <td>{{ unit.shortName }}</td>
+                    <td>
+                        {% if unit.isModifiable %}
+                        <a href="#" data-toggle="modal" data-target="#editUnit{{ unit.id }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        <a href="{{ url('delete_unit', {'id': unit.id }) }}" data-toggle="confirmation"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        {% endif %}
+                    </td>
+                </tr>
+                <div class="modal fade" id="editUnit{{ unit.id }}" tabindex="-1" role="dialog" aria-labelledby="editUnitLabel{{ unit.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            {{ render(controller('AdminBundle:Unit:edit', {'id': unit.id})) }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% include '@Admin/paginator.html.twig' %}
+    </div>
+    <div class="modal fade" id="newUnit" tabindex="-1" role="dialog" aria-labelledby="newUnitLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {{ render(controller('AdminBundle:Unit:new')) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    function ucfirst(str) {
+        //  discuss at: http://phpjs.org/functions/ucfirst/
+        //  original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+        //  bugfixed by: Onno Marsman
+        //  improved by: Brett Zamir (http://brett-zamir.me)
+        //  example 1: ucfirst('kevin van zonneveld');
+        //  returns 1: 'Kevin van zonneveld'
+
+        str += '';
+        var f = str.charAt(0).toUpperCase();
+        return f + str.substr(1);
+    }
+
+    $(function () {
+        $('[type="radio"]').change(this, function(){
+            var selected = $(this).val();
+            $('[type="radio"]').each(function(index, value){
+                var hiddenElementId = 'unit_is'+ucfirst($(value).val());
+                if (selected == $(value).val()) {
+                    $("#"+hiddenElementId).val(1);
+                } else {
+                    $("#"+hiddenElementId).val(0);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

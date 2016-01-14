@@ -1,0 +1,15 @@
+{% extends '@Admin/base.html.twig' %}
+
+{% block content %}
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Пропорции</a></li>
+        <li role="presentation"><a href="{{ url("show_all_units") }}">Едининцы измерения</a></li>
+        <li role="presentation"><a href="{{ url("show_system_settings") }}">Системные настройки</a></li>
+    </ul>
+    <h2 class="sub-header">
+        Пропорции
+        <button class="btn btn-default" data-toggle="modal" data-target="#newProportion">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Добавить
+        </button>
+    </h2>
+{% endblock %}

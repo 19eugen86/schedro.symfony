@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -32,7 +33,7 @@ class Product
     private $name;
 
     /**
-     * @var int
+     * @var ProductCategory
      *
      * @ORM\ManyToOne(targetEntity="ProductCategory", inversedBy="products")
      * @ORM\JoinColumn(name="product_category_id", referencedColumnName="id")
@@ -40,8 +41,19 @@ class Product
      * @Assert\Type(type="AdminBundle\Entity\ProductCategory")
      * @Assert\Valid()
      */
-    private $category;
+    protected $category;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Proportion", mappedBy="product")
+     */
+    protected $proportions;
+
+    public function __construct()
+    {
+        $this->proportions = new ArrayCollection();
+    }
 
     /**
      * Get id
