@@ -14,7 +14,6 @@ use AdminBundle\Form\Type\UnitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/admin/settings/units")
@@ -54,7 +53,10 @@ class UnitController extends Controller
     {
         $unit = new Unit();
 
-        $form = $this->createForm(UnitType::class, $unit);
+        $form = $this->createForm(UnitType::class, $unit, array(
+            'action' => $this->generateUrl("add_new_unit"),
+            'method' => 'POST'
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -70,7 +72,7 @@ class UnitController extends Controller
             return $this->redirectToRoute("show_all_units");
         }
 
-        return $this->render('AdminBundle:Unit:new.html.twig', array(
+        return $this->render('AdminBundle:Unit:form.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -87,7 +89,12 @@ class UnitController extends Controller
             throw $this->createNotFoundException('Единица измерения не найдена');
         }
 
-        $form = $this->createForm(UnitType::class, $unit);
+        $form = $this->createForm(UnitType::class, $unit, array(
+            'action' => $this->generateUrl("edit_unit", array(
+                'id' => $unit->getId()
+            )),
+            'method' => 'POST'
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -103,11 +110,9 @@ class UnitController extends Controller
             return $this->redirectToRoute("show_all_units");
         }
 
-//        return $this->render('AdminBundle:Unit:edit.html.twig', array(
-//            'form' => $form->createView(),
-//            'id' => $unit->getId()
-//        ));
-        return new Response();
+        return $this->render('AdminBundle:Unit:form.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     /**

@@ -27,7 +27,7 @@ class Proportion
      *
      * @ORM\Column(name="is_modifiable", type="boolean")
      */
-    private $isModifiable;
+    private $isModifiable = true;
 
     /**
      * @var string

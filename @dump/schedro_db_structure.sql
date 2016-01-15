@@ -148,6 +148,36 @@ CREATE TABLE IF NOT EXISTS `users` (
   `roles` enum('ROLE_USER','ROLE_ADMIN') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ROLE_USER'
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `units`
+--
+
+CREATE TABLE `units` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `short_name` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `type` enum('weight','area','volume') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'weight',
+  `is_modifiable` tinyint(1) NOT NULL DEFAULT '1',
+  `is_visible` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `units_proportions`
+--
+
+CREATE TABLE `units_proportions` (
+  `id` int(11) NOT NULL,
+  `unit_1_id` int(11) DEFAULT NULL,
+  `unit_2_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `is_modifiable` tinyint(1) NOT NULL DEFAULT '1',
+  `ratio` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -207,6 +237,23 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `UNIQ_1483A5E9F85E0677` (`username`), ADD UNIQUE KEY `UNIQ_1483A5E9E7927C74` (`email`);
 
 --
+-- Indexes for table `units`
+--
+ALTER TABLE `units`
+ADD PRIMARY KEY (`id`),
+ADD UNIQUE KEY `UNIQ_E9B074495E237E06` (`name`),
+ADD UNIQUE KEY `UNIQ_E9B074493EE4B093` (`short_name`);
+
+--
+-- Indexes for table `units_proportions`
+--
+ALTER TABLE `units_proportions`
+ADD PRIMARY KEY (`id`),
+ADD KEY `IDX_EDED4FCA7C15BDA0` (`unit_1_id`),
+ADD KEY `IDX_EDED4FCA6EA0124E` (`unit_2_id`),
+ADD KEY `IDX_EDED4FCA4584665A` (`product_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -256,6 +303,17 @@ ALTER TABLE `product_categories`
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT for table `units`
+--
+ALTER TABLE `units`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `units_proportions`
+--
+ALTER TABLE `units_proportions`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -294,6 +352,14 @@ ADD CONSTRAINT `FK_B308924A8BAC62AF` FOREIGN KEY (`city_id`) REFERENCES `cities`
 --
 ALTER TABLE `products`
 ADD CONSTRAINT `FK_B3BA5A5ABE6903FD` FOREIGN KEY (`product_category_id`) REFERENCES `product_categories` (`id`);
+
+--
+-- Constraints for table `units_proportions`
+--
+ALTER TABLE `units_proportions`
+ADD CONSTRAINT `FK_EDED4FCA4584665A` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+ADD CONSTRAINT `FK_EDED4FCA6EA0124E` FOREIGN KEY (`unit_2_id`) REFERENCES `units` (`id`),
+ADD CONSTRAINT `FK_EDED4FCA7C15BDA0` FOREIGN KEY (`unit_1_id`) REFERENCES `units` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

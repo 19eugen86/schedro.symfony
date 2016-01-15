@@ -25,7 +25,7 @@
         </li>
     </ul>
     <ul class="nav nav-sidebar">
-        <li{% if app.request.get('_route') == 'show_system_settings' %} class="active"{% endif %}><a href="{{ url("show_system_settings") }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Настройки</a></li>
+        <li{% if app.request.get('_route') == 'show_all_proportions' or app.request.get('_route') == 'show_all_units' or app.request.get('_route') == 'show_system_settings' %} class="active"{% endif %}><a href="{{ url("show_all_proportions") }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Настройки</a></li>
         <li><a href="{{ url("logout") }}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Выход</a></li>
     </ul>
 </div>

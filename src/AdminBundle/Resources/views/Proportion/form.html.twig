@@ -1,0 +1,46 @@
+{{ form_start(form, { 'attr': {'class': 'form-inline'} }) }}
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal-window-label">Добавить/Редактировать</h4>
+    </div>
+    <div class="modal-body">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.category, 'Товарная группа') }}</span>
+            {{ form_errors(form.category) }}
+            {{ form_widget(form.category, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br><br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2">{{ form_label(form.product, 'Продукт') }}</span>
+            {{ form_errors(form.product) }}
+            {{ form_widget(form.product, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br><br>
+        <div class="form-group">
+            <input type="text" value="1" class="form-control inline" size="1" disabled>&nbsp;{{ form_errors(form.unit1) }}{{ form_widget(form.unit1, {'attr': {'class': 'form-control inline'}, 'aria-describedby': 'basic-addon1'}) }}
+            =
+            {{ form_errors(form.ratio) }}{{ form_widget(form.ratio, {'attr': {'class': 'form-control inline', 'size': 5}, 'aria-describedby': 'basic-addon1'}) }}&nbsp;{{ form_errors(form.unit2) }}{{ form_widget(form.unit2, {'attr': {'class': 'form-control inline'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+{{ form_end(form) }}
+<script>
+    $(function () {
+        $(document).on('change', '#proportion_category' ,function() {
+            $.ajax({
+                url: "{{ url("filter_products") }}",
+                data: 'category='+$(this).find(":selected").val(),
+                dataType: 'json',
+                success: function(json) {
+                    $('#proportion_product').find('option').remove().end()
+                    $.each(json, function(i, value) {
+                        $('#proportion_product').append($('<option>').text(value.name).attr('value', value.id));
+                    });
+                }
+            });
+        });
+    });
+</script>

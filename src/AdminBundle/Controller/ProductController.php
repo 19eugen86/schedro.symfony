@@ -132,4 +132,25 @@ class ProductController extends Controller
 
         return $this->redirectToRoute("show_all_products");
     }
+
+    /**
+     * @Route("/filter", name="filter_products")
+     */
+    public function filterAction(Request $request)
+    {
+        $categoryId = $request->query->get('category');
+        $category = $this->getDoctrine()->getRepository('AdminBundle:ProductCategory')->find($categoryId);
+        if (!$category) {
+            throw $this->createNotFoundException('Категория не найдена');
+        }
+
+        $products = $this->getDoctrine()->getRepository('AdminBundle:Product')->findByCategory($category);
+        return new Response(
+            $this->get('serializer')->serialize($products, 'json'),
+            200,
+            array(
+                'Content-Type' => 'application/json'
+            )
+        );
+    }
 }

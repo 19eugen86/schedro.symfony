@@ -37,25 +37,11 @@ class Unit
     private $shortName;
 
     /**
-     * @var bool
+     * @var string
      *
-     * @ORM\Column(name="is_weight", type="boolean")
+     * @ORM\Column(name="type", type="string", columnDefinition="ENUM('weight', 'area', 'volume')")
      */
-    private $isWeight = false;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_area", type="boolean")
-     */
-    private $isArea = false;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_volume", type="boolean")
-     */
-    private $isVolume = false;
+    private $type;
 
     /**
      * @var bool
@@ -150,75 +136,22 @@ class Unit
     }
 
     /**
-     * Set isWeight
-     *
-     * @param boolean $isWeight
-     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
      * @return Unit
      */
-    public function setIsWeight($isWeight)
+    public function setType($type)
     {
-        $this->isWeight = $isWeight;
+        $this->type = $type;
 
         return $this;
-    }
-
-    /**
-     * Get isWeight
-     *
-     * @return bool
-     */
-    public function getIsWeight()
-    {
-        return $this->isWeight;
-    }
-
-    /**
-     * Set isArea
-     *
-     * @param boolean $isArea
-     *
-     * @return Unit
-     */
-    public function setIsArea($isArea)
-    {
-        $this->isArea = $isArea;
-
-        return $this;
-    }
-
-    /**
-     * Get isArea
-     *
-     * @return bool
-     */
-    public function getIsArea()
-    {
-        return $this->isArea;
-    }
-
-    /**
-     * Set isVolume
-     *
-     * @param boolean $isVolume
-     *
-     * @return Unit
-     */
-    public function setIsVolume($isVolume)
-    {
-        $this->isVolume = $isVolume;
-
-        return $this;
-    }
-
-    /**
-     * Get isVolume
-     *
-     * @return bool
-     */
-    public function getIsVolume()
-    {
-        return $this->isVolume;
     }
 
     /**

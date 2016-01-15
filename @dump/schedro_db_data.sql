@@ -96,3 +96,28 @@ INSERT INTO `units` (`id`, `name`, `short_name`, `is_weight`, `is_area`, `is_vol
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `is_active`, `roles`) VALUES
 (1, 'admin', '$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC', 'admin@schedro.ua', 1, 'ROLE_ADMIN'),
 (2, 'user', '$2y$13$TncZcL9Iy5s3./kjxOG15eH7gAvm7dMXmfve0yOrwblXTwYDL/dYC', 'user@schedro.ua', 1, 'ROLE_USER');
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`id`, `name`, `short_name`, `type`, `is_modifiable`, `is_visible`) VALUES
+  (1, 'килограмм', 'кг', 'weight', 0, 1),
+  (2, 'тонна', 'т', 'weight', 0, 1),
+  (3, 'квадратный метр', 'м²', 'area', 0, 1),
+  (4, 'кубический метр', 'м³', 'volume', 0, 1),
+  (5, 'грамм', 'г', 'weight', 0, 1),
+  (6, 'поддон', 'под.', 'weight', 1, 1),
+  (7, 'ящик', 'ящ.', 'weight', 1, 1),
+  (8, 'пачка', 'п.', 'weight', 1, 1);
+
+--
+-- Dumping data for table `units_proportions`
+--
+
+INSERT INTO `units_proportions` (`id`, `unit_1_id`, `unit_2_id`, `product_id`, `is_modifiable`, `ratio`) VALUES
+  (1, 6, 1, 1, 1, '1000.00'),
+  (2, 8, 5, 2, 1, '450.00'),
+  (4, 8, 5, 5, 1, '150.00');

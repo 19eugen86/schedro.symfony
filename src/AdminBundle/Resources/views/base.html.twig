@@ -38,6 +38,7 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
+                {% include '@Admin/modal.html.twig' %}
                 {% include '@Admin/sidebar.html.twig' %}
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     {% include '@Admin/alertsbar.html.twig' %}
@@ -54,6 +55,7 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src="{{ asset('js/bootstrap-confirmation.min.js') }}"></script>
+        <script src="{{ asset('js/functions.js') }}"></script>
         <script>
             $(document).ready(function () {
                 $('[data-toggle="popover"]').popover()
@@ -64,6 +66,20 @@
                     singleton: true,
                     popout: true
                 })
+            });
+
+            $(function () {
+                $('[data-target="#modal-window"]').click(function(){
+                    $.ajax({
+                        url: $(this).data("action"),
+                        beforeSend: function() {
+                            $("#modal-window-content").html('');
+                        },
+                        success: function(response) {
+                            $("#modal-window-content").html(response);
+                        }
+                    });
+                });
             });
         </script>
         {% block javascripts %}{% endblock %}
