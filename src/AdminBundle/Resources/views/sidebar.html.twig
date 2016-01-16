@@ -17,8 +17,8 @@
         <li{% if app.request.get('_route') == 'show_all_cities' or app.request.get('_route') == 'show_all_countries' %} class="active"{% endif %}>
             <a href="{{ url("show_all_cities") }}"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> География</a>
         </li>
-        <li>
-            <a href="#"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> Транспорт</a>
+        <li{% if app.request.get('_route') == 'show_all_carriers' or app.request.get('_route') == 'show_all_drivers' or app.request.get('_route') == 'show_all_vehicles' %} class="active"{% endif %}>
+            <a href="{{ url("show_all_carriers") }}"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> Транспорт</a>
         </li>
         <li>
             <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Сотрудники</a>
