@@ -14,9 +14,9 @@ use AdminBundle\Form\Type\ProductCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
+ * TODO: Update forms to use AJAX
  * @Route("/admin/product-categories")
  */
 class ProductCategoryController extends Controller

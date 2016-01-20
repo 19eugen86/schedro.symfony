@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
+ * TODO: Update forms to use AJAX
  * @Route("/admin/cities")
  */
 class CityController extends Controller

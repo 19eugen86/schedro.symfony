@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
+ * TODO: Update forms to use AJAX
  * @Route("/admin/products")
  */
 class ProductController extends Controller
