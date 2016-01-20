@@ -33,6 +33,7 @@ class EmployeeCategoryController extends Controller
     }
 
     /**
+     * TODO:
      * @Route("/page/{page}", name="show_employee_categories_by_page", defaults={"page": 1}, requirements={
      *      "page": "\d+"
      * })

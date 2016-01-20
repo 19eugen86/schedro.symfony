@@ -33,6 +33,7 @@ class CityController extends Controller
     }
 
     /**
+     * TODO:
      * @Route("/page/{page}", name="show_cities_by_page", defaults={"page": 1}, requirements={
      *      "page": "\d+"
      * })
@@ -121,8 +122,8 @@ class CityController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-//        $em->remove($city);
-//        $em->flush();
+        $em->remove($city);
+        $em->flush();
 
         $this->addFlash(
             'success',

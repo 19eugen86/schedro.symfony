@@ -33,6 +33,7 @@ class ClientController extends Controller
     }
 
     /**
+     * TODO:
      * @Route("/page/{page}", name="show_clients_by_page", defaults={"page": 1}, requirements={
      *      "page": "\d+"
      * })
@@ -115,8 +116,8 @@ class ClientController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-//        $em->remove($client);
-//        $em->flush();
+        $em->remove($client);
+        $em->flush();
 
         $this->addFlash(
             'success',

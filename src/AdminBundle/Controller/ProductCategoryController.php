@@ -34,6 +34,7 @@ class ProductCategoryController extends Controller
     }
 
     /**
+     * TODO:
      * @Route("/page/{page}", name="show_product_categories_by_page", defaults={"page": 1}, requirements={
      *      "page": "\d+"
      * })

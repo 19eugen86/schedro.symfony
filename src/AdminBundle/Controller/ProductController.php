@@ -34,6 +34,7 @@ class ProductController extends Controller
     }
 
     /**
+     * TODO:
      * @Route("/page/{page}", name="show_products_by_page", defaults={"page": 1}, requirements={
      *      "page": "\d+"
      * })
@@ -122,8 +123,8 @@ class ProductController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-//        $em->remove($product);
-//        $em->flush();
+        $em->remove($product);
+        $em->flush();
 
         $this->addFlash(
             'success',

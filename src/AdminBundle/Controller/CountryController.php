@@ -34,6 +34,7 @@ class CountryController extends Controller
     }
 
     /**
+     * TODO:
      * @Route("/page/{page}", name="show_countries_by_page", defaults={"page": 1}, requirements={
      *      "page": "\d+"
      * })
@@ -119,8 +120,8 @@ class CountryController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-//        $em->remove($country);
-//        $em->flush();
+        $em->remove($country);
+        $em->flush();
 
         $this->addFlash(
             'success',
