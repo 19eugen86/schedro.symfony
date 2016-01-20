@@ -1,6 +1,9 @@
 <div class="col-sm-3 col-md-2 sidebar">
     <ul class="nav nav-sidebar">
-        <li><a href="#"><span class="glyphicon glyphicon-export" aria-hidden="true"></span> Фабрики</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Товарооборот</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="#"><span class="glyphicon glyphicon-export" aria-hidden="true"></span> Комбинаты</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-move" aria-hidden="true"></span> РЦ</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Филиалы</a></li>
     </ul>
@@ -20,8 +23,8 @@
         <li{% if app.request.get('_route') == 'show_all_carriers' or app.request.get('_route') == 'show_all_drivers' or app.request.get('_route') == 'show_all_vehicles' %} class="active"{% endif %}>
             <a href="{{ url("show_all_carriers") }}"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> Транспорт</a>
         </li>
-        <li>
-            <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Сотрудники</a>
+        <li{% if app.request.get('_route') == 'show_all_employees' or app.request.get('_route') == 'show_all_employee_categories' %} class="active"{% endif %}>
+            <a href="{{ url("show_all_employees") }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Сотрудники</a>
         </li>
     </ul>
     <ul class="nav nav-sidebar">

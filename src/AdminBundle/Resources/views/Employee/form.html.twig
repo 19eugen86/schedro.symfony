@@ -1,0 +1,48 @@
+{{ form_start(form) }}
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal-window-label">Добавить/Редактировать</h4>
+    </div>
+    <div class="modal-body">
+        {{ form_errors(form) }}
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.username, 'Логин') }}</span>
+            {{ form_errors(form.username) }}
+            {{ form_widget(form.username, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br><br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.password, 'Пароль') }}</span>
+            {{ form_errors(form.password) }}
+            {{ form_widget(form.password, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br><br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.fullname, 'ФИО') }}</span>
+            {{ form_errors(form.fullname) }}
+            {{ form_widget(form.fullname, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br><br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.phone, 'Тел.') }}</span>
+            {{ form_errors(form.phone) }}
+            {{ form_widget(form.phone, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br><br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.email, 'Эл. почта') }}</span>
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br><br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.category, 'Категория') }}</span>
+            {{ form_errors(form.category) }}
+            {{ form_widget(form.category, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+{{ form_end(form) }}

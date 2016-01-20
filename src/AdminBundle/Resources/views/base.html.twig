@@ -47,7 +47,7 @@
             </div>
             {% block body %}{% endblock %}
             <footer class="text-center">
-                <p>&copy; 2016 Щедро, Inc.</p>
+                <p>&copy; 2016 Щедро</p>
             </footer>
         </div><!-- /.container -->
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -58,6 +58,7 @@
         <script src="{{ asset('js/functions.js') }}"></script>
         <script>
             $(document).ready(function () {
+                $('.dropdown-toggle').dropdown()
                 $('[data-toggle="popover"]').popover()
                 $('[data-toggle="confirmation"]').confirmation({
                     title: 'Вы уверены?',

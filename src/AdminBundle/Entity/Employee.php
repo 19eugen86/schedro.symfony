@@ -1,17 +1,18 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * User
+ * Employee
  *
  * @ORM\Table(name="users")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="AdminBundle\Repository\EmployeeRepository")
  */
-class User implements UserInterface, \Serializable
+class Employee implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -25,40 +26,62 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=25, unique=true)
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=64)
+     * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=60, unique=true)
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=255)
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fullname", type="string", length=255)
+     */
+    private $fullname;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    private $isActive = true;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="roles", type="string", columnDefinition="ENUM('ROLE_USER', 'ROLE_ADMIN')")
      */
-    private $roles;
+    private $roles = 'ROLE_USER';
 
-    public function __construct()
-    {
-        $this->isActive = true;
-    }
+    /**
+     * @var EmployeeCategory
+     *
+     * @ORM\ManyToOne(targetEntity="EmployeeCategory", inversedBy="employees")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     *
+     * @Assert\Type(type="AdminBundle\Entity\EmployeeCategory")
+     * @Assert\Valid()
+     */
+    protected $category;
 
     /**
      * Get id
@@ -75,7 +98,7 @@ class User implements UserInterface, \Serializable
      *
      * @param string $username
      *
-     * @return User
+     * @return Employee
      */
     public function setUsername($username)
     {
@@ -99,7 +122,7 @@ class User implements UserInterface, \Serializable
      *
      * @param string $password
      *
-     * @return User
+     * @return Employee
      */
     public function setPassword($password)
     {
@@ -123,7 +146,7 @@ class User implements UserInterface, \Serializable
      *
      * @param string $email
      *
-     * @return User
+     * @return Employee
      */
     public function setEmail($email)
     {
@@ -143,11 +166,59 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Employee
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set fullname
+     *
+     * @param string $fullname
+     *
+     * @return Employee
+     */
+    public function setFullname($fullname)
+    {
+        $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    /**
+     * Get fullname
+     *
+     * @return string
+     */
+    public function getFullname()
+    {
+        return $this->fullname;
+    }
+
+    /**
      * Set isActive
      *
      * @param boolean $isActive
      *
-     * @return User
+     * @return Employee
      */
     public function setIsActive($isActive)
     {
@@ -166,15 +237,54 @@ class User implements UserInterface, \Serializable
         return $this->isActive;
     }
 
+    /**
+     * Set roles
+     *
+     * @param string $roles
+     *
+     * @return Employee
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return string
+     */
+    public function getRoles()
+    {
+        return array($this->roles);
+    }
+
+    /**
+     * @return EmployeeCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param EmployeeCategory $category
+     * @return $this
+     */
+    public function setCategory(EmployeeCategory $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
     public function getSalt()
     {
         return null;
     }
 
-    public function getRoles()
-    {
-        return array($this->roles);
-    }
 
     public function eraseCredentials()
     {
