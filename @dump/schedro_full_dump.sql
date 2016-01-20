@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2016 at 11:56 AM
+-- Generation Time: Jan 20, 2016 at 12:00 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `schedro`
 --
+CREATE DATABASE IF NOT EXISTS `schedro` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `schedro`;
 
 -- --------------------------------------------------------
 
@@ -320,107 +322,107 @@ INSERT INTO `users_categories` (`id`, `name`) VALUES(3, 'Кладовщики');
 -- Indexes for table `branches`
 --
 ALTER TABLE `branches`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_D760D16F8BAC62AF` (`city_id`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `IDX_D760D16F8BAC62AF` (`city_id`);
 
 --
 -- Indexes for table `carriers`
 --
 ALTER TABLE `carriers`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `carriers_drivers`
 --
 ALTER TABLE `carriers_drivers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_8CCE694921DFC797` (`carrier_id`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `IDX_8CCE694921DFC797` (`carrier_id`);
 
 --
 -- Indexes for table `carriers_vehicles`
 --
 ALTER TABLE `carriers_vehicles`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_8EC2DBC721DFC797` (`carrier_id`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `IDX_8EC2DBC721DFC797` (`carrier_id`);
 
 --
 -- Indexes for table `cities`
 --
 ALTER TABLE `cities`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_D95DB16BF92F3E70` (`country_id`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `IDX_D95DB16BF92F3E70` (`country_id`);
 
 --
 -- Indexes for table `clients`
 --
 ALTER TABLE `clients`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_C82E748BAC62AF` (`city_id`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `IDX_C82E748BAC62AF` (`city_id`);
 
 --
 -- Indexes for table `countries`
 --
 ALTER TABLE `countries`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `distribution_centers`
 --
 ALTER TABLE `distribution_centers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_C7FC95838BAC62AF` (`city_id`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `IDX_C7FC95838BAC62AF` (`city_id`);
 
 --
 -- Indexes for table `factories`
 --
 ALTER TABLE `factories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_B308924A8BAC62AF` (`city_id`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `IDX_B308924A8BAC62AF` (`city_id`);
 
 --
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_B3BA5A5ABE6903FD` (`product_category_id`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `IDX_B3BA5A5ABE6903FD` (`product_category_id`);
 
 --
 -- Indexes for table `product_categories`
 --
 ALTER TABLE `product_categories`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `units`
 --
 ALTER TABLE `units`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_E9B074495E237E06` (`name`),
-  ADD UNIQUE KEY `UNIQ_E9B074493EE4B093` (`short_name`);
+ADD PRIMARY KEY (`id`),
+ADD UNIQUE KEY `UNIQ_E9B074495E237E06` (`name`),
+ADD UNIQUE KEY `UNIQ_E9B074493EE4B093` (`short_name`);
 
 --
 -- Indexes for table `units_proportions`
 --
 ALTER TABLE `units_proportions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_EDED4FCA7C15BDA0` (`unit_1_id`),
-  ADD KEY `IDX_EDED4FCA6EA0124E` (`unit_2_id`),
-  ADD KEY `IDX_EDED4FCA4584665A` (`product_id`);
+ADD PRIMARY KEY (`id`),
+ADD KEY `IDX_EDED4FCA7C15BDA0` (`unit_1_id`),
+ADD KEY `IDX_EDED4FCA6EA0124E` (`unit_2_id`),
+ADD KEY `IDX_EDED4FCA4584665A` (`product_id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_1483A5E9F85E0677` (`username`),
-  ADD UNIQUE KEY `UNIQ_1483A5E9E7927C74` (`email`),
-  ADD KEY `IDX_1483A5E912469DE2` (`category_id`);
+ADD PRIMARY KEY (`id`),
+ADD UNIQUE KEY `UNIQ_1483A5E9F85E0677` (`username`),
+ADD UNIQUE KEY `UNIQ_1483A5E9E7927C74` (`email`),
+ADD KEY `IDX_1483A5E912469DE2` (`category_id`);
 
 --
 -- Indexes for table `users_categories`
 --
 ALTER TABLE `users_categories`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -430,77 +432,77 @@ ALTER TABLE `users_categories`
 -- AUTO_INCREMENT for table `branches`
 --
 ALTER TABLE `branches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `carriers`
 --
 ALTER TABLE `carriers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `carriers_drivers`
 --
 ALTER TABLE `carriers_drivers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `carriers_vehicles`
 --
 ALTER TABLE `carriers_vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `distribution_centers`
 --
 ALTER TABLE `distribution_centers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `factories`
 --
 ALTER TABLE `factories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `product_categories`
 --
 ALTER TABLE `product_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `units_proportions`
 --
 ALTER TABLE `units_proportions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users_categories`
 --
 ALTER TABLE `users_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
@@ -509,63 +511,63 @@ ALTER TABLE `users_categories`
 -- Constraints for table `branches`
 --
 ALTER TABLE `branches`
-  ADD CONSTRAINT `FK_D760D16F8BAC62AF` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
+ADD CONSTRAINT `FK_D760D16F8BAC62AF` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
 
 --
 -- Constraints for table `carriers_drivers`
 --
 ALTER TABLE `carriers_drivers`
-  ADD CONSTRAINT `FK_8CCE694921DFC797` FOREIGN KEY (`carrier_id`) REFERENCES `carriers` (`id`);
+ADD CONSTRAINT `FK_8CCE694921DFC797` FOREIGN KEY (`carrier_id`) REFERENCES `carriers` (`id`);
 
 --
 -- Constraints for table `carriers_vehicles`
 --
 ALTER TABLE `carriers_vehicles`
-  ADD CONSTRAINT `FK_8EC2DBC721DFC797` FOREIGN KEY (`carrier_id`) REFERENCES `carriers` (`id`);
+ADD CONSTRAINT `FK_8EC2DBC721DFC797` FOREIGN KEY (`carrier_id`) REFERENCES `carriers` (`id`);
 
 --
 -- Constraints for table `cities`
 --
 ALTER TABLE `cities`
-  ADD CONSTRAINT `FK_D95DB16BF92F3E70` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`);
+ADD CONSTRAINT `FK_D95DB16BF92F3E70` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`);
 
 --
 -- Constraints for table `clients`
 --
 ALTER TABLE `clients`
-  ADD CONSTRAINT `FK_C82E748BAC62AF` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
+ADD CONSTRAINT `FK_C82E748BAC62AF` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
 
 --
 -- Constraints for table `distribution_centers`
 --
 ALTER TABLE `distribution_centers`
-  ADD CONSTRAINT `FK_C7FC95838BAC62AF` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
+ADD CONSTRAINT `FK_C7FC95838BAC62AF` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
 
 --
 -- Constraints for table `factories`
 --
 ALTER TABLE `factories`
-  ADD CONSTRAINT `FK_B308924A8BAC62AF` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
+ADD CONSTRAINT `FK_B308924A8BAC62AF` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
 
 --
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `FK_B3BA5A5ABE6903FD` FOREIGN KEY (`product_category_id`) REFERENCES `product_categories` (`id`);
+ADD CONSTRAINT `FK_B3BA5A5ABE6903FD` FOREIGN KEY (`product_category_id`) REFERENCES `product_categories` (`id`);
 
 --
 -- Constraints for table `units_proportions`
 --
 ALTER TABLE `units_proportions`
-  ADD CONSTRAINT `FK_EDED4FCA4584665A` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `FK_EDED4FCA6EA0124E` FOREIGN KEY (`unit_2_id`) REFERENCES `units` (`id`),
-  ADD CONSTRAINT `FK_EDED4FCA7C15BDA0` FOREIGN KEY (`unit_1_id`) REFERENCES `units` (`id`);
+ADD CONSTRAINT `FK_EDED4FCA4584665A` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+ADD CONSTRAINT `FK_EDED4FCA6EA0124E` FOREIGN KEY (`unit_2_id`) REFERENCES `units` (`id`),
+ADD CONSTRAINT `FK_EDED4FCA7C15BDA0` FOREIGN KEY (`unit_1_id`) REFERENCES `units` (`id`);
 
 --
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `FK_1483A5E912469DE2` FOREIGN KEY (`category_id`) REFERENCES `users_categories` (`id`);
+ADD CONSTRAINT `FK_1483A5E912469DE2` FOREIGN KEY (`category_id`) REFERENCES `users_categories` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
