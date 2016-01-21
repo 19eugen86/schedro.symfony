@@ -16,7 +16,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * TODO: Update forms to use AJAX
  * @Route("/admin/product-categories")
  */
 class ProductCategoryController extends Controller
@@ -55,7 +54,10 @@ class ProductCategoryController extends Controller
     {
         $category = new ProductCategory();
 
-        $form = $this->createForm(ProductCategoryType::class, $category);
+        $form = $this->createForm(ProductCategoryType::class, $category, array(
+            'action' => $this->generateUrl("add_new_product_category"),
+            'method' => "POST"
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,7 +73,7 @@ class ProductCategoryController extends Controller
             return $this->redirectToRoute("show_all_product_categories");
         }
 
-        return $this->render('AdminBundle:ProductCategory:new.html.twig', array(
+        return $this->render('AdminBundle:ProductCategory:form.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -88,7 +90,12 @@ class ProductCategoryController extends Controller
             throw $this->createNotFoundException('Товарная группа не найдена');
         }
 
-        $form = $this->createForm(ProductCategoryType::class, $category);
+        $form = $this->createForm(ProductCategoryType::class, $category, array(
+            'action' => $this->generateUrl("edit_product_category", array(
+                'id' => $category->getId()
+            )),
+            'method' => "POST"
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -104,9 +111,8 @@ class ProductCategoryController extends Controller
             return $this->redirectToRoute("show_all_product_categories");
         }
 
-        return $this->render('AdminBundle:ProductCategory:edit.html.twig', array(
-            'form' => $form->createView(),
-            'id' => $category->getId()
+        return $this->render('AdminBundle:ProductCategory:form.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 

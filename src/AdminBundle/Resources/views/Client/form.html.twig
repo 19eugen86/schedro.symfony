@@ -1,7 +1,7 @@
-{{ form_start(form, {'action': url('add_new_client'), 'method': 'POST'}) }}
+{{ form_start(form) }}
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="newClientLabel">Новый клиент</h4>
+        <h4 class="modal-title" id="modal-window-label">Добавить/Редактировать</h4>
     </div>
     <div class="modal-body">
         {{ form_errors(form) }}

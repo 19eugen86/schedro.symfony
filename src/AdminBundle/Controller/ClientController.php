@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * TODO: Update forms to use AJAX
  * @Route("/admin/clients")
  */
 class ClientController extends Controller
@@ -54,7 +53,10 @@ class ClientController extends Controller
     {
         $client = new Client();
 
-        $form = $this->createForm(ClientType::class, $client);
+        $form = $this->createForm(ClientType::class, $client, array(
+            'action' => $this->generateUrl("add_new_client"),
+            'method' => "POST"
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -65,7 +67,7 @@ class ClientController extends Controller
             return $this->redirectToRoute("show_all_clients");
         }
 
-        return $this->render('AdminBundle:Client:new.html.twig', array(
+        return $this->render('AdminBundle:Client:form.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -82,7 +84,12 @@ class ClientController extends Controller
             throw $this->createNotFoundException('Клиент не найден');
         }
 
-        $form = $this->createForm(ClientType::class, $client);
+        $form = $this->createForm(ClientType::class, $client, array(
+            'action' => $this->generateUrl("edit_client", array(
+                'id' => $client->getId()
+            )),
+            'method' => "POST"
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -98,9 +105,8 @@ class ClientController extends Controller
             return $this->redirectToRoute("show_all_clients");
         }
 
-        return $this->render('AdminBundle:Client:edit.html.twig', array(
-            'form' => $form->createView(),
-            'id' => $client->getId()
+        return $this->render('AdminBundle:Client:form.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 
@@ -122,7 +128,7 @@ class ClientController extends Controller
 
         $this->addFlash(
             'success',
-            'Клинт удален!'
+            'Клиент удален!'
         );
 
         return $this->redirectToRoute("show_all_clients");

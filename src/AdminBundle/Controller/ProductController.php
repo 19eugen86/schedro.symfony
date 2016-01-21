@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * TODO: Update forms to use AJAX
  * @Route("/admin/products")
  */
 class ProductController extends Controller
@@ -56,7 +55,10 @@ class ProductController extends Controller
     {
         $product = new Product();
 
-        $form = $this->createForm(ProductType::class, $product);
+        $form = $this->createForm(ProductType::class, $product, array(
+            'action' => $this->generateUrl("add_new_product"),
+            'method' => "POST"
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -72,7 +74,7 @@ class ProductController extends Controller
             return $this->redirectToRoute("show_all_products");
         }
 
-        return $this->render('AdminBundle:Product:new.html.twig', array(
+        return $this->render('AdminBundle:Product:form.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -89,7 +91,12 @@ class ProductController extends Controller
             throw $this->createNotFoundException('Продукт не найден');
         }
 
-        $form = $this->createForm(ProductType::class, $product);
+        $form = $this->createForm(ProductType::class, $product, array(
+            'action' => $this->generateUrl("edit_product", array(
+                'id' => $product->getId()
+            )),
+            'method' => "POST"
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -105,9 +112,8 @@ class ProductController extends Controller
             return $this->redirectToRoute("show_all_products");
         }
 
-        return $this->render('AdminBundle:Product:edit.html.twig', array(
-            'form' => $form->createView(),
-            'id' => $product->getId()
+        return $this->render('AdminBundle:Product:form.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 

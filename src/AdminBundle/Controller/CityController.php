@@ -16,7 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * TODO: Update forms to use AJAX
  * @Route("/admin/cities")
  */
 class CityController extends Controller
@@ -55,7 +54,10 @@ class CityController extends Controller
     {
         $city = new City();
 
-        $form = $this->createForm(CityType::class, $city);
+        $form = $this->createForm(CityType::class, $city, array(
+            'action' => $this->generateUrl("add_new_city"),
+            'method' => "POST"
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,7 +73,7 @@ class CityController extends Controller
             return $this->redirectToRoute("show_all_cities");
         }
 
-        return $this->render('AdminBundle:City:new.html.twig', array(
+        return $this->render('AdminBundle:City:form.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -88,7 +90,12 @@ class CityController extends Controller
             throw $this->createNotFoundException('Город не найден');
         }
 
-        $form = $this->createForm(CityType::class, $city);
+        $form = $this->createForm(CityType::class, $city, array(
+            'action' => $this->generateUrl("edit_city", array(
+                'id' => $city->getId()
+            )),
+            'method' => "POST"
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -104,9 +111,8 @@ class CityController extends Controller
             return $this->redirectToRoute("show_all_cities");
         }
 
-        return $this->render('AdminBundle:City:edit.html.twig', array(
-            'form' => $form->createView(),
-            'id' => $city->getId()
+        return $this->render('AdminBundle:City:form.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 

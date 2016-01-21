@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * TODO: Update forms to use AJAX
  * @Route("/admin/countries")
  */
 class CountryController extends Controller
@@ -56,7 +55,10 @@ class CountryController extends Controller
     {
         $country = new Country();
 
-        $form = $this->createForm(CountryType::class, $country);
+        $form = $this->createForm(CountryType::class, $country, array(
+                'action' => $this->generateUrl("add_new_country"),
+                'method' => "POST"
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -72,7 +74,7 @@ class CountryController extends Controller
             return $this->redirectToRoute("show_all_countries");
         }
 
-        return $this->render('AdminBundle:Country:new.html.twig', array(
+        return $this->render('AdminBundle:Country:form.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -86,7 +88,12 @@ class CountryController extends Controller
     {
         $country = $this->getDoctrine()->getRepository('AdminBundle:Country')->find($id);
 
-        $form = $this->createForm(CountryType::class, $country);
+        $form = $this->createForm(CountryType::class, $country, array(
+            'action' => $this->generateUrl("edit_country", array(
+                'id' => $country->getId()
+            )),
+            'method' => "POST"
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -102,9 +109,8 @@ class CountryController extends Controller
             return $this->redirectToRoute("show_all_countries");
         }
 
-        return $this->render('AdminBundle:Country:edit.html.twig', array(
-            'form' => $form->createView(),
-            'id' => $country->getId()
+        return $this->render('AdminBundle:Country:form.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 
