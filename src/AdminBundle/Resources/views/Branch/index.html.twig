@@ -1,6 +1,10 @@
 {% extends '@Admin/base.html.twig' %}
 
 {% block content %}
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="{{ url("show_all_branches") }}">Филиалы</a></li>
+        <li role="presentation"><a href="{{ url("show_all_branches_warehouses") }}">Склады</a></li>
+    </ul>
     <h2 class="sub-header">
         Филиалы
         <button class="btn btn-default" data-toggle="modal" data-target="#modal-window" data-action="{{ url("add_new_branch") }}">

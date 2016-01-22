@@ -9,14 +9,14 @@
 namespace AdminBundle\Controller;
 
 
-use AdminBundle\Entity\DistributionCenter;
-use AdminBundle\Form\Type\DistributionCenterType;
+use AdminBundle\Entity\Department;
+use AdminBundle\Form\Type\DepartmentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/admin/distribution-centers")
+ * @Route("/admin/departments/distribution-centers")
  */
 class DistributionCenterController extends Controller
 {
@@ -25,7 +25,7 @@ class DistributionCenterController extends Controller
      */
     public function indexAction()
     {
-        $distributionCenters = $this->getDoctrine()->getRepository('AdminBundle:DistributionCenter')->findAll();
+        $distributionCenters = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::DISTRIBUTION_CENTER);
         return $this->render('AdminBundle:DistributionCenter:index.html.twig', array(
             'distributionCenters' => $distributionCenters,
             'section' => 'РЦ'
@@ -40,7 +40,7 @@ class DistributionCenterController extends Controller
      */
     public function showByPageAction()
     {
-        $distributionCenters = $this->getDoctrine()->getRepository('AdminBundle:DistributionCenter')->findAll();
+        $distributionCenters = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::DISTRIBUTION_CENTER);
         return $this->render('AdminBundle:DistributionCenter:index.html.twig', array(
             'distributionCenters' => $distributionCenters,
             'section' => 'РЦ'
@@ -52,9 +52,9 @@ class DistributionCenterController extends Controller
      */
     public function newAction(Request $request)
     {
-        $distributionCenter = new DistributionCenter();
+        $distributionCenter = new Department(Department::DISTRIBUTION_CENTER);
 
-        $form = $this->createForm(DistributionCenterType::class, $distributionCenter, array(
+        $form = $this->createForm(DepartmentType::class, $distributionCenter, array(
             'action' => $this->generateUrl("add_new_distribution_center"),
             'method' => "POST"
         ));
@@ -85,12 +85,12 @@ class DistributionCenterController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $distributionCenter = $this->getDoctrine()->getRepository('AdminBundle:DistributionCenter')->find($id);
+        $distributionCenter = $this->getDoctrine()->getRepository('AdminBundle:Department')->find($id);
         if (!$distributionCenter) {
             throw $this->createNotFoundException('РЦ не найден');
         }
 
-        $form = $this->createForm(DistributionCenterType::class, $distributionCenter, array(
+        $form = $this->createForm(DepartmentType::class, $distributionCenter, array(
             'action' => $this->generateUrl("edit_distribution_center", array(
                 'id' => $distributionCenter->getId()
             )),
@@ -123,7 +123,7 @@ class DistributionCenterController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $distributionCenter = $this->getDoctrine()->getRepository('AdminBundle:DistributionCenter')->find($id);
+        $distributionCenter = $this->getDoctrine()->getRepository('AdminBundle:Department')->find($id);
         if (!$distributionCenter) {
             throw $this->createNotFoundException('РЦ не найден');
         }

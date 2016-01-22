@@ -9,14 +9,14 @@
 namespace AdminBundle\Controller;
 
 
-use AdminBundle\Entity\Factory;
-use AdminBundle\Form\Type\FactoryType;
+use AdminBundle\Entity\Department;
+use AdminBundle\Form\Type\DepartmentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/admin/factories")
+ * @Route("/admin/departments/factories")
  */
 class FactoryController extends Controller
 {
@@ -25,7 +25,7 @@ class FactoryController extends Controller
      */
     public function indexAction()
     {
-        $factories = $this->getDoctrine()->getRepository('AdminBundle:Factory')->findAll();
+        $factories = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::FACTORY);
         return $this->render('AdminBundle:Factory:index.html.twig', array(
             'factories' => $factories,
             'section' => 'Комбинаты'
@@ -40,7 +40,7 @@ class FactoryController extends Controller
      */
     public function showByPageAction()
     {
-        $factories = $this->getDoctrine()->getRepository('AdminBundle:Factory')->findAll();
+        $factories = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::FACTORY);
         return $this->render('AdminBundle:Factory:index.html.twig', array(
             'factories' => $factories,
             'section' => 'Комбинаты'
@@ -52,9 +52,9 @@ class FactoryController extends Controller
      */
     public function newAction(Request $request)
     {
-        $factory = new Factory();
+        $factory = new Department(Department::FACTORY);
 
-        $form = $this->createForm(FactoryType::class, $factory, array(
+        $form = $this->createForm(DepartmentType::class, $factory, array(
             'action' => $this->generateUrl("add_new_factory"),
             'method' => "POST"
         ));
@@ -85,12 +85,12 @@ class FactoryController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $factory = $this->getDoctrine()->getRepository('AdminBundle:Factory')->find($id);
+        $factory = $this->getDoctrine()->getRepository('AdminBundle:Department')->find($id);
         if (!$factory) {
             throw $this->createNotFoundException('Комбинат не найден');
         }
 
-        $form = $this->createForm(FactoryType::class, $factory, array(
+        $form = $this->createForm(DepartmentType::class, $factory, array(
             'action' => $this->generateUrl("edit_factory", array(
                 'id' => $factory->getId()
             )),
@@ -123,7 +123,7 @@ class FactoryController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $factory = $this->getDoctrine()->getRepository('AdminBundle:Factory')->find($id);
+        $factory = $this->getDoctrine()->getRepository('AdminBundle:Department')->find($id);
         if (!$factory) {
             throw $this->createNotFoundException('Комбинат не найден');
         }

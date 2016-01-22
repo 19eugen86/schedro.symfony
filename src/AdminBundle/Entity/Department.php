@@ -2,17 +2,22 @@
 
 namespace AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Branch
+ * Department
  *
- * @ORM\Table(name="branches")
- * @ORM\Entity(repositoryClass="AdminBundle\Repository\BranchRepository")
+ * @ORM\Table(name="departments")
+ * @ORM\Entity(repositoryClass="AdminBundle\Repository\DepartmentRepository")
  */
-class Branch
+class Department
 {
+    const FACTORY = 'factory';
+    const DISTRIBUTION_CENTER = 'distributionCenter';
+    const BRANCH = 'branch';
+
     /**
      * @var int
      *
@@ -26,8 +31,6 @@ class Branch
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     *
-     * @Assert\NotBlank()
      */
     private $name;
 
@@ -35,28 +38,46 @@ class Branch
      * @var string
      *
      * @ORM\Column(name="description", type="text")
-     *
-     * @Assert\NotBlank()
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="text")
-     *
-     * @Assert\NotBlank()
+     * @ORM\Column(name="address", type="string", length=255)
      */
     private $address;
 
     /**
-     * @var
+     * @var City
      *
-     * @ORM\ManyToOne(targetEntity="City", inversedBy="branches")
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="departments")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
+     *
+     * @Assert\Type(type="AdminBundle\Entity\City")
+     * @Assert\Valid()
      */
     private $city;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="integer", columnDefinition="ENUM('factory', 'distributionCenter', 'branch')")
+     */
+    private $type = 'branch';
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Warehouse", mappedBy="department")
+     */
+    private $warehouses;
+
+    public function __construct($type)
+    {
+        $this->setType($type);
+        $this->warehouses = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -73,7 +94,7 @@ class Branch
      *
      * @param string $name
      *
-     * @return Branch
+     * @return Department
      */
     public function setName($name)
     {
@@ -97,7 +118,7 @@ class Branch
      *
      * @param string $description
      *
-     * @return Branch
+     * @return Department
      */
     public function setDescription($description)
     {
@@ -121,7 +142,7 @@ class Branch
      *
      * @param string $address
      *
-     * @return Branch
+     * @return Department
      */
     public function setAddress($address)
     {
@@ -141,11 +162,11 @@ class Branch
     }
 
     /**
-     * Set city object
+     * Set city
      *
      * @param City $city
      *
-     * @return $this
+     * @return Department
      */
     public function setCity(City $city)
     {
@@ -155,13 +176,37 @@ class Branch
     }
 
     /**
-     * Get city object
+     * Get city
      *
-     * @return mixed
+     * @return City
      */
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Department
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }
 

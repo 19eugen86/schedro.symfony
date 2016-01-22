@@ -9,7 +9,7 @@
         <li{% if app.request.get('_route') == 'show_all_distribution_centers' %} class="active"{% endif %}>
             <a href="{{ url("show_all_distribution_centers") }}"><span class="glyphicon glyphicon-move" aria-hidden="true"></span> РЦ</a>
         </li>
-        <li{% if app.request.get('_route') == 'show_all_branches' %} class="active"{% endif %}>
+        <li{% if app.request.get('_route') == 'show_all_branches' or app.request.get('_route') == 'show_all_branches_warehouses' %} class="active"{% endif %}>
             <a href="{{ url("show_all_branches") }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Филиалы</a>
         </li>
     </ul>

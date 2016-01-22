@@ -1,6 +1,10 @@
 {% extends '@Admin/base.html.twig' %}
 
 {% block content %}
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">РЦ</a></li>
+        <li role="presentation"><a href="#">Склады</a></li>
+    </ul>
     <h2 class="sub-header">
         РЦ
         <button class="btn btn-default" data-toggle="modal" data-target="#modal-window" data-action="{{ url("add_new_distribution_center") }}">

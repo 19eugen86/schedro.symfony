@@ -9,14 +9,14 @@
 namespace AdminBundle\Controller;
 
 
-use AdminBundle\Entity\Branch;
-use AdminBundle\Form\Type\BranchType;
+use AdminBundle\Entity\Department;
+use AdminBundle\Form\Type\DepartmentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/admin/branches")
+ * @Route("/admin/departments/branches")
  */
 class BranchController extends Controller
 {
@@ -25,7 +25,7 @@ class BranchController extends Controller
      */
     public function indexAction()
     {
-        $branches = $this->getDoctrine()->getRepository('AdminBundle:Branch')->findAll();
+        $branches = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::BRANCH);
         return $this->render('AdminBundle:Branch:index.html.twig', array(
             'branches' => $branches,
             'section' => 'Филиалы'
@@ -40,7 +40,7 @@ class BranchController extends Controller
      */
     public function showByPageAction()
     {
-        $branches = $this->getDoctrine()->getRepository('AdminBundle:Branch')->findAll();
+        $branches = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::BRANCH);
         return $this->render('AdminBundle:Branch:index.html.twig', array(
             'branches' => $branches,
             'section' => 'Филиалы'
@@ -52,9 +52,9 @@ class BranchController extends Controller
      */
     public function newAction(Request $request)
     {
-        $branch = new Branch();
+        $branch = new Department(Department::BRANCH);
 
-        $form = $this->createForm(BranchType::class, $branch, array(
+        $form = $this->createForm(DepartmentType::class, $branch, array(
             'action' => $this->generateUrl("add_new_branch"),
             'method' => "POST"
         ));
@@ -85,12 +85,12 @@ class BranchController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $branch = $this->getDoctrine()->getRepository('AdminBundle:Branch')->find($id);
+        $branch = $this->getDoctrine()->getRepository('AdminBundle:Department')->find($id);
         if (!$branch) {
             throw $this->createNotFoundException('Филиал не найден');
         }
 
-        $form = $this->createForm(BranchType::class, $branch, array(
+        $form = $this->createForm(DepartmentType::class, $branch, array(
             'action' => $this->generateUrl("edit_branch", array(
                 'id' => $branch->getId()
             )),
@@ -123,7 +123,7 @@ class BranchController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $branch = $this->getDoctrine()->getRepository('AdminBundle:Branch')->find($id);
+        $branch = $this->getDoctrine()->getRepository('AdminBundle:Department')->find($id);
         if (!$branch) {
             throw $this->createNotFoundException('Филиал не найден');
         }

@@ -7,12 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * City
+ * Warehouse
  *
- * @ORM\Table(name="cities")
- * @ORM\Entity(repositoryClass="AdminBundle\Repository\CityRepository")
+ * @ORM\Table(name="warehouses")
+ * @ORM\Entity(repositoryClass="AdminBundle\Repository\WarehouseRepository")
  */
-class City
+class Warehouse
 {
     /**
      * @var int
@@ -27,34 +27,31 @@ class City
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     *
-     * @Assert\NotBlank()
      */
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Country", inversedBy="cities")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * @var Department
      *
-     * @Assert\Type(type="AdminBundle\Entity\Country")
+     * @ORM\ManyToOne(targetEntity="Department", inversedBy="warehouses")
+     * @ORM\JoinColumn(name="department_id", referencedColumnName="id")
+     *
+     * @Assert\Type(type="AdminBundle\Entity\Department")
      * @Assert\Valid()
      */
-    protected $country;
+    private $department;
 
     /**
-     * @ORM\OneToMany(targetEntity="Client", mappedBy="city")
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="WarehouseCell", mappedBy="warehouse")
      */
-    protected $clients;
+    private $cells;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Department", mappedBy="city")
-     */
-    protected $departments;
 
     public function __construct()
     {
-        $this->clients = new ArrayCollection();
-        $this->departments = new ArrayCollection();
+        $this->cells = new ArrayCollection();
     }
 
     /**
@@ -72,7 +69,7 @@ class City
      *
      * @param string $name
      *
-     * @return City
+     * @return Warehouse
      */
     public function setName($name)
     {
@@ -92,22 +89,27 @@ class City
     }
 
     /**
-     * @param Country $country
-     * @return $this
+     * Set department
+     *
+     * @param Department $department
+     *
+     * @return Warehouse
      */
-    public function setCountry(Country $country)
+    public function setDepartment(Department $department)
     {
-        $this->country = $country;
+        $this->department = $department;
 
         return $this;
     }
 
     /**
-     * @return mixed
+     * Get department
+     *
+     * @return Department
      */
-    public function getCountry()
+    public function getDepartment()
     {
-        return $this->country;
+        return $this->department;
     }
 }
 

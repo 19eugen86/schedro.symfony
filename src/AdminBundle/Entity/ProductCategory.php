@@ -33,13 +33,23 @@ class ProductCategory
     private $name;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
      */
-    protected $products;
+    private $products;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="WarehouseCell", mappedBy="productCategory")
+     */
+    private $warehouseCells;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->warehouseCells = new ArrayCollection();
     }
 
     /**
@@ -76,4 +86,3 @@ class ProductCategory
         return $this->name;
     }
 }
-

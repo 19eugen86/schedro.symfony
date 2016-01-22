@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/admin/product-categories")
+ * @Route("/admin/products/categories")
  */
 class ProductCategoryController extends Controller
 {

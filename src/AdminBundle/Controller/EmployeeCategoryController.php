@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/admin/employee-categories")
+ * @Route("/admin/employees/categories")
  */
 class EmployeeCategoryController extends Controller
 {
