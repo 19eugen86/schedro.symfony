@@ -5,17 +5,28 @@
     </div>
     <div class="modal-body">
         {{ form_errors(form) }}
-
         <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.name, 'Склад') }}</span>
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.warehouse, 'Склад') }}</span>
+            {{ form_errors(form.warehouse) }}
+            {{ form_widget(form.warehouse, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.name, 'Камера') }}</span>
             {{ form_errors(form.name) }}
             {{ form_widget(form.name, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
         </div>
         <br>
         <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.department, 'Филиал') }}</span>
-            {{ form_errors(form.department) }}
-            {{ form_widget(form.department, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.area, 'Площадь (м²)') }}</span>
+            {{ form_errors(form.area) }}
+            {{ form_widget(form.area, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">{{ form_label(form.productCategory, 'Товарная группа') }}</span>
+            {{ form_errors(form.productCategory) }}
+            {{ form_widget(form.productCategory, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
         </div>
     </div>
     <div class="modal-footer">

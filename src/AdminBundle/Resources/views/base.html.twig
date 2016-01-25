@@ -51,22 +51,22 @@
             </footer>
         </div><!-- /.container -->
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src="{{ asset('js/bootstrap-confirmation.min.js') }}"></script>
         <script src="{{ asset('js/functions.js') }}"></script>
         <script>
             $(document).ready(function () {
-                $('.dropdown-toggle').dropdown()
-                $('[data-toggle="popover"]').popover()
+                $('.dropdown-toggle').dropdown();
+                $('[data-toggle="popover"]').popover();
                 $('[data-toggle="confirmation"]').confirmation({
                     title: 'Вы уверены?',
                     btnOkLabel: '<i class="icon-ok-sign icon-white"></i> Да',
                     btnCancelLabel: '<i class="icon-remove-sign"></i> Нет',
                     singleton: true,
                     popout: true
-                })
+                });
             });
 
             $(function () {

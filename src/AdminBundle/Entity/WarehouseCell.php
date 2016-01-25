@@ -65,6 +65,10 @@ class WarehouseCell
      */
     private $volume;
 
+    /**
+     * @var string
+     */
+    private $usedArea;
 
     /**
      * Get id
@@ -194,6 +198,25 @@ class WarehouseCell
     public function getVolume()
     {
         return $this->volume;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsedArea()
+    {
+        return $this->usedArea;
+    }
+
+    /**
+     * @param string $usedArea
+     * @return WarehouseCellRepository
+     */
+    public function setUsedArea($usedArea)
+    {
+        $this->usedArea = $usedArea;
+
+        return $this;
     }
 }
 
