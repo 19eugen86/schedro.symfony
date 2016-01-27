@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Department
 {
     const FACTORY = 'factory';
-    const DISTRIBUTION_CENTER = 'distributionCenter';
+    const DISTRIBUTION_CENTER = 'distribution_center';
     const BRANCH = 'branch';
 
     /**
@@ -62,7 +62,7 @@ class Department
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="integer", columnDefinition="ENUM('factory', 'distributionCenter', 'branch')")
+     * @ORM\Column(name="type", type="string", columnDefinition="ENUM('factory', 'distribution_center', 'branch')")
      */
     private $type = 'branch';
 
@@ -207,6 +207,29 @@ class Department
     public function getType()
     {
         return $this->type;
+    }
+
+    public function getRoutePart()
+    {
+        $type = $this->getType();
+        switch ($type) {
+            case self::FACTORY:
+                $routePart = 'factories';
+                break;
+
+            case self::DISTRIBUTION_CENTER:
+                $routePart = 'distribution_centers';
+                break;
+
+            case self::BRANCH:
+                $routePart = 'branches';
+                break;
+
+            default:
+                $routePart = '';
+                break;
+        }
+        return $routePart;
     }
 }
 

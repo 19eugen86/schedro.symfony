@@ -25,7 +25,7 @@ class EmployeeCategoryController extends Controller
      */
     public function indexAction()
     {
-        $categories = $this->getDoctrine()->getRepository('AdminBundle:EmployeeCategory')->findAll();
+        $categories = $this->get('fos_user.group_manager')->findGroups();
         return $this->render('AdminBundle:EmployeeCategory:index.html.twig', array(
             'categories' => $categories,
             'section' => 'Сотрудники'
@@ -40,10 +40,14 @@ class EmployeeCategoryController extends Controller
      */
     public function showByPageAction($page)
     {
-        $categories = $this->getDoctrine()->getRepository('AdminBundle:EmployeeCategory')->findAll();
+        $categories = $this->get('fos_user.group_manager')->findGroups();
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($categories, $page, 5);
+
         return $this->render('AdminBundle:EmployeeCategory:index.html.twig', array(
-            'categories' => $categories,
-            'section' => 'Сотрудники'
+            'pagination' => $pagination,
+            'section' => 'Сотрудники',
         ));
     }
 

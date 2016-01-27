@@ -74,8 +74,8 @@ class WarehouseCellController extends Controller
                 'Камера успешно добавлена!'
             );
 
-            // TODO:
-            return $this->redirectToRoute("show_all_branches_warehouses");
+            $departmentRoute = "show_all_".$warehouse->getDepartment()->getRoutePart()."_warehouses";
+            return $this->redirectToRoute($departmentRoute);
         }
 
         return $this->render('AdminBundle:WarehouseCell:form.html.twig', array(
@@ -119,8 +119,8 @@ class WarehouseCellController extends Controller
                 'Камера изменена!'
             );
 
-            // TODO:
-            return $this->redirectToRoute("show_all_branches_warehouses");
+            $departmentRoute = "show_all_".$warehouse->getDepartment()->getRoutePart()."_warehouses";
+            return $this->redirectToRoute($departmentRoute);
         }
 
         return $this->render('AdminBundle:WarehouseCell:form.html.twig', array(
@@ -154,7 +154,7 @@ class WarehouseCellController extends Controller
             'Камера успешно удалена!'
         );
 
-        // TODO:
-        return $this->redirectToRoute("show_all_branches_warehouses");
+        $departmentRoute = "show_all_".$warehouse->getDepartment()->getRoutePart()."_warehouses";
+        return $this->redirectToRoute($departmentRoute);
     }
 }
