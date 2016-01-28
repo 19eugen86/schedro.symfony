@@ -13,11 +13,8 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $user = $this->get('fos_user.user_manager')->findUserByUsername('admin');
-        dump($user->getGroupNames());
-
         if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
-//            return $this->redirect($request->getRequestUri()."admin");
+            return $this->redirect($request->getRequestUri()."admin");
         }
 
         // replace this example code with whatever you need

@@ -24,7 +24,7 @@ class EmployeeType extends AbstractType
         $builder
             ->add('username', TextType::class)
             ->add('password', PasswordType::class)
-            ->add('fullname', TextType::class)
+            ->add('fullName', TextType::class)
             ->add('phone', TextType::class)
             ->add('email', EmailType::class)
             ->add('category', EntityType::class, array(

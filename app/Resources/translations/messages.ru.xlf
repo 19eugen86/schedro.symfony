@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Add</source>
+                <target>Добавить</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Edit</source>
+                <target>Редактировать</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Delete</source>
+                <target>Удалить</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Yes</source>
+                <target>Да</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>No</source>
+                <target>Нет</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Are you sure?</source>
+                <target>Вы уверены?</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Save</source>
+                <target>Сохранить</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Cancel</source>
+                <target>Отмена</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>Name</source>
+                <target>Название</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Add/Edit</source>
+                <target>Добавить/Редактировать</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

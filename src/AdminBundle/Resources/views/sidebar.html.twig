@@ -29,8 +29,8 @@
         <li{% if app.request.get('_route') == 'show_all_carriers' or app.request.get('_route') == 'show_all_drivers' or app.request.get('_route') == 'show_all_vehicles' %} class="active"{% endif %}>
             <a href="{{ url("show_all_carriers") }}"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> Транспорт</a>
         </li>
-        <li{% if app.request.get('_route') == 'show_all_employees' or app.request.get('_route') == 'show_all_employee_categories' %} class="active"{% endif %}>
-            <a href="{{ url("show_all_employees") }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Сотрудники</a>
+        <li{% if app.request.get('_route') == 'show_employees' or app.request.get('_route') == 'show_employee_groups' %} class="active"{% endif %}>
+            <a href="{{ url("show_employees") }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Сотрудники</a>
         </li>
     </ul>
     <ul class="nav nav-sidebar">

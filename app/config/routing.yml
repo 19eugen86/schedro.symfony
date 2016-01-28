@@ -24,3 +24,10 @@ fos_user:
 fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
+
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: AppBundle:Redirecting:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]

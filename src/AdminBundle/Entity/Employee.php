@@ -75,10 +75,10 @@ class Employee implements UserInterface, \Serializable
     /**
      * @var EmployeeCategory
      *
-     * @ORM\ManyToOne(targetEntity="EmployeeCategory", inversedBy="employees")
+     * @ORM\ManyToOne(targetEntity="EmployeeGroup", inversedBy="employees")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      *
-     * @Assert\Type(type="AdminBundle\Entity\EmployeeCategory")
+     * @Assert\Type(type="AdminBundle\Entity\EmployeeGroup")
      * @Assert\Valid()
      */
     protected $category;

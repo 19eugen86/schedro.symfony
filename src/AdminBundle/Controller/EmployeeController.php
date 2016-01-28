@@ -11,6 +11,10 @@ namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Employee;
 use AdminBundle\Form\Type\EmployeeType;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\FOSUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,27 +25,29 @@ use Symfony\Component\HttpFoundation\Request;
 class EmployeeController extends Controller
 {
     /**
-     * @Route("/", name="show_all_employees")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_employees",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page", "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
-        $employees = $this->getDoctrine()->getRepository('AdminBundle:Employee')->findAll();
-        return $this->render('AdminBundle:Employee:index.html.twig', array(
-            'employees' => $employees,
-            'section' => 'Сотрудники'
-        ));
-    }
+        $employees = $this->get('fos_user.user_manager')->findUsers();
 
-    /**
-     * TODO:
-     * @Route("/pages/{page}", name="show_employees_by_page")
-     */
-    public function showByPageAction()
-    {
-        $employees = $this->getDoctrine()->getRepository('AdminBundle:Employee')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($employees, $page, 5);
+
         return $this->render('AdminBundle:Employee:index.html.twig', array(
-            'employees' => $employees,
-            'section' => 'Сотрудники'
+            'pagination' => $pagination,
+            'section' => $this->get('translator')->trans('Employees')
         ));
     }
 
@@ -50,26 +56,70 @@ class EmployeeController extends Controller
      */
     public function newAction(Request $request)
     {
-        $employee = new Employee();
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
 
-        $form = $this->createForm(EmployeeType::class, $employee, array(
+        $user = $userManager->createUser();
+        $user->setEnabled(true);
+
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->get('fos_user.profile.form.factory');
+
+        $form = $formFactory->createForm(array(
             'action' => $this->generateUrl("add_new_employee"),
             'method' => "POST"
         ));
+        $form->setData($user);
+
+        dump($form);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($employee);
-            $em->flush();
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
-            $this->addFlash(
-                'success',
-                'Сотрудник успешно добавлен!'
-            );
+            $userManager->updateUser($user);
 
-            return $this->redirectToRoute("show_all_employees");
+            if (null === $response = $event->getResponse()) {
+                $response = $this->redirectToRoute("show_employees");
+            }
+
+            $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+            return $response;
         }
+
+//        $employee = new Employee();
+//
+//        $form = $this->createForm(EmployeeType::class, $employee, array(
+//            'action' => $this->generateUrl("add_new_employee"),
+//            'method' => "POST"
+//        ));
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($employee);
+//            $em->flush();
+//
+//            $this->addFlash(
+//                'success',
+//                'Сотрудник успешно добавлен!'
+//            );
+//
+//            return $this->redirectToRoute("show_employees");
+//        }
 
         return $this->render("AdminBundle:Employee:form.html.twig", array(
             'form' => $form->createView()
@@ -106,7 +156,7 @@ class EmployeeController extends Controller
                 'Сотрудник изменен!'
             );
 
-            return $this->redirectToRoute("show_all_employees");
+            return $this->redirectToRoute("show_employees");
         }
 
         return $this->render("AdminBundle:Employee:form.html.twig", array(
@@ -135,6 +185,6 @@ class EmployeeController extends Controller
             'Сотрудник успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_employees");
+        return $this->redirectToRoute("show_employees");
     }
 }

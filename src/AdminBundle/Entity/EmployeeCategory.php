@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * EmployeeCategory
+ * EmployeeGroup
  *
  * @ORM\Table(name="users_categories")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\EmployeeCategoryRepository")
