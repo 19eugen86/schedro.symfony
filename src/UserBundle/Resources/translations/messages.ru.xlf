@@ -11,7 +11,7 @@
                 <target>Группы</target>
             </trans-unit>
             <trans-unit id="3">
-                <source>Employees</source>
+                <source>users</source>
                 <target>Сотрудники</target>
             </trans-unit>
             <trans-unit id="4">

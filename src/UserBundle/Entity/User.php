@@ -8,6 +8,7 @@
 
 namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -41,6 +42,12 @@ class User extends BaseUser
      *      inversedJoinColumns={name="group_id", referencedColumnName="id"}
      */
     protected $groups;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->groups = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -78,5 +85,21 @@ class User extends BaseUser
         $this->fullName = $fullName;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $groups
+     */
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
     }
 }

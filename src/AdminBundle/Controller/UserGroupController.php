@@ -19,14 +19,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/admin/employees/groups")
+ * @Route("/admin/users/groups")
  */
-class EmployeeGroupController extends Controller
+class UserGroupController extends Controller
 {
     /**
      * @Route(
      *      "/{pageParam}/{page}",
-     *      name="show_employee_groups",
+     *      name="show_user_groups",
      *      defaults={
      *          "pageParam": "page",
      *          "page": 1
@@ -43,14 +43,14 @@ class EmployeeGroupController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($groups, $page, 5);
 
-        return $this->render('AdminBundle:EmployeeGroup:index.html.twig', array(
+        return $this->render('AdminBundle:UserGroup:index.html.twig', array(
             'pagination' => $pagination,
-            'section' => $this->get('translator')->trans('Employees'),
+            'section' => $this->get('translator')->trans('users'),
         ));
     }
 
     /**
-     * @Route("/new", name="add_new_employee_group")
+     * @Route("/new", name="add_new_user_group")
      */
     public function newAction(Request $request)
     {
@@ -66,7 +66,7 @@ class EmployeeGroupController extends Controller
         $dispatcher->dispatch(FOSUserEvents::GROUP_CREATE_INITIALIZE, new GroupEvent($group, $request));
 
         $form = $formFactory->createForm(array(
-            'action' => $this->generateUrl("add_new_employee_group"),
+            'action' => $this->generateUrl("add_new_user_group"),
             'method' => "POST"
         ));
         $form->setData($group);
@@ -80,7 +80,7 @@ class EmployeeGroupController extends Controller
             $groupManager->updateGroup($group);
 
             if (null === $response = $event->getResponse()) {
-                $response = $this->redirectToRoute("show_employee_groups");
+                $response = $this->redirectToRoute("show_user_groups");
             }
 
             $dispatcher->dispatch(FOSUserEvents::GROUP_CREATE_COMPLETED, new FilterGroupResponseEvent($group, $request, $response));
@@ -88,13 +88,13 @@ class EmployeeGroupController extends Controller
             return $response;
         }
 
-        return $this->render('AdminBundle:EmployeeGroup:form.html.twig', array(
+        return $this->render('AdminBundle:UserGroup:form.html.twig', array(
             'form' => $form->createview(),
         ));
     }
 
     /**
-     * @Route("/{id}/edit", name="edit_employee_group", requirements={
+     * @Route("/{id}/edit", name="edit_user_group", requirements={
      *      "id": "\d+"
      * })
      */
@@ -119,7 +119,7 @@ class EmployeeGroupController extends Controller
         $formFactory = $this->get('fos_user.group.form.factory');
 
         $form = $formFactory->createForm(array(
-            'action' => $this->generateUrl("edit_employee_group", array(
+            'action' => $this->generateUrl("edit_user_group", array(
                 'id' => $group->getId()
             )),
             'method' => "POST"
@@ -138,7 +138,7 @@ class EmployeeGroupController extends Controller
             $groupManager->updateGroup($group);
 
             if (null === $response = $event->getResponse()) {
-                $response = $this->redirectToRoute("show_employee_groups");
+                $response = $this->redirectToRoute("show_user_groups");
             }
 
             $dispatcher->dispatch(FOSUserEvents::GROUP_EDIT_COMPLETED, new FilterGroupResponseEvent($group, $request, $response));
@@ -146,13 +146,13 @@ class EmployeeGroupController extends Controller
             return $response;
         }
 
-        return $this->render("AdminBundle:EmployeeGroup:form.html.twig", array(
+        return $this->render("AdminBundle:UserGroup:form.html.twig", array(
             'form' => $form->createView()
         ));
     }
 
     /**
-     * @Route("/{id}/delete", name="delete_employee_group", requirements={
+     * @Route("/{id}/delete", name="delete_user_group", requirements={
      *      "id": "\d+"
      * })
      */
@@ -164,7 +164,7 @@ class EmployeeGroupController extends Controller
         $group = $groupManager->findGroupBy(array('id' => $id));
         $this->get('fos_user.group_manager')->deleteGroup($group);
 
-        $response = $this->redirectToRoute("show_employee_groups");
+        $response = $this->redirectToRoute("show_user_groups");
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
