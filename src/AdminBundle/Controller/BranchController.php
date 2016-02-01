@@ -21,29 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
 class BranchController extends Controller
 {
     /**
-     * @Route("/", name="show_all_branches")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_branches",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $branches = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::BRANCH);
-        return $this->render('AdminBundle:Branch:index.html.twig', array(
-            'branches' => $branches,
-            'section' => 'Филиалы'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/pages/{page}", name="show_branches_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction()
-    {
-        $branches = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::BRANCH);
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($branches, $page);
+
         return $this->render('AdminBundle:Branch:index.html.twig', array(
-            'branches' => $branches,
-            'section' => 'Филиалы'
+            'pagination' => $pagination
         ));
     }
 
@@ -70,7 +69,7 @@ class BranchController extends Controller
                 'Филиал успешно добавлен!'
             );
 
-            return $this->redirectToRoute("show_all_branches");
+            return $this->redirectToRoute("show_branches");
         }
 
         return $this->render("AdminBundle:Branch:form.html.twig", array(
@@ -108,7 +107,7 @@ class BranchController extends Controller
                 'Филиал изменен!'
             );
 
-            return $this->redirectToRoute("show_all_branches");
+            return $this->redirectToRoute("show_branches");
         }
 
         return $this->render("AdminBundle:Branch:form.html.twig", array(
@@ -137,6 +136,6 @@ class BranchController extends Controller
             'Филиал успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_branches");
+        return $this->redirectToRoute("show_branches");
     }
 }

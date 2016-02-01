@@ -21,29 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
 class DriverController extends Controller
 {
     /**
-     * @Route("/", name="show_all_drivers")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_drivers",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $drivers = $this->getDoctrine()->getRepository('AdminBundle:Driver')->findAll();
-        return $this->render('AdminBundle:Driver:index.html.twig', array(
-            'drivers' => $drivers,
-            'section' => 'Транспорт'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/page/{page}", name="show_drivers_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $drivers = $this->getDoctrine()->getRepository('AdminBundle:Driver')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($drivers, $page);
+
         return $this->render('AdminBundle:Driver:index.html.twig', array(
-            'drivers' => $drivers,
-            'section' => 'Транспорт'
+            'pagination' => $pagination
         ));
     }
 
@@ -70,7 +69,7 @@ class DriverController extends Controller
                 'Водитель успешно добавлен!'
             );
 
-            return $this->redirectToRoute("show_all_drivers");
+            return $this->redirectToRoute("show_drivers");
         }
 
         return $this->render('AdminBundle:Driver:form.html.twig', array(
@@ -108,7 +107,7 @@ class DriverController extends Controller
                 'Водитель успешно изменен!'
             );
 
-            return $this->redirectToRoute("show_all_drivers");
+            return $this->redirectToRoute("show_drivers");
         }
 
         return $this->render('AdminBundle:Driver:form.html.twig', array(
@@ -137,6 +136,6 @@ class DriverController extends Controller
             'Водитель успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_drivers");
+        return $this->redirectToRoute("show_drivers");
     }
 }

@@ -21,29 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
 class ProportionController extends Controller
 {
     /**
-     * @Route("/", name="show_all_proportions")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_proportions",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $proportions = $this->getDoctrine()->getRepository('AdminBundle:Proportion')->findAll();
-        return $this->render('AdminBundle:Proportion:index.html.twig', array(
-            'proportions' => $proportions,
-            'section' => 'Настройки'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/page/{page}", name="show_proportions_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $proportions = $this->getDoctrine()->getRepository('AdminBundle:Proportion')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($proportions, $page);
+
         return $this->render('AdminBundle:Proportion:index.html.twig', array(
-            'proportions' => $proportions,
-            'section' => 'Настройки'
+            'pagination' => $pagination
         ));
     }
 
@@ -70,7 +69,7 @@ class ProportionController extends Controller
                 'Пропорция успешно добавлена!'
             );
 
-            return $this->redirectToRoute("show_all_proportions");
+            return $this->redirectToRoute("show_proportions");
         }
 
         return $this->render('AdminBundle:Proportion:form.html.twig', array(
@@ -108,7 +107,7 @@ class ProportionController extends Controller
                 'Пропорция изменена!'
             );
 
-            return $this->redirectToRoute("show_all_proportions");
+            return $this->redirectToRoute("show_proportions");
         }
 
         return $this->render('AdminBundle:Proportion:form.html.twig', array(
@@ -137,6 +136,6 @@ class ProportionController extends Controller
             'Пропорция успешно удалена!'
         );
 
-        return $this->redirectToRoute("show_all_proportions");
+        return $this->redirectToRoute("show_proportions");
     }
 }

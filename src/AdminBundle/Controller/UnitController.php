@@ -21,29 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
 class UnitController extends Controller
 {
     /**
-     * @Route("/", name="show_all_units")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_units",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $units = $this->getDoctrine()->getRepository('AdminBundle:Unit')->findAll();
-        return $this->render('AdminBundle:Unit:index.html.twig', array(
-            'units' => $units,
-            'section' => 'Настройки'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/page/{page}", name="show_units_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $units = $this->getDoctrine()->getRepository('AdminBundle:Unit')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($units, $page);
+
         return $this->render('AdminBundle:Unit:index.html.twig', array(
-            'units' => $units,
-            'section' => 'Настройки'
+            'pagination' => $pagination
         ));
     }
 
@@ -70,7 +69,7 @@ class UnitController extends Controller
                 'Единица измерения успешно добавлена!'
             );
 
-            return $this->redirectToRoute("show_all_units");
+            return $this->redirectToRoute("show_units");
         }
 
         return $this->render('AdminBundle:Unit:form.html.twig', array(
@@ -108,7 +107,7 @@ class UnitController extends Controller
                 'Единица измерения изменена!'
             );
 
-            return $this->redirectToRoute("show_all_units");
+            return $this->redirectToRoute("show_units");
         }
 
         return $this->render('AdminBundle:Unit:form.html.twig', array(
@@ -137,6 +136,6 @@ class UnitController extends Controller
             'Единица измерения успешно удалена!'
         );
 
-        return $this->redirectToRoute("show_all_units");
+        return $this->redirectToRoute("show_units");
     }
 }

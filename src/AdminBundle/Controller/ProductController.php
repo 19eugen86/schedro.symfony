@@ -22,29 +22,28 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductController extends Controller
 {
     /**
-     * @Route("/", name="show_all_products")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_products",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $products = $this->getDoctrine()->getRepository('AdminBundle:Product')->findAll();
-        return $this->render('AdminBundle:Product:index.html.twig', array(
-            'products' => $products,
-            'section' => 'Продукция'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/page/{page}", name="show_products_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $products = $this->getDoctrine()->getRepository('AdminBundle:Product')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($products, $page);
+
         return $this->render('AdminBundle:Product:index.html.twig', array(
-            'products' => $products,
-            'section' => 'Продукция'
+            'pagination' => $pagination
         ));
     }
 
@@ -71,7 +70,7 @@ class ProductController extends Controller
                 'Продукт успешно добавлен!'
             );
 
-            return $this->redirectToRoute("show_all_products");
+            return $this->redirectToRoute("show_products");
         }
 
         return $this->render('AdminBundle:Product:form.html.twig', array(
@@ -109,7 +108,7 @@ class ProductController extends Controller
                 'Продукт изменен!'
             );
 
-            return $this->redirectToRoute("show_all_products");
+            return $this->redirectToRoute("show_products");
         }
 
         return $this->render('AdminBundle:Product:form.html.twig', array(
@@ -138,7 +137,7 @@ class ProductController extends Controller
             'Продукт успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_products");
+        return $this->redirectToRoute("show_products");
     }
 
     /**

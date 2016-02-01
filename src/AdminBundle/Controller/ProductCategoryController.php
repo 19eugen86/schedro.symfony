@@ -21,29 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductCategoryController extends Controller
 {
     /**
-     * @Route("/", name="show_all_product_categories")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_products_categories",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $categories = $this->getDoctrine()->getRepository('AdminBundle:ProductCategory')->findAll();
-        return $this->render('AdminBundle:ProductCategory:index.html.twig', array(
-            'categories' => $categories,
-            'section' => 'Продукция'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/page/{page}", name="show_product_categories_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $categories = $this->getDoctrine()->getRepository('AdminBundle:ProductCategory')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($categories, $page);
+
         return $this->render('AdminBundle:ProductCategory:index.html.twig', array(
-            'categories' => $categories,
-            'section' => 'Продукция'
+            'pagination' => $pagination
         ));
     }
 
@@ -70,7 +69,7 @@ class ProductCategoryController extends Controller
                 'Товарная группа успешно добавлена!'
             );
 
-            return $this->redirectToRoute("show_all_product_categories");
+            return $this->redirectToRoute("show_products_categories");
         }
 
         return $this->render('AdminBundle:ProductCategory:form.html.twig', array(
@@ -108,7 +107,7 @@ class ProductCategoryController extends Controller
                 'Товарная группа изменена!'
             );
 
-            return $this->redirectToRoute("show_all_product_categories");
+            return $this->redirectToRoute("show_products_categories");
         }
 
         return $this->render('AdminBundle:ProductCategory:form.html.twig', array(
@@ -137,6 +136,6 @@ class ProductCategoryController extends Controller
             'Товарная группа успешно удалена!'
         );
 
-        return $this->redirectToRoute("show_all_product_categories");
+        return $this->redirectToRoute("show_products_categories");
     }
 }

@@ -26,7 +26,7 @@ class UserGroupController extends Controller
     /**
      * @Route(
      *      "/{pageParam}/{page}",
-     *      name="show_user_groups",
+     *      name="show_users_groups",
      *      defaults={
      *          "pageParam": "page",
      *          "page": 1
@@ -44,8 +44,7 @@ class UserGroupController extends Controller
         $pagination = $paginator->paginate($groups, $page, 5);
 
         return $this->render('AdminBundle:UserGroup:index.html.twig', array(
-            'pagination' => $pagination,
-            'section' => $this->get('translator')->trans('users'),
+            'pagination' => $pagination
         ));
     }
 
@@ -80,7 +79,7 @@ class UserGroupController extends Controller
             $groupManager->updateGroup($group);
 
             if (null === $response = $event->getResponse()) {
-                $response = $this->redirectToRoute("show_user_groups");
+                $response = $this->redirectToRoute("show_users_groups");
             }
 
             $dispatcher->dispatch(FOSUserEvents::GROUP_CREATE_COMPLETED, new FilterGroupResponseEvent($group, $request, $response));
@@ -138,7 +137,7 @@ class UserGroupController extends Controller
             $groupManager->updateGroup($group);
 
             if (null === $response = $event->getResponse()) {
-                $response = $this->redirectToRoute("show_user_groups");
+                $response = $this->redirectToRoute("show_users_groups");
             }
 
             $dispatcher->dispatch(FOSUserEvents::GROUP_EDIT_COMPLETED, new FilterGroupResponseEvent($group, $request, $response));
@@ -164,7 +163,7 @@ class UserGroupController extends Controller
         $group = $groupManager->findGroupBy(array('id' => $id));
         $this->get('fos_user.group_manager')->deleteGroup($group);
 
-        $response = $this->redirectToRoute("show_user_groups");
+        $response = $this->redirectToRoute("show_users_groups");
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');

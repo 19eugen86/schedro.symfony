@@ -22,27 +22,28 @@ use Symfony\Component\HttpFoundation\Response;
 class ClientController extends Controller
 {
     /**
-     * @Route("/", name="show_all_clients")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_clients",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $clients = $this->getDoctrine()->getRepository('AdminBundle:Client')->findAll();
-        return $this->render('AdminBundle:Client:index.html.twig', array(
-            'clients' => $clients
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/page/{page}", name="show_clients_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction()
-    {
-        $clients = $this->getDoctrine()->getRepository('AdminBundle:Client')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($clients, $page);
+
         return $this->render('AdminBundle:Client:index.html.twig', array(
-            'clients' => $clients
+            'pagination' => $pagination
         ));
     }
 
@@ -64,7 +65,7 @@ class ClientController extends Controller
             $em->persist($client);
             $em->flush();
 
-            return $this->redirectToRoute("show_all_clients");
+            return $this->redirectToRoute("show_clients");
         }
 
         return $this->render('AdminBundle:Client:form.html.twig', array(
@@ -102,7 +103,7 @@ class ClientController extends Controller
                 'Клиент изменен!'
             );
 
-            return $this->redirectToRoute("show_all_clients");
+            return $this->redirectToRoute("show_clients");
         }
 
         return $this->render('AdminBundle:Client:form.html.twig', array(
@@ -131,6 +132,6 @@ class ClientController extends Controller
             'Клиент удален!'
         );
 
-        return $this->redirectToRoute("show_all_clients");
+        return $this->redirectToRoute("show_clients");
     }
 }

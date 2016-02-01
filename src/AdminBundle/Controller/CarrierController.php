@@ -21,29 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
 class CarrierController extends Controller
 {
     /**
-     * @Route("/", name="show_all_carriers")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_carriers",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $carriers = $this->getDoctrine()->getRepository('AdminBundle:Carrier')->findAll();
-        return $this->render('AdminBundle:Carrier:index.html.twig', array(
-            'carriers' => $carriers,
-            'section' => 'Транспорт'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/pages/{page}", name="show_carriers_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $carriers = $this->getDoctrine()->getRepository('AdminBundle:Carrier')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($carriers, $page);
+
         return $this->render('AdminBundle:Carrier:index.html.twig', array(
-            'carriers' => $carriers,
-            'section' => 'Транспорт'
+            'pagination' => $pagination
         ));
     }
 
@@ -70,7 +69,7 @@ class CarrierController extends Controller
                 'Перевозчик успешно добавлен!'
             );
 
-            return $this->redirectToRoute("show_all_carriers");
+            return $this->redirectToRoute("show_carriers");
         }
 
         return $this->render('AdminBundle:Carrier:form.html.twig', array(
@@ -108,7 +107,7 @@ class CarrierController extends Controller
                 'Перевозчик изменен!'
             );
 
-            return $this->redirectToRoute("show_all_carriers");
+            return $this->redirectToRoute("show_carriers");
         }
 
         return $this->render('AdminBundle:Carrier:form.html.twig', array(
@@ -137,6 +136,6 @@ class CarrierController extends Controller
             'Перевозчик успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_carriers");
+        return $this->redirectToRoute("show_carriers");
     }
 }

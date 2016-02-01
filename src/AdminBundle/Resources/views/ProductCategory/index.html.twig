@@ -2,8 +2,8 @@
 
 {% block content %}
     <ul class="nav nav-tabs">
-        <li role="presentation"><a href="{{ url("show_all_products") }}">Продукты</a></li>
-        <li role="presentation" class="active"><a href="{{ url("show_all_product_categories") }}">Товарные группы</a></li>
+        <li role="presentation"><a href="{{ url("show_products") }}">Продукты</a></li>
+        <li role="presentation" class="active"><a href="{{ url("show_products_categories") }}">Товарные группы</a></li>
     </ul>
     <h2 class="sub-header">
         Товарные группы
@@ -20,7 +20,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for category in categories %}
+            {% for category in pagination %}
                 <tr>
                     <td>{{ category.name }}</td>
                     <td>

@@ -2,8 +2,8 @@
 
 {% block content %}
     <ul class="nav nav-tabs">
-        <li role="presentation"><a href="{{ url("show_all_cities") }}">Города</a></li>
-        <li role="presentation" class="active"><a href="{{ url("show_all_countries") }}">Страны</a></li>
+        <li role="presentation"><a href="{{ url("show_cities") }}">Города</a></li>
+        <li role="presentation" class="active"><a href="{{ url("show_countries") }}">Страны</a></li>
     </ul>
     <h2 class="sub-header">
         Страны
@@ -20,7 +20,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for country in countries %}
+            {% for country in pagination %}
                 <tr>
                     <td>{{ country.name }}</td>
                     <td>

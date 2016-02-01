@@ -22,32 +22,29 @@ use Symfony\Component\HttpFoundation\Request;
 class DistributionCenterWarehouseController extends Controller
 {
     /**
-     * @Route("/", name="show_all_distribution_centers_warehouses")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_distribution_centers_warehouses",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $distributionCenters = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::DISTRIBUTION_CENTER);
         $warehouses = $this->getDoctrine()->getRepository('AdminBundle:Warehouse')->findByDepartment($distributionCenters);
 
-        return $this->render("AdminBundle:DistributionCenter/Warehouse:index.html.twig", array(
-            'warehouses' => $warehouses,
-            'section' => 'РЦ'
-        ));
-    }
-
-    /**
-     * @Route("/pages/{page}", name="show_distribution_centers_warehouses_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $distributionCenters = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::DISTRIBUTION_CENTER);
-        $warehouses = $this->getDoctrine()->getRepository('AdminBundle:Warehouse')->findByDepartment($distributionCenters);
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($warehouses, $page);
 
         return $this->render("AdminBundle:DistributionCenter/Warehouse:index.html.twig", array(
-            'warehouses' => $warehouses,
-            'section' => 'РЦ'
+            'pagination' => $pagination
         ));
     }
 
@@ -75,7 +72,7 @@ class DistributionCenterWarehouseController extends Controller
                 'Склад успешно добавлен!'
             );
 
-            return $this->redirectToRoute("show_all_distribution_centers_warehouses");
+            return $this->redirectToRoute("show_distribution_centers_warehouses");
         }
 
         return $this->render("AdminBundle:DistributionCenter/Warehouse:form.html.twig", array(
@@ -114,7 +111,7 @@ class DistributionCenterWarehouseController extends Controller
                 'Склад изменен!'
             );
 
-            return $this->redirectToRoute("show_all_distribution_centers_warehouses");
+            return $this->redirectToRoute("show_distribution_centers_warehouses");
         }
 
         return $this->render("AdminBundle:DistributionCenter/Warehouse:form.html.twig", array(
@@ -143,6 +140,6 @@ class DistributionCenterWarehouseController extends Controller
             'Склад успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_distribution_centers_warehouses");
+        return $this->redirectToRoute("show_distribution_centers_warehouses");
     }
 }

@@ -21,29 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
 class VehicleController extends Controller
 {
     /**
-     * @Route("/", name="show_all_vehicles")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_vehicles",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $vehicles = $this->getDoctrine()->getRepository('AdminBundle:Vehicle')->findAll();
-        return $this->render('AdminBundle:Vehicle:index.html.twig', array(
-            'vehicles' => $vehicles,
-            'section' => 'Транспорт'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/page/{page}", name="show_vehicles_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $vehicles = $this->getDoctrine()->getRepository('AdminBundle:Vehicle')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($vehicles, $page);
+
         return $this->render('AdminBundle:Vehicle:index.html.twig', array(
-            'vehicles' => $vehicles,
-            'section' => 'Транспорт'
+            'pagination' => $pagination
         ));
     }
 
@@ -70,7 +69,7 @@ class VehicleController extends Controller
                 'Автомобиль успешно добавлен!'
             );
 
-            return $this->redirectToRoute("show_all_vehicles");
+            return $this->redirectToRoute("show_vehicles");
         }
 
         return $this->render('AdminBundle:Vehicle:form.html.twig', array(
@@ -108,7 +107,7 @@ class VehicleController extends Controller
                 'Автомобиль успешно изменен!'
             );
 
-            return $this->redirectToRoute("show_all_vehicles");
+            return $this->redirectToRoute("show_vehicles");
         }
 
         return $this->render('AdminBundle:Vehicle:form.html.twig', array(
@@ -137,6 +136,6 @@ class VehicleController extends Controller
             'Автомобиль успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_vehicles");
+        return $this->redirectToRoute("show_vehicles");
     }
 }

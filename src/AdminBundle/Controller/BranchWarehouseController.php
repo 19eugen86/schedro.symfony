@@ -22,32 +22,29 @@ use Symfony\Component\HttpFoundation\Request;
 class BranchWarehouseController extends Controller
 {
     /**
-     * @Route("/", name="show_all_branches_warehouses")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_branches_warehouses",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $branches = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::BRANCH);
         $warehouses = $this->getDoctrine()->getRepository('AdminBundle:Warehouse')->findByDepartment($branches);
 
-        return $this->render("AdminBundle:Branch/Warehouse:index.html.twig", array(
-            'warehouses' => $warehouses,
-            'section' => 'Филиалы'
-        ));
-    }
-
-    /**
-     * @Route("/pages/{page}", name="show_branches_warehouses_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $branches = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::BRANCH);
-        $warehouses = $this->getDoctrine()->getRepository('AdminBundle:Warehouse')->findByDepartment($branches);
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($warehouses, $page);
 
         return $this->render("AdminBundle:Branch/Warehouse:index.html.twig", array(
-            'warehouses' => $warehouses,
-            'section' => 'Филиалы'
+            'pagination' => $pagination
         ));
     }
 
@@ -75,7 +72,7 @@ class BranchWarehouseController extends Controller
                 'Склад успешно добавлен!'
             );
 
-            return $this->redirectToRoute("show_all_branches_warehouses");
+            return $this->redirectToRoute("show_branches_warehouses");
         }
 
         return $this->render("AdminBundle:Branch/Warehouse:form.html.twig", array(
@@ -114,7 +111,7 @@ class BranchWarehouseController extends Controller
                 'Склад изменен!'
             );
 
-            return $this->redirectToRoute("show_all_branches_warehouses");
+            return $this->redirectToRoute("show_branches_warehouses");
         }
 
         return $this->render("AdminBundle:Branch/Warehouse:form.html.twig", array(
@@ -143,6 +140,6 @@ class BranchWarehouseController extends Controller
             'Склад успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_branches_warehouses");
+        return $this->redirectToRoute("show_branches_warehouses");
     }
 }

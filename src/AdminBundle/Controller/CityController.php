@@ -21,29 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
 class CityController extends Controller
 {
     /**
-     * @Route("/", name="show_all_cities")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_cities",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $cities = $this->getDoctrine()->getRepository('AdminBundle:City')->findAll();
-        return $this->render('AdminBundle:City:index.html.twig', array(
-            'cities' => $cities,
-            'section' => 'География'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/page/{page}", name="show_cities_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $cities = $this->getDoctrine()->getRepository('AdminBundle:City')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($cities, $page);
+
         return $this->render('AdminBundle:City:index.html.twig', array(
-            'cities' => $cities,
-            'section' => 'География'
+            'pagination' => $pagination
         ));
     }
 
@@ -70,7 +69,7 @@ class CityController extends Controller
                 'Город успешно добавлен!'
             );
 
-            return $this->redirectToRoute("show_all_cities");
+            return $this->redirectToRoute("show_cities");
         }
 
         return $this->render('AdminBundle:City:form.html.twig', array(
@@ -108,7 +107,7 @@ class CityController extends Controller
                 'Город изменен!'
             );
 
-            return $this->redirectToRoute("show_all_cities");
+            return $this->redirectToRoute("show_cities");
         }
 
         return $this->render('AdminBundle:City:form.html.twig', array(
@@ -137,6 +136,6 @@ class CityController extends Controller
             'Город успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_cities");
+        return $this->redirectToRoute("show_cities");
     }
 }

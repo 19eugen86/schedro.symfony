@@ -21,8 +21,6 @@ class SettingsController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AdminBundle:Settings:index.html.twig', array(
-            'section' => 'Настройки'
-        ));
+        return $this->render('AdminBundle:Settings:index.html.twig');
     }
 }

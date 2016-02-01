@@ -2,8 +2,8 @@
 
 {% block content %}
     <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="{{ url("show_all_distribution_centers") }}">РЦ</a></li>
-        <li role="presentation"><a href="{{ url("show_all_distribution_centers_warehouses") }}">Склады</a></li>
+        <li role="presentation" class="active"><a href="{{ url("show_distribution_centers") }}">РЦ</a></li>
+        <li role="presentation"><a href="{{ url("show_distribution_centers_warehouses") }}">Склады</a></li>
     </ul>
     <h2 class="sub-header">
         РЦ
@@ -21,7 +21,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for distributionCenter in distributionCenters %}
+            {% for distributionCenter in pagination %}
                 <tr>
                     <td>{{ distributionCenter.name }}</td>
                     <td>{{ distributionCenter.city.name }}</td>

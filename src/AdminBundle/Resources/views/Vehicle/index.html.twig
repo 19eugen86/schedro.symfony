@@ -2,9 +2,9 @@
 
 {% block content %}
     <ul class="nav nav-tabs">
-        <li role="presentation"><a href="{{ url("show_all_carriers") }}">Перевозчики</a></li>
-        <li role="presentation"><a href="{{ url("show_all_drivers") }}">Водители</a></li>
-        <li role="presentation" class="active"><a href="{{ url("show_all_vehicles") }}">Автомобили</a></li>
+        <li role="presentation"><a href="{{ url("show_carriers") }}">Перевозчики</a></li>
+        <li role="presentation"><a href="{{ url("show_drivers") }}">Водители</a></li>
+        <li role="presentation" class="active"><a href="{{ url("show_vehicles") }}">Автомобили</a></li>
     </ul>
     <h2 class="sub-header">
         Автомобили
@@ -24,7 +24,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for vehicle in vehicles %}
+            {% for vehicle in pagination %}
                 <tr>
                     <td>{{ vehicle.brand }}</td>
                     <td>{{ vehicle.model }}</td>

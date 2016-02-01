@@ -74,7 +74,7 @@ class WarehouseCellController extends Controller
                 'Камера успешно добавлена!'
             );
 
-            $departmentRoute = "show_all_".$warehouse->getDepartment()->getRoutePart()."_warehouses";
+            $departmentRoute = "show_".$warehouse->getDepartment()->getRoutePart()."_warehouses";
             return $this->redirectToRoute($departmentRoute);
         }
 
@@ -119,7 +119,7 @@ class WarehouseCellController extends Controller
                 'Камера изменена!'
             );
 
-            $departmentRoute = "show_all_".$warehouse->getDepartment()->getRoutePart()."_warehouses";
+            $departmentRoute = "show_".$warehouse->getDepartment()->getRoutePart()."_warehouses";
             return $this->redirectToRoute($departmentRoute);
         }
 
@@ -154,7 +154,7 @@ class WarehouseCellController extends Controller
             'Камера успешно удалена!'
         );
 
-        $departmentRoute = "show_all_".$warehouse->getDepartment()->getRoutePart()."_warehouses";
+        $departmentRoute = "show_".$warehouse->getDepartment()->getRoutePart()."_warehouses";
         return $this->redirectToRoute($departmentRoute);
     }
 }

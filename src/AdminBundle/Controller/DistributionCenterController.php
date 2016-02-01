@@ -21,29 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
 class DistributionCenterController extends Controller
 {
     /**
-     * @Route("/", name="show_all_distribution_centers")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_distribution_centers",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $distributionCenters = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::DISTRIBUTION_CENTER);
-        return $this->render('AdminBundle:DistributionCenter:index.html.twig', array(
-            'distributionCenters' => $distributionCenters,
-            'section' => 'РЦ'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/pages/{page}", name="show_distribution_centers_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction()
-    {
-        $distributionCenters = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::DISTRIBUTION_CENTER);
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($distributionCenters, $page);
+
         return $this->render('AdminBundle:DistributionCenter:index.html.twig', array(
-            'distributionCenters' => $distributionCenters,
-            'section' => 'РЦ'
+            'pagination' => $pagination
         ));
     }
 
@@ -70,7 +69,7 @@ class DistributionCenterController extends Controller
                 'РЦ успешно добавлен!'
             );
 
-            return $this->redirectToRoute("show_all_distribution_centers");
+            return $this->redirectToRoute("show_distribution_centers");
         }
 
         return $this->render("AdminBundle:DistributionCenter:form.html.twig", array(
@@ -108,7 +107,7 @@ class DistributionCenterController extends Controller
                 'РЦ изменен!'
             );
 
-            return $this->redirectToRoute("show_all_distribution_centers");
+            return $this->redirectToRoute("show_distribution_centers");
         }
 
         return $this->render("AdminBundle:DistributionCenter:form.html.twig", array(
@@ -137,6 +136,6 @@ class DistributionCenterController extends Controller
             'РЦ успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_distribution_centers");
+        return $this->redirectToRoute("show_distribution_centers");
     }
 }

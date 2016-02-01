@@ -21,29 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
 class FactoryController extends Controller
 {
     /**
-     * @Route("/", name="show_all_factories")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_factories",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $factories = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::FACTORY);
-        return $this->render('AdminBundle:Factory:index.html.twig', array(
-            'factories' => $factories,
-            'section' => 'Комбинаты'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/pages/{page}", name="show_factories_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction()
-    {
-        $factories = $this->getDoctrine()->getRepository('AdminBundle:Department')->findByType(Department::FACTORY);
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($factories, $page);
+
         return $this->render('AdminBundle:Factory:index.html.twig', array(
-            'factories' => $factories,
-            'section' => 'Комбинаты'
+            'pagination' => $pagination
         ));
     }
 
@@ -70,7 +69,7 @@ class FactoryController extends Controller
                 'Комбинат успешно добавлен!'
             );
 
-            return $this->redirectToRoute("show_all_factories");
+            return $this->redirectToRoute("show_factories");
         }
 
         return $this->render("AdminBundle:Factory:form.html.twig", array(
@@ -108,7 +107,7 @@ class FactoryController extends Controller
                 'Комбинат изменен!'
             );
 
-            return $this->redirectToRoute("show_all_factories");
+            return $this->redirectToRoute("show_factories");
         }
 
         return $this->render("AdminBundle:Factory:form.html.twig", array(
@@ -137,6 +136,6 @@ class FactoryController extends Controller
             'Комбинат успешно удален!'
         );
 
-        return $this->redirectToRoute("show_all_factories");
+        return $this->redirectToRoute("show_factories");
     }
 }

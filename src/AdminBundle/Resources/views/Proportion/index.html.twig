@@ -2,8 +2,8 @@
 
 {% block content %}
     <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="{{ url("show_all_proportions") }}">Пропорции</a></li>
-        <li role="presentation"><a href="{{ url("show_all_units") }}">Едининцы измерения</a></li>
+        <li role="presentation" class="active"><a href="{{ url("show_proportions") }}">Пропорции</a></li>
+        <li role="presentation"><a href="{{ url("show_units") }}">Едининцы измерения</a></li>
         <li role="presentation"><a href="{{ url("show_system_settings") }}">Системные настройки</a></li>
     </ul>
     <h2 class="sub-header">
@@ -24,7 +24,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for proportion in proportions %}
+            {% for proportion in pagination %}
                 <tr>
                     <td>{{ proportion.unit1.name }}</td>
                     <td>{{ proportion.product.name }}</td>

@@ -22,29 +22,28 @@ use Symfony\Component\HttpFoundation\Response;
 class CountryController extends Controller
 {
     /**
-     * @Route("/", name="show_all_countries")
+     * @Route(
+     *      "/{pageParam}/{page}",
+     *      name="show_countries",
+     *      defaults={
+     *          "pageParam": "page",
+     *          "page": 1
+     *      },
+     *      requirements={
+     *          "pageParam": "page",
+     *          "page": "\d+"
+     *      }
+     * )
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $countries = $this->getDoctrine()->getRepository('AdminBundle:Country')->findAll();
-        return $this->render('AdminBundle:Country:index.html.twig', array(
-            'countries' => $countries,
-            'section' => 'География'
-        ));
-    }
 
-    /**
-     * TODO:
-     * @Route("/page/{page}", name="show_countries_by_page", defaults={"page": 1}, requirements={
-     *      "page": "\d+"
-     * })
-     */
-    public function showByPageAction($page)
-    {
-        $countries = $this->getDoctrine()->getRepository('AdminBundle:Country')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($countries, $page);
+
         return $this->render('AdminBundle:Country:index.html.twig', array(
-            'countries' => $countries,
-            'section' => 'География'
+            'pagination' => $pagination
         ));
     }
 
@@ -71,7 +70,7 @@ class CountryController extends Controller
                 'Страна успешно добавлена!'
             );
 
-            return $this->redirectToRoute("show_all_countries");
+            return $this->redirectToRoute("show_countries");
         }
 
         return $this->render('AdminBundle:Country:form.html.twig', array(
@@ -106,7 +105,7 @@ class CountryController extends Controller
                 'Страна изменена!'
             );
 
-            return $this->redirectToRoute("show_all_countries");
+            return $this->redirectToRoute("show_countries");
         }
 
         return $this->render('AdminBundle:Country:form.html.twig', array(
@@ -135,6 +134,6 @@ class CountryController extends Controller
             'Страна успешно удалена!'
         );
 
-        return $this->redirectToRoute("show_all_countries");
+        return $this->redirectToRoute("show_countries");
     }
 }

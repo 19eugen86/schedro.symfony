@@ -2,8 +2,8 @@
 
 {% block content %}
     <ul class="nav nav-tabs">
-        <li role="presentation"><a href="{{ url("show_all_branches") }}">Филиалы</a></li>
-        <li role="presentation" class="active"><a href="{{ url("show_all_branches_warehouses") }}">Склады</a></li>
+        <li role="presentation"><a href="{{ url("show_branches") }}">Филиалы</a></li>
+        <li role="presentation" class="active"><a href="{{ url("show_branches_warehouses") }}">Склады</a></li>
     </ul>
     <h2 class="sub-header">
         Филиалы &raquo; Склады
@@ -21,7 +21,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for warehouse in warehouses %}
+            {% for warehouse in pagination %}
                 <tr>
                     <td>{{ warehouse.name }}</td>
                     <td>{{ warehouse.department.name }}</td>

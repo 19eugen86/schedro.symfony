@@ -42,8 +42,7 @@ class UserController extends Controller
         $pagination = $paginator->paginate($users, $page, 5);
 
         return $this->render('AdminBundle:User:index.html.twig', array(
-            'pagination' => $pagination,
-            'section' => $this->get('translator')->trans('users')
+            'pagination' => $pagination
         ));
     }
 

@@ -2,9 +2,9 @@
 
 {% block content %}
     <ul class="nav nav-tabs">
-        <li role="presentation"><a href="{{ url("show_all_carriers") }}">Перевозчики</a></li>
-        <li role="presentation" class="active"><a href="{{ url("show_all_drivers") }}">Водители</a></li>
-        <li role="presentation"><a href="{{ url("show_all_vehicles") }}">Автомобили</a></li>
+        <li role="presentation"><a href="{{ url("show_carriers") }}">Перевозчики</a></li>
+        <li role="presentation" class="active"><a href="{{ url("show_drivers") }}">Водители</a></li>
+        <li role="presentation"><a href="{{ url("show_vehicles") }}">Автомобили</a></li>
     </ul>
     <h2 class="sub-header">
         Водители
@@ -23,7 +23,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for driver in drivers %}
+            {% for driver in pagination %}
                 <tr>
                     <td>{{ driver.fullName }}</td>
                     <td><a href="tel:{{ driver.phoneNumber }}">{{ driver.phoneNumber }}</a></td>
