@@ -2,6 +2,7 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
+            <!--Actions-->
             <trans-unit id="1">
                 <source>Add</source>
                 <target>Добавить</target>
@@ -41,6 +42,48 @@
             <trans-unit id="10">
                 <source>Add/Edit</source>
                 <target>Добавить/Редактировать</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Logout</source>
+                <target>Выход</target>
+            </trans-unit>
+
+            <!--Entities-->
+            <trans-unit id="12">
+                <source>Factories</source>
+                <target>Комбинаты</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Distribution Centers</source>
+                <target>РЦ</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>Branches</source>
+                <target>Филиалы</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>Warehouses</source>
+                <target>Склады</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>Reminders</source>
+                <target>Остатки</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>Arrival</source>
+                <target>Приход</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>Consumption</source>
+                <target>Расход</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>Country</source>
+                <target>Страна</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Country List</source>
+                <target>Страны</target>
             </trans-unit>
         </body>
     </file>

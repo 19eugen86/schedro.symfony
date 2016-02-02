@@ -24,14 +24,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <span class="navbar-brand">
-                        Щедро &raquo; Склад &raquo; Панель администратора
-                    </span>
+                    <a href="{{ url("sonata_admin_dashboard") }}">
+                        <span class="navbar-brand">
+                            Щедро &raquo; Склад &raquo; Панель администратора
+                        </span>
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li role="separator" class="divider-vertical"></li>
-                        <li><a href="{{ url("logout") }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Выход</a></li>
+                        <li><a href="{{ url("fos_user_security_logout") }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Выход</a></li>
                     </ul>
                 </div>
             </div>

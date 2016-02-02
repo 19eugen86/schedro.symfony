@@ -17,43 +17,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% if is_granted('ROLE_USER') %}
-                    <ul class="nav navbar-nav">
-                        <li role="separator" class="divider-vertical"></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-export" aria-hidden="true"></span> Фабрики<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span> Остатки</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Приход</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-open" aria-hidden="true"></span> Расход</a></li>
-                            </ul>
-                        </li>
-                        <li role="separator" class="divider-vertical"></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-move" aria-hidden="true"></span> РЦ<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span> Остатки</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> Склады</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Приход</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Расход</a></li>
-                            </ul>
-                        </li>
-                        <li role="separator" class="divider-vertical"></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Филиалы<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span> Остатки</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> Склады</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Приход</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Расход</a></li>
-                            </ul>
-                        </li>
-                        <li role="separator" class="divider-vertical"></li>
-                    </ul>
+                    {{ knp_menu_render('AppBundle:Builder:mainMenu', {'currentClass': 'active'}) }}
                 {% endif %}
-                <ul class="nav navbar-nav navbar-right">
-                    <li role="separator" class="divider-vertical"></li>
-                    <li><a href="{{ url("logout") }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Выход</a></li>
-                </ul>
+                {{ knp_menu_render('AppBundle:Builder:logoutMenu', {'currentClass': 'active'}) }}
             {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
                 {% include 'login.html.twig' %}
             {% endif %}

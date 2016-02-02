@@ -23,4 +23,9 @@ class Group extends BaseGroup
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    public function __construct($name = '', $roles = array())
+    {
+        parent::__construct($name, $roles);
+    }
 }

@@ -13,3 +13,27 @@ services:
             - { name: serializer.normalizer }
     fos_user.doctrine_registry:
         alias: doctrine
+
+    admin.country:
+        class: AppBundle\Admin\CountryAdmin
+        arguments: [~, AdminBundle\Entity\Country, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Country }
+
+    admin.city:
+        class: AppBundle\Admin\CityAdmin
+        arguments: [~, AdminBundle\Entity\City, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: City }
+
+    admin.user_group:
+        class: AppBundle\Admin\UserGroupAdmin
+        arguments: [~, UserBundle\Entity\Group, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: User Group}
+
+    admin.user:
+        class: AppBundle\Admin\UserAdmin
+        arguments: [~, UserBundle\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: User }

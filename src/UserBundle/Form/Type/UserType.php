@@ -28,7 +28,6 @@ class UserType extends AbstractType
             ->add('phone', TextType::class)
             ->add('email', EmailType::class)
             ->add('groups', EntityType::class, array(
-//                'mapped' => false,
                 'class' => 'UserBundle\Entity\Group',
                 'choice_label' => 'name',
                 'multiple' => true
