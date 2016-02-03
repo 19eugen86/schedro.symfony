@@ -3,7 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@AdminBundle/Resources/config/services.yml" }
-    - { resource: "@UserBundle/Resources/config/services.yml" }
+#    - { resource: "@UserBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -66,11 +66,18 @@ doctrine:
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #     path:     "%database_path%"
-
+        types:
+            json: Sonata\Doctrine\Types\JsonType
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+#        naming_strategy: doctrine.orm.naming_strategy.underscore
+#        auto_mapping: true
+        entity_managers:
+            default:
+                mappings:
+                    ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -83,9 +90,16 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: UserBundle\Entity\User
+    user_class: Application\Sonata\UserBundle\Entity\User
+#    user_class: Sonata\UserBundle\Entity\BaseUser
+
     group:
-        group_class: UserBundle\Entity\Group
+        group_class: Application\Sonata\UserBundle\Entity\Group
+#        group_class: Sonata\UserBundle\Entity\BaseGroup
+        group_manager: sonata.user.orm.group_manager
+
+    service:
+        user_manager: sonata.user.orm.user_manager
 
 knp_paginator:
     page_range: 5                      # default page range used in pagination control
@@ -102,9 +116,32 @@ knp_menu:
     twig:
         template: AppBundle:Default:knp_menu.html.twig
 
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb
+
 sonata_block:
-    default_contexts: [cms]
+    default_contexts: [sonata_page_bundle]
     blocks:
-        # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
-            contexts: [admin]
+            contexts:   [admin]
+
+        #sonata.admin_doctrine_orm.block.audit:
+        #    contexts:   [admin]
+
+        sonata.block.service.text:
+        sonata.block.service.rss:
+
+        # Some specific block from the SonataMediaBundle
+        #sonata.media.block.media:
+        #sonata.media.block.gallery:
+        #sonata.media.block.feature_media:
+
+        # Some block with different templates
+        #acme.demo.block.demo:
+        #    templates:
+        #       - { name: 'Simple', template: 'AcmeDemoBundle:Block:demo_simple.html.twig' }
+        #       - { name: 'Big',    template: 'AcmeDemoBundle:Block:demo_big.html.twig' }
+
+sonata_admin:
+    title: Schedro

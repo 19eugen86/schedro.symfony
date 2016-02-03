@@ -9,7 +9,7 @@
 namespace AppBundle\Admin;
 
 
-use AdminBundle\Entity\Country;
+use AppBundle\Entity\Country;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;

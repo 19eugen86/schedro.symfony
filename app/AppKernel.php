@@ -19,12 +19,15 @@ class AppKernel extends Kernel
             new AdminBundle\AdminBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new \Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new UserBundle\UserBundle(),
+//            new UserBundle\UserBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

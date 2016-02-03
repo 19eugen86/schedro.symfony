@@ -9,7 +9,7 @@
 namespace AppBundle\Admin;
 
 
-use AdminBundle\Entity\City;
+use AppBundle\Entity\City;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -56,7 +56,7 @@ class CityAdmin extends Admin
     public function toString($object)
     {
         return $object instanceof City
-            ? $object->getCountry()->getName() . ' / ' . $object->getName()
+            ? $object->getName()
             : 'City';
     }
 }

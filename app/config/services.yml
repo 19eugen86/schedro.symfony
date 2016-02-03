@@ -14,26 +14,69 @@ services:
     fos_user.doctrine_registry:
         alias: doctrine
 
+#    admin.user_group:
+#        class: AppBundle\Admin\UserGroupAdmin
+#        arguments: [~, UserBundle\Entity\Group, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Users Groups, group: Employees }
+#
+#    admin.user:
+#        class: AppBundle\Admin\UserAdmin
+#        arguments: [~, UserBundle\Entity\User, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Users, group: Employees }
+
     admin.country:
         class: AppBundle\Admin\CountryAdmin
-        arguments: [~, AdminBundle\Entity\Country, ~]
+        arguments: [~, AppBundle\Entity\Country, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Country }
+            - { name: sonata.admin, manager_type: orm, label: Countries, group: Geography }
 
     admin.city:
         class: AppBundle\Admin\CityAdmin
-        arguments: [~, AdminBundle\Entity\City, ~]
+        arguments: [~, AppBundle\Entity\City, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: City }
+            - { name: sonata.admin, manager_type: orm, label: Cities, group: Geography }
 
-    admin.user_group:
-        class: AppBundle\Admin\UserGroupAdmin
-        arguments: [~, UserBundle\Entity\Group, ~]
+    admin.client:
+        class: AppBundle\Admin\ClientAdmin
+        arguments: [~, AppBundle\Entity\Client, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: User Group}
+            - { name: sonata.admin, manager_type: orm, label: Clients, group: Clients  }
 
-    admin.user:
-        class: AppBundle\Admin\UserAdmin
-        arguments: [~, UserBundle\Entity\User, ~]
+    admin.factory:
+        class: AppBundle\Admin\FactoryAdmin
+        arguments: [~, AppBundle\Entity\Department, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: User }
+            - { name: sonata.admin, manager_type: orm, label: Factories, group: Departments }
+
+    admin.distribution_center:
+        class: AppBundle\Admin\DistributionCenterAdmin
+        arguments: [~, AppBundle\Entity\Department, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Distribution Centers, group: Departments }
+
+    admin.branch:
+        class: AppBundle\Admin\BranchAdmin
+        arguments: [~, AppBundle\Entity\Department, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Branches, group: Departments }
+
+    admin.carrier:
+        class: AppBundle\Admin\CarrierAdmin
+        arguments: [~, AppBundle\Entity\Carrier, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Carriers, group: Carriers }
+
+    admin.driver:
+        class: AppBundle\Admin\DriverAdmin
+        arguments: [~, AppBundle\Entity\Driver, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Drivers, group: Carriers }
+
+    admin.vehicle:
+        class: AppBundle\Admin\VehicleAdmin
+        arguments: [~, AppBundle\Entity\Vehicle, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Vehicles, group: Carriers }
+

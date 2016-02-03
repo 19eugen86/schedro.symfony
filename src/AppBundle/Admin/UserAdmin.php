@@ -13,6 +13,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use UserBundle\Entity\User;
 
 class UserAdmin extends Admin
 {
@@ -56,5 +57,12 @@ class UserAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
 
+    }
+
+    public function toString($object)
+    {
+        return $object instanceof User
+            ? $object->getFullName()
+            : 'User';
     }
 }
