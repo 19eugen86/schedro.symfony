@@ -2,13 +2,61 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
-            <trans-unit id="1">
+            <trans-unit id="default_title">
                 <source>default</source>
                 <target>по умолчанию</target>
             </trans-unit>
-            <trans-unit id="2">
+            <trans-unit id="dashboard_title">
                 <source>Dashboard</source>
                 <target>Панель администратора</target>
+            </trans-unit>
+            <trans-unit id="settings_title">
+                <source>Settings</source>
+                <target>Настройки</target>
+            </trans-unit>
+
+            <!--Geography-->
+            <trans-unit id="geography_title">
+                <source>Geography</source>
+                <target>География</target>
+            </trans-unit>
+
+            <!--Departments-->
+            <trans-unit id="departments_title">
+                <source>Departments</source>
+                <target>Подразделения</target>
+            </trans-unit>
+
+            <!--Clients-->
+            <trans-unit id="clients_title">
+                <source>Clients</source>
+                <target>Клиенты</target>
+            </trans-unit>
+
+            <!--Transport-->
+            <trans-unit id="transport_title">
+                <source>Transport</source>
+                <target>Транспорт</target>
+            </trans-unit>
+
+            <!--Production-->
+            <trans-unit id="production_title">
+                <source>Production</source>
+                <target>Продукция</target>
+            </trans-unit>
+
+            <!-- TODO: Flash messages ??? -->
+            <trans-unit id="msg_success_create">
+                <source>Элемент создан успешно</source>
+                <target>Элемент создан успешно</target>
+            </trans-unit>
+            <trans-unit id="msg_success_edit">
+                <source>Элемент успешно обновлен.</source>
+                <target>Элемент успешно обновлен.</target>
+            </trans-unit>
+            <trans-unit id="msg_success_delete">
+                <source>Элемент успешно удален.</source>
+                <target>Элемент успешно удален.</target>
             </trans-unit>
         </body>
     </file>

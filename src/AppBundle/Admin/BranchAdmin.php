@@ -17,6 +17,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class BranchAdmin extends Admin
 {
+    protected $baseRouteName = 'sonata_branches';
+    protected $baseRoutePattern = 'departments/branches';
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -59,7 +62,6 @@ class BranchAdmin extends Admin
     {
         $instance = parent::getNewInstance();
         $instance->setType(Department::BRANCH);
-
         return $instance;
     }
 
@@ -73,4 +75,9 @@ class BranchAdmin extends Admin
 
         return $query;
     }
+
+//    public function getBreadcrumbs()
+//    {
+//
+//    }
 }

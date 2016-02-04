@@ -18,6 +18,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class CountryAdmin extends Admin
 {
+    protected $baseRouteName = 'sonata_countries';
+    protected $baseRoutePattern = 'geography/countries';
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', 'text');

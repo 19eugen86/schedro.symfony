@@ -17,6 +17,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class DistributionCenterAdmin extends Admin
 {
+    protected $baseRouteName = 'sonata_distribution_centers';
+    protected $baseRoutePattern = 'departments/distribution_centers';
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper

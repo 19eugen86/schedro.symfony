@@ -66,17 +66,41 @@ services:
         class: AppBundle\Admin\CarrierAdmin
         arguments: [~, AppBundle\Entity\Carrier, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Carriers, group: Carriers }
+            - { name: sonata.admin, manager_type: orm, label: Carriers, group: Transport }
 
     admin.driver:
         class: AppBundle\Admin\DriverAdmin
         arguments: [~, AppBundle\Entity\Driver, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Drivers, group: Carriers }
+            - { name: sonata.admin, manager_type: orm, label: Drivers, group: Transport }
 
     admin.vehicle:
         class: AppBundle\Admin\VehicleAdmin
         arguments: [~, AppBundle\Entity\Vehicle, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Vehicles, group: Carriers }
+            - { name: sonata.admin, manager_type: orm, label: Vehicles, group: Transport }
+
+    admin.product_categories:
+        class: AppBundle\Admin\ProductCategoryAdmin
+        arguments: [~, AppBundle\Entity\ProductCategory, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Products Categories, group: Production }
+
+    admin.products:
+        class: AppBundle\Admin\ProductAdmin
+        arguments: [~, AppBundle\Entity\Product, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Products, group: Production }
+
+    admin.units:
+        class: AppBundle\Admin\UnitAdmin
+        arguments: [~, AppBundle\Entity\Unit, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Units, group: Settings }
+
+    admin.proportions:
+        class: AppBundle\Admin\ProportionAdmin
+        arguments: [~, AppBundle\Entity\Proportion, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Proportions, group: Settings }
 

@@ -17,6 +17,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class VehicleAdmin extends Admin
 {
+    protected $baseRouteName = 'sonata_vehicles';
+    protected $baseRoutePattern = 'carriers/vehicles';
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -34,7 +37,7 @@ class VehicleAdmin extends Admin
             ->add('model', 'text')
             ->add('registrationNumber', 'text')
             ->add('carrier', 'sonata_type_model', array(
-                'class' => 'AppBundle\Entity\Vehicle',
+                'class' => 'AppBundle\Entity\Carrier',
                 'property' => 'name'
             ))
         ;

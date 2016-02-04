@@ -17,6 +17,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class FactoryAdmin extends Admin
 {
+    protected $baseRouteName = 'sonata_factories';
+    protected $baseRoutePattern = 'departments/factories';
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper

@@ -17,6 +17,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class ClientAdmin extends Admin
 {
+    protected $baseRouteName = 'sonata_clients';
+    protected $baseRoutePattern = 'clients';
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper

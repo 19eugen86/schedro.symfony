@@ -17,6 +17,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class CityAdmin extends Admin
 {
+    protected $baseRouteName = 'sonata_cities';
+    protected $baseRoutePattern = 'geography/countries/cities';
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -29,7 +32,7 @@ class CityAdmin extends Admin
 //            ->tab('Publish Options')
 //                ->with('Meta data')
                     ->add('country', 'sonata_type_model', array(
-                        'class' => 'AdminBundle\Entity\Country',
+                        'class' => 'AppBundle\Entity\Country',
                         'property' => 'name'
                     ))
 //                ->end()
@@ -59,4 +62,12 @@ class CityAdmin extends Admin
             ? $object->getName()
             : 'City';
     }
+
+//    public function getBreadcrumbs($action)
+//    {
+//        $breadcrumbs = parent::getBreadcrumbs($action);
+//
+//        dump($breadcrumbs);
+//        return $breadcrumbs;
+//    }
 }

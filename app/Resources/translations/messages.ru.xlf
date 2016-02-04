@@ -2,6 +2,36 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
+            <!--Titles-->
+            <trans-unit id="company_title">
+                <source>Schedro</source>
+                <target>Щедро</target>
+            </trans-unit>
+            <trans-unit id="profile_title">
+                <source>User Profile</source>
+                <target>Профиль</target>
+            </trans-unit>
+            <trans-unit id="settings_title">
+                <source>Settings</source>
+                <target>Настройки</target>
+            </trans-unit>
+            <trans-unit id="description_title">
+                <source>Description</source>
+                <target>Описание</target>
+            </trans-unit>
+            <trans-unit id="address_title">
+                <source>Address</source>
+                <target>Адрес</target>
+            </trans-unit>
+            <trans-unit id="departments_list_title">
+                <source>Department List</source>
+                <target>Подразделения</target>
+            </trans-unit>
+            <trans-unit id="phone_number_title">
+                <source>Phone Number</source>
+                <target>Тел.</target>
+            </trans-unit>
+
             <!--Actions-->
             <trans-unit id="1">
                 <source>Add</source>
@@ -49,41 +79,275 @@
             </trans-unit>
 
             <!--Entities-->
-            <trans-unit id="12">
+
+            <trans-unit id="factories_title">
                 <source>Factories</source>
                 <target>Комбинаты</target>
             </trans-unit>
-            <trans-unit id="13">
+            <trans-unit id="distribution_centers_title">
                 <source>Distribution Centers</source>
                 <target>РЦ</target>
             </trans-unit>
-            <trans-unit id="14">
+            <trans-unit id="branches_title">
                 <source>Branches</source>
                 <target>Филиалы</target>
             </trans-unit>
-            <trans-unit id="15">
+
+
+            <trans-unit id="warehouses_title">
                 <source>Warehouses</source>
                 <target>Склады</target>
             </trans-unit>
-            <trans-unit id="16">
+            <trans-unit id="reminders_title">
                 <source>Reminders</source>
                 <target>Остатки</target>
             </trans-unit>
-            <trans-unit id="17">
+            <trans-unit id="arrival_title">
                 <source>Arrival</source>
                 <target>Приход</target>
             </trans-unit>
-            <trans-unit id="18">
+            <trans-unit id="consumption_title">
                 <source>Consumption</source>
                 <target>Расход</target>
             </trans-unit>
-            <trans-unit id="19">
+
+            <!--Country-->
+            <trans-unit id="countries_title">
+                <source>Countries</source>
+                <target>Страны</target>
+            </trans-unit>
+            <trans-unit id="country_list_title">
+                <source>Country List</source>
+                <target>Страны</target>
+            </trans-unit>
+            <trans-unit id="country_title">
                 <source>Country</source>
                 <target>Страна</target>
             </trans-unit>
-            <trans-unit id="20">
-                <source>Country List</source>
-                <target>Страны</target>
+            <trans-unit id="country_name_title">
+                <source>Country Name</source>
+                <target>Страна</target>
+            </trans-unit>
+
+            <!--City-->
+            <trans-unit id="cities_title">
+                <source>Cities</source>
+                <target>Города</target>
+            </trans-unit>
+            <trans-unit id="cities_list_title">
+                <source>City List</source>
+                <target>Города</target>
+            </trans-unit>
+            <trans-unit id="city_title">
+                <source>City</source>
+                <target>Город</target>
+            </trans-unit>
+            <trans-unit id="city_name_title">
+                <source>City Name</source>
+                <target>Город</target>
+            </trans-unit>
+
+            <!--Clients-->
+            <trans-unit id="clients_title">
+                <source>Clients</source>
+                <target>Клиенты</target>
+            </trans-unit>
+            <trans-unit id="clients_list_title">
+                <source>Client List</source>
+                <target>Клиенты</target>
+            </trans-unit>
+            <trans-unit id="client_title">
+                <source>Client</source>
+                <target>Клиент</target>
+            </trans-unit>
+
+            <!--Carriers-->
+            <trans-unit id="carriers_title">
+                <source>Carriers</source>
+                <target>Компании-Перевозчики</target>
+            </trans-unit>
+            <trans-unit id="carriers_list_title">
+                <source>Carrier List</source>
+                <target>Компании-Перевозчики</target>
+            </trans-unit>
+            <trans-unit id="carrier_title">
+                <source>Carrier</source>
+                <target>Компания-Перевозчик</target>
+            </trans-unit>
+            <trans-unit id="carrier_name_title">
+                <source>Carrier Name</source>
+                <target>Компания-Перевозчик</target>
+            </trans-unit>
+            <trans-unit id="carrier_delete_title">
+                <source>Carrier Delete</source>
+                <target>Удаление</target>
+            </trans-unit>
+
+            <!--Drivers-->
+            <trans-unit id="drivers_title">
+                <source>Drivers</source>
+                <target>Водители</target>
+            </trans-unit>
+            <trans-unit id="drivers_list_title">
+                <source>Driver List</source>
+                <target>Водители</target>
+            </trans-unit>
+            <trans-unit id="driver_title">
+                <source>Driver</source>
+                <target>Водитель</target>
+            </trans-unit>
+            <trans-unit id="full_name_title">
+                <source>Full Name</source>
+                <target>ФИО</target>
+            </trans-unit>
+
+            <!--Vehicles-->
+            <trans-unit id="vehicles_title">
+                <source>Vehicles</source>
+                <target>Автомобили</target>
+            </trans-unit>
+            <trans-unit id="vehicles_list_title">
+                <source>Vehicle List</source>
+                <target>Автомобили</target>
+            </trans-unit>
+            <trans-unit id="vehicle_title">
+                <source>Vehicle</source>
+                <target>Автомобиль</target>
+            </trans-unit>
+            <trans-unit id="vehicle_reg_number_title">
+                <source>Registration Number</source>
+                <target>Рег. номер</target>
+            </trans-unit>
+            <trans-unit id="vehicle_brand_title">
+                <source>Brand</source>
+                <target>Марка</target>
+            </trans-unit>
+            <trans-unit id="vehicle_model_title">
+                <source>Model</source>
+                <target>Модель</target>
+            </trans-unit>
+
+            <!--Products Categories-->
+            <trans-unit id="products_categories_title">
+                <source>Products Categories</source>
+                <target>Товарные группы</target>
+            </trans-unit>
+            <trans-unit id="products_categories_list_title">
+                <source>Product Category List</source>
+                <target>Товарные группы</target>
+            </trans-unit>
+            <trans-unit id="product_category_title">
+                <source>Product Category</source>
+                <target>Товарная группа</target>
+            </trans-unit>
+            <trans-unit id="product_category_name_title">
+                <source>Category Name</source>
+                <target>Товарная группа</target>
+            </trans-unit>
+
+            <!--Products-->
+            <trans-unit id="products_title">
+                <source>Products</source>
+                <target>Продукты</target>
+            </trans-unit>
+            <trans-unit id="products_list_title">
+                <source>Product List</source>
+                <target>Продукты</target>
+            </trans-unit>
+            <trans-unit id="product_title">
+                <source>Product</source>
+                <target>Продукт</target>
+            </trans-unit>
+            <trans-unit id="product_name_title">
+                <source>Product Name</source>
+                <target>Продукт</target>
+            </trans-unit>
+
+            <!-- ??? Filtering ??? -->
+            <trans-unit id="contents_filter">
+                <source>содержит</source>
+                <target>содержит</target>
+            </trans-unit>
+            <trans-unit id="not_contents_filter">
+                <source>не содержит</source>
+                <target>не содержит</target>
+            </trans-unit>
+            <trans-unit id="equal_filter">
+                <source>равен</source>
+                <target>равен</target>
+            </trans-unit>
+
+            <!--<trans-unit id="contents_filter">-->
+                <!--<source>contains</source>-->
+                <!--<target>содержит</target>-->
+            <!--</trans-unit>-->
+            <!--<trans-unit id="not_contents_filter">-->
+                <!--<source>does not contain</source>-->
+                <!--<target>не содержит</target>-->
+            <!--</trans-unit>-->
+            <!--<trans-unit id="equal_filter">-->
+                <!--<source>is equal to</source>-->
+                <!--<target>равен</target>-->
+            <!--</trans-unit>-->
+
+            <!--Units-->
+            <trans-unit id="units_title">
+                <source>Units</source>
+                <target>Ед. измерений</target>
+            </trans-unit>
+            <trans-unit id="units_list_title">
+                <source>Unit List</source>
+                <target>Ед. измерений</target>
+            </trans-unit>
+            <trans-unit id="unit_title">
+                <source>Unit</source>
+                <target>Ед. измерения</target>
+            </trans-unit>
+            <trans-unit id="unit_short_name_title">
+                <source>Short Name</source>
+                <target>Сокращение</target>
+            </trans-unit>
+            <trans-unit id="unit_type_title">
+                <source>Type</source>
+                <target>Тип</target>
+            </trans-unit>
+            <trans-unit id="unit_weight_type_title">
+                <source>weight</source>
+                <target>вес</target>
+            </trans-unit>
+            <trans-unit id="unit_area_type_title">
+                <source>area</source>
+                <target>площадь</target>
+            </trans-unit>
+            <trans-unit id="unit_volume_type_title">
+                <source>volume</source>
+                <target>объем</target>
+            </trans-unit>
+
+            <!--Proportions-->
+            <trans-unit id="proportions_title">
+                <source>Proportions</source>
+                <target>Пропорции</target>
+            </trans-unit>
+            <trans-unit id="proportions_list_title">
+                <source>Proportion List</source>
+                <target>Пропорции</target>
+            </trans-unit>
+            <trans-unit id="proportion_title">
+                <source>Proportion</source>
+                <target>Пропорция</target>
+            </trans-unit>
+            <trans-unit id="unit1_short_title">
+                <source>Unit1 Short Name</source>
+                <target>Ед. 1</target>
+            </trans-unit>
+            <trans-unit id="unit2_short_title">
+                <source>Unit2 Short Name</source>
+                <target>Ед. 2</target>
+            </trans-unit>
+            <trans-unit id="ratio_title">
+                <source>Ratio</source>
+                <target>Коэфф.</target>
             </trans-unit>
         </body>
     </file>

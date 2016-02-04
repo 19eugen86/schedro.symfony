@@ -2,40 +2,38 @@
 /**
  * Created by PhpStorm.
  * User: evgeniy.edlenko
- * Date: 03.02.2016
- * Time: 12:15
+ * Date: 04.02.2016
+ * Time: 13:33
  */
 
 namespace AppBundle\Admin;
 
 
-use AppBundle\Entity\Driver;
+use AppBundle\Entity\Product;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class DriverAdmin extends Admin
+class ProductAdmin extends Admin
 {
-    protected $baseRouteName = 'sonata_drivers';
-    protected $baseRoutePattern = 'carriers/drivers';
+    protected $baseRouteName = 'sonata_products';
+    protected $baseRoutePattern = 'products';
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('fullName')
-            ->add('phoneNumber')
-            ->add('carrier.name')
+            ->addIdentifier('name')
+            ->add('category.name')
         ;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('fullName', 'text')
-            ->add('phoneNumber', 'text')
-            ->add('carrier', 'sonata_type_model', array(
-                'class' => 'AppBundle\Entity\Carrier',
+            ->add('name', 'text')
+            ->add('category', 'sonata_type_model', array(
+                'class' => 'AppBundle\Entity\ProductCategory',
                 'property' => 'name'
             ))
         ;
@@ -44,15 +42,15 @@ class DriverAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('fullName')
-            ->add('carrier.name')
+            ->add('name')
+            ->add('category.name')
         ;
     }
 
     public function toString($object)
     {
-        return $object instanceof Driver
-            ? $object->getFullName()
-            : 'Driver';
+        return $object instanceof Product
+            ? $object->getName()
+            : 'Product';
     }
 }
