@@ -39,14 +39,14 @@ class Warehouse
      * @Assert\Type(type="AppBundle\Entity\Department")
      * @Assert\Valid()
      */
-    private $department;
+    protected $department;
 
     /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="WarehouseCell", mappedBy="warehouse")
      */
-    private $cells;
+    protected $cells;
 
 
     public function __construct()
@@ -110,6 +110,14 @@ class Warehouse
     public function getDepartment()
     {
         return $this->department;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCells()
+    {
+        return $this->cells;
     }
 }
 

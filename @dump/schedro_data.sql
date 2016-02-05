@@ -1,57 +1,92 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2016 at 11:19 AM
--- Server version: 5.6.24
--- PHP Version: 5.6.8
+-- Generation Time: Feb 05, 2016 at 04:02 PM
+-- Server version: 10.1.9-MariaDB
+-- PHP Version: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `schedro`
 --
 
 --
+-- Truncate table before insert `acl_classes`
+--
+
+TRUNCATE TABLE `acl_classes`;
+--
+-- Truncate table before insert `acl_entries`
+--
+
+TRUNCATE TABLE `acl_entries`;
+--
+-- Truncate table before insert `acl_object_identities`
+--
+
+TRUNCATE TABLE `acl_object_identities`;
+--
+-- Truncate table before insert `acl_object_identity_ancestors`
+--
+
+TRUNCATE TABLE `acl_object_identity_ancestors`;
+--
+-- Truncate table before insert `acl_security_identities`
+--
+
+TRUNCATE TABLE `acl_security_identities`;
+--
+-- Truncate table before insert `carriers`
+--
+
+TRUNCATE TABLE `carriers`;
+--
 -- Dumping data for table `carriers`
 --
 
 INSERT INTO `carriers` (`id`, `name`, `description`) VALUES
-(1, 'Новая Почта', 'Lorem ipsum dolor sit amet, animal vivendo scribentur mea at, docendi luptatum neglegentur eu sit. Sit quod verear vivendo id, ludus voluptatum ea eos. Vis rebum alterum ad. In mei lucilius vulputate. Quaeque euismod vis ne, cum id ignota accommodare.'),
-(2, 'DHL', 'Lorem ipsum dolor sit amet, animal vivendo scribentur mea at, docendi luptatum neglegentur eu sit. Sit quod verear vivendo id, ludus voluptatum ea eos. Vis rebum alterum ad. In mei lucilius vulputate. Quaeque euismod vis ne, cum id ignota accommodare.');
+(1, 'Новая Почта', 'Сегодня "Нова Пошта" является абсолютным лидером экспресс-доставки, благодаря инновационным подходам и постоянной работе над эффективностью. Предугадывая желания клиентов, компания постоянно предлагает новые продукты и услуги.\r\n\r\nОператор не просто перевозит посылки и грузы, но и развивает рынок электронной коммерции, разрабатывая комплексные решения, которые помогают бизнесу расширить географию сбыта или сосредоточиться на основной деятельности.'),
+(2, 'Интайм', 'Интайм – профессиональная служба доставки, работающая на рынке с 2002 года.\r\n\r\nСтав одним из пионеров в сегменте маршрутных автомобильных грузоперевозок, компания во многом способствовала его становлению и развитию. Большинство сервисов, существующих на данном рынке, в свое время были впервые внедрены именно в Интайм. Компания и сегодня не прекращает наращивать портфель предоставляемых услуг, постоянно совершенствуя уровень обслуживания.\r\n\r\n    В настоящее время Интайм – это более 2000 пунктов выдачи грузов по всей Украине, из которых 548 стационарных отделения и 1477 Почтоматов. Успешное сотрудничество с крупными компаниями, а также компаниями малого и среднего бизнеса, доставка грузов в торговые сети Украины, дополнительные опции для постоянных клиентов – вот далеко не полный перечень причин, по которым Интайм является надежным партнером по перевозке товаров.\r\n\r\nКомпания несет материальную ответственность за качество сервиса и осуществляет доставку грузов «до Двери» получателя в любой населенный пункт Украины.');
 
+--
+-- Truncate table before insert `carriers_drivers`
+--
+
+TRUNCATE TABLE `carriers_drivers`;
 --
 -- Dumping data for table `carriers_drivers`
 --
 
 INSERT INTO `carriers_drivers` (`id`, `carrier_id`, `full_name`, `phone_number`) VALUES
-(1, 1, 'Иванов И. И.', '+38 (096) 123 45 67'),
-(3, 2, 'John Doe', '+38 (099) 999 99 99');
+(1, 1, 'Иванов И. И.', '+38 (099) 123 45 67');
 
+--
+-- Truncate table before insert `carriers_vehicles`
+--
+
+TRUNCATE TABLE `carriers_vehicles`;
 --
 -- Dumping data for table `carriers_vehicles`
 --
 
 INSERT INTO `carriers_vehicles` (`id`, `carrier_id`, `brand`, `model`, `registration_number`) VALUES
-(1, 1, 'Ford', 'Transit', 'AX 1234 AA'),
-(3, 2, 'Mercedes', 'Actros', 'AX 9999 AT');
+(1, 1, 'Ford', 'Transit', 'AX 0001 AA');
 
 --
--- Dumping data for table `countries`
+-- Truncate table before insert `cities`
 --
 
-INSERT INTO `countries` (`id`, `name`) VALUES
-(1, 'Украина'),
-(2, 'Румыния'),
-(3, 'Турция'),
-(4, 'Германия'),
-(5, 'Польша'),
-(6, 'Испания'),
-(7, 'Австрия'),
-(8, 'США');
-
+TRUNCATE TABLE `cities`;
 --
 -- Dumping data for table `cities`
 --
@@ -68,8 +103,18 @@ INSERT INTO `cities` (`id`, `country_id`, `name`) VALUES
 (9, 3, 'Анталья'),
 (10, 4, 'Берлин'),
 (11, 6, 'Мадрид'),
-(12, 8, 'Вашингтон');
+(12, 8, 'Вашингтон'),
+(13, 1, 'Луцк'),
+(14, 1, 'Полтава'),
+(15, 9, 'Торонто'),
+(16, 12, 'Каир'),
+(17, 1, 'Херсон');
 
+--
+-- Truncate table before insert `clients`
+--
+
+TRUNCATE TABLE `clients`;
 --
 -- Dumping data for table `clients`
 --
@@ -79,25 +124,90 @@ INSERT INTO `clients` (`id`, `city_id`, `name`, `description`, `address`) VALUES
 (2, 3, 'Львовськая кондитерськая фабрика „Світоч“', 'Кондитерская фабрика во Львове, контрольным пакетом акций которой владеет швейцарская корпорация «Nestlé». Это одно из самых старых предприятий в кондитерской отрасли Украины, один из основных украинских производителей.', '79000, Украина, г. Львов, ул. Ткацкая, 10'),
 (3, 2, 'Киевская кондитерская фабрика ROSHEN', 'Киевская кондитерская фабрика ROSHEN, сертифицированная в соответствии с международными стандартами качества ISO 9001:2008 и безопасности продуктов питания ISO 22000:2005, специализируется на производстве шоколадной продукции (шоколадных конфет, плиточного шоколада) и бисквитной продукции. ', '03039, Украина, г. Киев, ул. Науки, 1');
 
+--
+-- Truncate table before insert `countries`
+--
 
+TRUNCATE TABLE `countries`;
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO `countries` (`id`, `name`) VALUES
+(1, 'Украина'),
+(2, 'Румыния'),
+(3, 'Турция'),
+(4, 'Германия'),
+(5, 'Польша'),
+(6, 'Испания'),
+(7, 'Австрия'),
+(8, 'США'),
+(9, 'Канада'),
+(10, 'Мексика'),
+(11, 'Чили'),
+(12, 'Египет');
+
+--
+-- Truncate table before insert `departments`
+--
+
+TRUNCATE TABLE `departments`;
 --
 -- Dumping data for table `departments`
 --
 
 INSERT INTO `departments` (`id`, `city_id`, `name`, `description`, `address`, `type`) VALUES
-(1, 1, 'Харьковский филиал', 'Lorem Ipsum', 'Lorem Ipsum', 'branch'),
-(2, 2, 'Киевский филиал', 'Lorem Ipsum', 'Lorem Ipsum', 'branch'),
-(3, 3, 'Львовский филиал', 'Lorem Ipsum', 'Lorem Ipsum', 'branch');
+(1, 1, 'Харьковский филиал', 'Контактное лицо: Кухарев Роман Алексеевич, директор филиала', 'ул. Овощная, 15, с. Васищево, Харьковский р-н, Харьковская обл., 62495 Тел.: (057) 766-37-63, 766-37-64, 766-37-65', 'branch'),
+(2, 1, 'РЦ ХЖК', '376-21-28,\r\n784-94-20,\r\n784-93-93', '61019, Украина, г. Харьков пр. Ильича, 120', 'distribution_center'),
+(3, 1, 'Харьковский жиркомбинат', 'Производство маргарина, линия рафинации масел, дезодорационные линии, освоено производство мягких наливных маргаринов.', '61019, Украина, г. Харьков  пр. Ильича, 120', 'factory'),
+(4, 2, 'Киевский филиал', 'Контактное лицо: Нимак Илья Владимирович, директор филиала', 'ул. Семьи Хохловых, 11/2, г. Киев, 04119 Тел.: (044) 393-03-63', 'branch'),
+(5, 14, 'Полтавский филиал', 'Контактное лицо: Васильев Юрий Владимирович, директор филиала', 'ул. Половка, 66-Б, г. Полтава, 36034 Тел.: (0532 ) 613-702, 613-703', 'branch'),
+(7, 3, 'РЦ ЛЖК', 'РЦ ЛЖК', 'РЦ ЛЖК', 'distribution_center');
 
 --
--- Dumping data for table `product_categories`
+-- Truncate table before insert `fos_user_group`
 --
 
-INSERT INTO `product_categories` (`id`, `name`) VALUES
-(1, 'Майонезы'),
-(2, 'Кетчупы'),
-(3, 'Горчицы');
+TRUNCATE TABLE `fos_user_group`;
+--
+-- Dumping data for table `fos_user_group`
+--
 
+INSERT INTO `fos_user_group` (`id`, `name`, `roles`) VALUES
+(1, 'Администрация', 'a:1:{i:0;s:16:"ROLE_SUPER_ADMIN";}'),
+(2, 'Пользователи', 'a:1:{i:0;s:9:"ROLE_USER";}');
+
+--
+-- Truncate table before insert `fos_user_user`
+--
+
+TRUNCATE TABLE `fos_user_user`;
+--
+-- Dumping data for table `fos_user_user`
+--
+
+INSERT INTO `fos_user_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `locked`, `expired`, `expires_at`, `confirmation_token`, `password_requested_at`, `roles`, `credentials_expired`, `credentials_expire_at`, `created_at`, `updated_at`, `date_of_birth`, `firstname`, `lastname`, `website`, `biography`, `gender`, `locale`, `timezone`, `phone`, `facebook_uid`, `facebook_name`, `facebook_data`, `twitter_uid`, `twitter_name`, `twitter_data`, `gplus_uid`, `gplus_name`, `gplus_data`, `token`, `two_step_code`) VALUES
+(1, 'admin', 'admin', 'admin@schedro.ua', 'admin@schedro.ua', 1, '3nba2h6st340k0sgso8gk4k4ow8wg88', '$2y$13$3nba2h6st340k0sgso8gkuE6hxdFnFKjwKagAUmEtiaDu/anIBALS', '2016-02-05 09:27:38', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:16:"ROLE_SUPER_ADMIN";}', 0, NULL, '2016-02-03 15:33:44', '2016-02-05 09:27:38', '1986-12-30 00:00:00', 'Евгений', 'Едленко', NULL, NULL, 'm', NULL, 'Europe/Kiev', '+38 (096) 671 99 65', NULL, NULL, 'null', NULL, NULL, 'null', NULL, NULL, 'null', NULL, NULL),
+(2, 'user', 'user', 'user@schedro.ua', 'user@schedro.ua', 1, 'gddll0uy4r48s4k88wsscssg0c04884', '$2y$13$gddll0uy4r48s4k88wsscevS7jpBa4qy3ZPtMNtuF6nnMTtR0yXgm', NULL, 0, 0, NULL, NULL, NULL, 'a:0:{}', 0, NULL, '2016-02-03 15:39:22', '2016-02-04 08:45:47', NULL, 'Юрий', 'Едленко', NULL, NULL, 'm', NULL, NULL, NULL, NULL, NULL, 'null', NULL, NULL, 'null', NULL, NULL, 'null', NULL, NULL);
+
+--
+-- Truncate table before insert `fos_user_user_group`
+--
+
+TRUNCATE TABLE `fos_user_user_group`;
+--
+-- Dumping data for table `fos_user_user_group`
+--
+
+INSERT INTO `fos_user_user_group` (`user_id`, `group_id`) VALUES
+(1, 1),
+(2, 2);
+
+--
+-- Truncate table before insert `products`
+--
+
+TRUNCATE TABLE `products`;
 --
 -- Dumping data for table `products`
 --
@@ -109,6 +219,26 @@ INSERT INTO `products` (`id`, `product_category_id`, `name`) VALUES
 (4, 2, 'Tabasco Garlic'),
 (5, 3, 'Горчица Козацкая');
 
+--
+-- Truncate table before insert `product_categories`
+--
+
+TRUNCATE TABLE `product_categories`;
+--
+-- Dumping data for table `product_categories`
+--
+
+INSERT INTO `product_categories` (`id`, `name`) VALUES
+(1, 'Майонезы'),
+(2, 'Кетчупы'),
+(3, 'Горчицы'),
+(5, 'Маргарины');
+
+--
+-- Truncate table before insert `units`
+--
+
+TRUNCATE TABLE `units`;
 --
 -- Dumping data for table `units`
 --
@@ -124,6 +254,11 @@ INSERT INTO `units` (`id`, `name`, `short_name`, `type`, `is_modifiable`, `is_vi
 (8, 'пачка', 'п.', 'weight', 1, 1);
 
 --
+-- Truncate table before insert `units_proportions`
+--
+
+TRUNCATE TABLE `units_proportions`;
+--
 -- Dumping data for table `units_proportions`
 --
 
@@ -133,34 +268,71 @@ INSERT INTO `units_proportions` (`id`, `unit_1_id`, `unit_2_id`, `product_id`, `
 (4, 8, 5, 5, 1, '150.00');
 
 --
--- Dumping data for table `users_categories`
+-- Truncate table before insert `users`
 --
 
-INSERT INTO `users_categories` (`id`, `name`) VALUES
-(1, 'Администрация');
-
+TRUNCATE TABLE `users`;
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `category_id`, `username`, `password`, `email`, `phone`, `fullname`, `is_active`, `roles`) VALUES
-(1, 1, 'admin', '$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC', 'admin@schedro.ua', '+38 (096) 671 99 65', 'Едленко Евгений Юрьевич', 1, 'ROLE_ADMIN'),
-(2, 1, 'user', '$2y$13$TncZcL9Iy5s3./kjxOG15eH7gAvm7dMXmfve0yOrwblXTwYDL/dYC', 'user@schedro.ua', '+38 (098) 775 51 83', 'Едленко Татьяна Геннадьевна', 1, 'ROLE_USER');
+(1, 1, 'admin', '$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC', 'admin@schedro.ua', '+38 (096) 671 99 65', 'Едленко Ю. Г.', 1, 'ROLE_ADMIN'),
+(2, 1, 'user', '$2y$13$TncZcL9Iy5s3./kjxOG15eH7gAvm7dMXmfve0yOrwblXTwYDL/dYC', 'user@schedro.ua', '+38 (096) 671 99 65', 'Едленко Е. Ю.', 1, 'ROLE_USER');
 
+--
+-- Truncate table before insert `users_categories`
+--
+
+TRUNCATE TABLE `users_categories`;
+--
+-- Dumping data for table `users_categories`
+--
+
+INSERT INTO `users_categories` (`id`, `name`) VALUES
+(1, 'Администрация'),
+(3, 'Кладовщики');
+
+--
+-- Truncate table before insert `warehouses`
+--
+
+TRUNCATE TABLE `warehouses`;
 --
 -- Dumping data for table `warehouses`
 --
 
 INSERT INTO `warehouses` (`id`, `department_id`, `name`) VALUES
-(1, 1, 'ХФ - Склад #1'),
-(2, 1, 'ХФ - Склад #2'),
-(3, 2, 'КФ - Склад #1'),
-(4, 3, 'ЛФ - Склад #1');
+(1, 1, 'ХФ - Склад - 1'),
+(2, 1, 'ХФ - Склад - 2'),
+(3, 4, 'КФ - Склад - 1'),
+(4, 2, 'ХРЦ - Склад - 1'),
+(5, 5, 'ПФ - Склад - 1'),
+(6, 2, 'ХРЦ - Склад - 2'),
+(7, 4, 'КФ - Склад - 2'),
+(8, 5, 'ПФ - Склад - 2');
 
+--
+-- Truncate table before insert `warehouse_cells`
+--
+
+TRUNCATE TABLE `warehouse_cells`;
 --
 -- Dumping data for table `warehouse_cells`
 --
 
 INSERT INTO `warehouse_cells` (`id`, `warehouse_id`, `product_category_id`, `name`, `area`, `volume`) VALUES
-(1, 1, 1, 'ХФ - Склад #1 - Камера #1', '100.00', NULL),
-(2, 1, 2, 'ХФ - Склад #1 - Камера #2', '100.00', NULL);
+(1, 1, 5, 'Камера #1', '10.00', NULL),
+(2, 1, 1, 'Камера #2', '50.00', NULL),
+(3, 1, 2, 'Камера #3', '100.00', NULL),
+(4, 1, 3, 'Камера #4', '200.00', NULL),
+(6, 2, 1, 'Камера #1', '200.00', NULL),
+(7, 3, 5, 'Камера #1', '200.00', NULL),
+(8, 4, 1, 'Камера #1', '200.00', NULL),
+(9, 4, 2, 'Камера #2', '100.00', NULL),
+(12, 4, 3, 'Камера #3', '50.00', NULL),
+(13, 4, 5, 'Камера #4', '10.00', NULL);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

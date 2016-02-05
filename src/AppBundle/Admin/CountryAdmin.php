@@ -21,6 +21,22 @@ class CountryAdmin extends Admin
     protected $baseRouteName = 'sonata_countries';
     protected $baseRoutePattern = 'geography/countries';
 
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->addIdentifier('name', null, array(
+                'route' => array('name' => 'show')
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                )
+            ))
+        ;
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', 'text');
@@ -29,11 +45,6 @@ class CountryAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('name');
-    }
-
-    protected function configureListFields(ListMapper $listMapper)
-    {
-        $listMapper->addIdentifier('name');
     }
 
     public function toString($object)

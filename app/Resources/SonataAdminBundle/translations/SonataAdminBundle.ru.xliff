@@ -45,6 +45,12 @@
                 <target>Продукция</target>
             </trans-unit>
 
+            <!--Warehouses-->
+            <trans-unit id="warehouses_title">
+                <source>Warehouses</source>
+                <target>Склады</target>
+            </trans-unit>
+
             <!-- TODO: Flash messages ??? -->
             <trans-unit id="msg_success_create">
                 <source>Элемент создан успешно</source>

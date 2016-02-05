@@ -230,5 +230,9 @@ class Department
         }
         return $routePart;
     }
+
+    public function __toString() {
+        return $this->name;
+    }
 }
 

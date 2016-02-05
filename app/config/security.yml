@@ -4,8 +4,6 @@ security:
     encoders:
         Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt
-#        UserBundle\Entity\User:
-#            algorithm: bcrypt
         FOS\UserBundle\ModelUserInterface:
             algorithm: bcrypt
         Application\Sonata\UserBundle\Entity\User:

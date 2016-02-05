@@ -14,18 +14,6 @@ services:
     fos_user.doctrine_registry:
         alias: doctrine
 
-#    admin.user_group:
-#        class: AppBundle\Admin\UserGroupAdmin
-#        arguments: [~, UserBundle\Entity\Group, ~]
-#        tags:
-#            - { name: sonata.admin, manager_type: orm, label: Users Groups, group: Employees }
-#
-#    admin.user:
-#        class: AppBundle\Admin\UserAdmin
-#        arguments: [~, UserBundle\Entity\User, ~]
-#        tags:
-#            - { name: sonata.admin, manager_type: orm, label: Users, group: Employees }
-
     admin.country:
         class: AppBundle\Admin\CountryAdmin
         arguments: [~, AppBundle\Entity\Country, ~]
@@ -80,27 +68,38 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Vehicles, group: Transport }
 
-    admin.product_categories:
+    admin.product_category:
         class: AppBundle\Admin\ProductCategoryAdmin
         arguments: [~, AppBundle\Entity\ProductCategory, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Products Categories, group: Production }
 
-    admin.products:
+    admin.product:
         class: AppBundle\Admin\ProductAdmin
         arguments: [~, AppBundle\Entity\Product, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Products, group: Production }
 
-    admin.units:
+    admin.unit:
         class: AppBundle\Admin\UnitAdmin
         arguments: [~, AppBundle\Entity\Unit, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Units, group: Settings }
 
-    admin.proportions:
+    admin.proportion:
         class: AppBundle\Admin\ProportionAdmin
         arguments: [~, AppBundle\Entity\Proportion, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Proportions, group: Settings }
 
+    admin.branch_warehouse:
+        class: AppBundle\Admin\BranchWarehouseAdmin
+        arguments: [~, AppBundle\Entity\Warehouse, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Branches, group: Warehouses }
+
+    admin.distribution_center_warehouse:
+        class: AppBundle\Admin\DistributionCenterWarehouseAdmin
+        arguments: [~, AppBundle\Entity\Warehouse, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Distribution Centers, group: Warehouses }

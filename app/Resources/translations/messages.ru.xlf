@@ -27,12 +27,25 @@
                 <source>Department List</source>
                 <target>Подразделения</target>
             </trans-unit>
+            <trans-unit id="warehouses_list_title">
+                <source>Warehouse List</source>
+                <target>Склады</target>
+            </trans-unit>
+
             <trans-unit id="phone_number_title">
                 <source>Phone Number</source>
                 <target>Тел.</target>
             </trans-unit>
 
             <!--Actions-->
+            <trans-unit id="action_title">
+                <source>Action</source>
+                <target>Действие</target>
+            </trans-unit>
+            <trans-unit id="actions_title">
+                <source>Actions</source>
+                <target>Действия</target>
+            </trans-unit>
             <trans-unit id="1">
                 <source>Add</source>
                 <target>Добавить</target>
@@ -84,19 +97,33 @@
                 <source>Factories</source>
                 <target>Комбинаты</target>
             </trans-unit>
+
             <trans-unit id="distribution_centers_title">
                 <source>Distribution Centers</source>
                 <target>РЦ</target>
             </trans-unit>
+            <trans-unit id="distribution_center_title">
+                <source>Distribution Center</source>
+                <target>РЦ</target>
+            </trans-unit>
+
             <trans-unit id="branches_title">
                 <source>Branches</source>
                 <target>Филиалы</target>
+            </trans-unit>
+            <trans-unit id="branch_title">
+                <source>Branch</source>
+                <target>Филиал</target>
             </trans-unit>
 
 
             <trans-unit id="warehouses_title">
                 <source>Warehouses</source>
                 <target>Склады</target>
+            </trans-unit>
+            <trans-unit id="cells_title">
+                <source>Cells</source>
+                <target>Камеры</target>
             </trans-unit>
             <trans-unit id="reminders_title">
                 <source>Reminders</source>

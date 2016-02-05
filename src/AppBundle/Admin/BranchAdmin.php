@@ -23,10 +23,19 @@ class BranchAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
+            ->addIdentifier('name', null, array(
+                'route' => array('name' => 'show')
+            ))
             ->add('description')
             ->add('address')
             ->add('city.name')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                )
+            ))
         ;
     }
 
@@ -75,9 +84,4 @@ class BranchAdmin extends Admin
 
         return $query;
     }
-
-//    public function getBreadcrumbs()
-//    {
-//
-//    }
 }

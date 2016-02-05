@@ -38,7 +38,7 @@ class WarehouseCell
      * @Assert\Type(type="AppBundle\Entity\Warehouse")
      * @Assert\Valid()
      */
-    private $warehouse;
+    protected $warehouse;
 
     /**
      * @var ProductCategory
@@ -217,6 +217,10 @@ class WarehouseCell
         $this->usedArea = $usedArea;
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->name;
     }
 }
 

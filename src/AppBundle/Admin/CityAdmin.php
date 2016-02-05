@@ -20,6 +20,23 @@ class CityAdmin extends Admin
     protected $baseRouteName = 'sonata_cities';
     protected $baseRoutePattern = 'geography/countries/cities';
 
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->addIdentifier('name', null, array(
+                'route' => array('name' => 'show')
+            ))
+            ->add('country.name')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                )
+            ))
+        ;
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -37,14 +54,6 @@ class CityAdmin extends Admin
                     ))
 //                ->end()
 //            ->end()
-        ;
-    }
-
-    protected function configureListFields(ListMapper $listMapper)
-    {
-        $listMapper
-            ->addIdentifier('name')
-            ->add('country.name')
         ;
     }
 

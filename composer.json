@@ -29,11 +29,11 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "symfony/serializer": "^3.0",
         "knplabs/knp-paginator-bundle": "^2.5",
+        "knplabs/knp-menu-bundle": "~1.1",
         "sonata-project/admin-bundle": "^2.3",
         "sonata-project/doctrine-orm-admin-bundle": "^2.3",
         "sonata-project/user-bundle": "^2.2",
-        "sonata-project/easy-extends-bundle": "^2.1",
-        "zorbus/admin-theme-bundle": "dev-master"
+        "sonata-project/easy-extends-bundle": "^2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
