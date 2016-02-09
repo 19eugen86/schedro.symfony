@@ -30,8 +30,7 @@ class BranchWarehouseAdmin extends Admin
                 'route' => array('name' => 'show')
             ))
             ->add('department.name', null, array(
-                'label' => 'Branch',
-                'admin_code' => 'admin.branch'
+                'label' => 'Branch'
             ))
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -86,7 +85,7 @@ class BranchWarehouseAdmin extends Admin
             ->add('department.name', null, array(
                 'label' => 'Branch',
             ))
-            ->add('cells')
+            ->add('cells', null, array('template' => 'AppBundle:Admin:Warehouse_Cells.html.twig'))
         ;
     }
 

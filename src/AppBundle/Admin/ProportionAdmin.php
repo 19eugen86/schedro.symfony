@@ -24,13 +24,10 @@ class ProportionAdmin extends Admin
         $listMapper
             ->add('unit1.shortName')
             ->add('product.name')
-            ->addIdentifier('ratio', null, array(
-                'route' => array('name' => 'show')
-            ))
+            ->add('ratio')
             ->add('unit2.shortName')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )

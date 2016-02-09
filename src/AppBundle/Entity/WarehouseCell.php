@@ -68,7 +68,7 @@ class WarehouseCell
     /**
      * @var string
      */
-    private $usedArea;
+    private $usedArea = 20;
 
     /**
      * Get id

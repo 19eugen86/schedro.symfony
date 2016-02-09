@@ -13,10 +13,9 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
-//            return $this->redirect($request->getRequestUri()."admin");
-            return $this->redirectToRoute("sonata_admin_dashboard");
-        }
+//        if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+//            return $this->redirectToRoute("sonata_admin_dashboard");
+//        }
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [

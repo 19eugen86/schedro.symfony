@@ -22,35 +22,67 @@ class Builder implements ContainerAwareInterface
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
 
-        $menu->addChild('Factories')->setAttributes(array(
-            'dropdown' => true,
-            'icon' => 'glyphicon glyphicon-export',
-//            'divider_append' => true
-        ));
+        // Factories menu
+        $menu
+            ->addChild('Factories', array('uri' => '#'))
+            ->setAttributes(array(
+                'class' => 'dropdown',
+                'icon' => 'glyphicon glyphicon-export'
+            ))
+            ->setLinkAttributes(array(
+                'class' => 'dropdown-toggle',
+                'data-toggle' => 'dropdown'
+            ))
+            ->setChildrenAttributes(array(
+                'class' => 'dropdown-menu'
+            ))
+        ;
         $menu['Factories']->addChild('Reminders', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-compressed');
         $menu['Factories']->addChild('Arrival', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-save');
         $menu['Factories']->addChild('Consumption', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-open');
 
-        $menu->addChild('Distribution Centers')->setAttributes(array(
-            'dropdown' => true,
-            'icon' => 'glyphicon glyphicon-move',
-//            'divider_append' => true
-        ));
+        // Distribution centers menu
+        $menu
+            ->addChild('Distribution Centers', array('uri' => '#'))
+            ->setAttributes(array(
+                'class' => 'dropdown',
+                'icon' => 'glyphicon glyphicon-move'
+            ))
+            ->setLinkAttributes(array(
+                'class' => 'dropdown-toggle',
+                'data-toggle' => 'dropdown'
+            ))
+            ->setChildrenAttributes(array(
+                'class' => 'dropdown-menu'
+            ))
+        ;
         $menu['Distribution Centers']->addChild('Reminders', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-compressed');
         $menu['Distribution Centers']->addChild('Warehouses', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-cloud');
         $menu['Distribution Centers']->addChild('Arrival', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-cloud-upload');
         $menu['Distribution Centers']->addChild('Consumption', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-cloud-download');
 
-        $menu->addChild('Branches')->setAttributes(array(
-            'dropdown' => true,
-            'icon' => 'glyphicon glyphicon-home'
-        ));
+        // Branches menu
+        $menu
+            ->addChild('Branches', array('uri' => '#'))
+            ->setAttributes(array(
+                'class' => 'dropdown',
+                'icon' => 'glyphicon glyphicon-home'
+            ))
+            ->setLinkAttributes(array(
+                'class' => 'dropdown-toggle',
+                'data-toggle' => 'dropdown'
+            ))
+            ->setChildrenAttributes(array(
+                'class' => 'dropdown-menu'
+            ))
+        ;
         $menu['Branches']->addChild('Reminders', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-compressed');
         $menu['Branches']->addChild('Warehouses', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-cloud');
         $menu['Branches']->addChild('Arrival', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-cloud-upload');
         $menu['Branches']->addChild('Consumption', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-cloud-download');
 
         return $menu;
+
     }
 
     public function logoutMenu(FactoryInterface $factory, array $options)

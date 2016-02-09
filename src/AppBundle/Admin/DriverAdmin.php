@@ -23,14 +23,11 @@ class DriverAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('fullName', null, array(
-                'route' => array('name' => 'show')
-            ))
+            ->add('fullName')
             ->add('phoneNumber')
             ->add('carrier.name')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
