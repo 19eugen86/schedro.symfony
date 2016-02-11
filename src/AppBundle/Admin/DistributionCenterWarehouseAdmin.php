@@ -46,7 +46,7 @@ class DistributionCenterWarehouseAdmin extends Admin
     {
         $formMapper
             ->add('name', 'text')
-            ->add('department', 'entity',
+            ->add('department', 'sonata_type_model',
                 array(
                     'class' => 'AppBundle\Entity\Department',
                     'property' => 'name',

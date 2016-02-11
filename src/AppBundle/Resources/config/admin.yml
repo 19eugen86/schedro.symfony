@@ -1,0 +1,96 @@
+services:
+    admin.country:
+        class: AppBundle\Admin\CountryAdmin
+        arguments: [~, AppBundle\Entity\Country, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Countries, group: Geography }
+
+    admin.city:
+        class: AppBundle\Admin\CityAdmin
+        arguments: [~, AppBundle\Entity\City, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Cities, group: Geography }
+
+    admin.client:
+        class: AppBundle\Admin\ClientAdmin
+        arguments: [~, AppBundle\Entity\Client, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Clients, group: Clients  }
+
+    admin.factory:
+        class: AppBundle\Admin\FactoryAdmin
+        arguments: [~, AppBundle\Entity\Department, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Factories, group: Departments }
+
+    admin.distribution_center:
+        class: AppBundle\Admin\DistributionCenterAdmin
+        arguments: [~, AppBundle\Entity\Department, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Distribution Centers, group: Departments }
+
+    admin.branch:
+        class: AppBundle\Admin\BranchAdmin
+        arguments: [~, AppBundle\Entity\Department, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Branches, group: Departments }
+
+    admin.carrier:
+        class: AppBundle\Admin\CarrierAdmin
+        arguments: [~, AppBundle\Entity\Carrier, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Carriers, group: Transport }
+
+    admin.driver:
+        class: AppBundle\Admin\DriverAdmin
+        arguments: [~, AppBundle\Entity\Driver, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Drivers, group: Transport }
+
+    admin.vehicle:
+        class: AppBundle\Admin\VehicleAdmin
+        arguments: [~, AppBundle\Entity\Vehicle, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Vehicles, group: Transport }
+
+    admin.product_category:
+        class: AppBundle\Admin\ProductCategoryAdmin
+        arguments: [~, AppBundle\Entity\ProductCategory, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Products Categories, group: Production }
+
+    admin.product:
+        class: AppBundle\Admin\ProductAdmin
+        arguments: [~, AppBundle\Entity\Product, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Products, group: Production }
+
+    admin.unit:
+        class: AppBundle\Admin\UnitAdmin
+        arguments: [~, AppBundle\Entity\Unit, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Units, group: Settings }
+
+    admin.proportion:
+        class: AppBundle\Admin\ProportionAdmin
+        arguments: [~, AppBundle\Entity\Proportion, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Proportions, group: Settings }
+
+    admin.branch_warehouse:
+        class: AppBundle\Admin\BranchWarehouseAdmin
+        arguments: [~, AppBundle\Entity\Warehouse, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Branches, group: Warehouses }
+
+    admin.distribution_center_warehouse:
+        class: AppBundle\Admin\DistributionCenterWarehouseAdmin
+        arguments: [~, AppBundle\Entity\Warehouse, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Distribution Centers, group: Warehouses }
+
+    admin.warehouse_cell:
+        class: AppBundle\Admin\WarehouseCellAdmin
+        arguments: [~, AppBundle\Entity\WarehouseCell, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }

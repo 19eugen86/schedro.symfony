@@ -64,6 +64,16 @@
                 <source>Элемент успешно удален.</source>
                 <target>Элемент успешно удален.</target>
             </trans-unit>
+
+            <!--Custom actions buttons-->
+            <trans-unit id="add_new_warehouse_button">
+                <source>Add new warehouse</source>
+                <target>Добавить склад</target>
+            </trans-unit>
+            <trans-unit id="add_new_warehouse_cell_button">
+                <source>Add new cell</source>
+                <target>Добавить камеру</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
