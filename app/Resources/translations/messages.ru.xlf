@@ -46,47 +46,56 @@
                 <source>Actions</source>
                 <target>Действия</target>
             </trans-unit>
-            <trans-unit id="1">
+            <trans-unit id="add_title">
                 <source>Add</source>
                 <target>Добавить</target>
             </trans-unit>
-            <trans-unit id="2">
+            <trans-unit id="edit_title">
                 <source>Edit</source>
                 <target>Редактировать</target>
             </trans-unit>
-            <trans-unit id="3">
+            <trans-unit id="delete_title">
                 <source>Delete</source>
                 <target>Удалить</target>
             </trans-unit>
-            <trans-unit id="4">
+            <trans-unit id="yes_title">
                 <source>Yes</source>
                 <target>Да</target>
             </trans-unit>
-            <trans-unit id="5">
+            <trans-unit id="no_title">
                 <source>No</source>
                 <target>Нет</target>
             </trans-unit>
-            <trans-unit id="6">
+            <trans-unit id="are_you_sure_title">
                 <source>Are you sure?</source>
                 <target>Вы уверены?</target>
             </trans-unit>
-            <trans-unit id="7">
+            <trans-unit id="save_title">
                 <source>Save</source>
                 <target>Сохранить</target>
             </trans-unit>
-            <trans-unit id="8">
+            <trans-unit id="cancel_title">
                 <source>Cancel</source>
                 <target>Отмена</target>
             </trans-unit>
-            <trans-unit id="9">
+            <trans-unit id="name_title">
                 <source>Name</source>
                 <target>Название</target>
             </trans-unit>
-            <trans-unit id="10">
+            <trans-unit id="add_edit_title">
                 <source>Add/Edit</source>
                 <target>Добавить/Редактировать</target>
             </trans-unit>
-            <trans-unit id="11">
+
+            <trans-unit id="sign_in_title">
+                <source>Sign In</source>
+                <target>Вход</target>
+            </trans-unit>
+            <trans-unit id="sign_up_title">
+                <source>Sign Up</source>
+                <target>Регистрация</target>
+            </trans-unit>
+            <trans-unit id="logout_title">
                 <source>Logout</source>
                 <target>Выход</target>
             </trans-unit>

@@ -21,7 +21,13 @@
                 {% endif %}
                 {{ knp_menu_render('AppBundle:Builder:logoutMenu', {'currentClass': 'active'}) }}
             {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
-                {% include 'login.html.twig' %}
+                {#{% include 'login.html.twig' %}#}
+                <ul class="nav navbar-nav navbar-right">
+                    <li role="separator" class="divider-vertical"></li>
+                    <li><a href="{{ url("fos_user_security_login") }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> {{ 'Sign In'|trans }}</a></li>
+                    <li role="separator" class="divider-vertical"></li>
+                    <li><a href="{{ url("fos_user_registration_register") }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ 'Sign Up'|trans }}</a></li>
+                </ul>
             {% endif %}
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

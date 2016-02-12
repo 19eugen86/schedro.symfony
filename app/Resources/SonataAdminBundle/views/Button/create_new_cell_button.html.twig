@@ -1,5 +1,3 @@
-{#{% if admin.hasroute('list') and admin.isGranted('LIST')%}#}
-    <a class="sonata-action-element" href="{{ url('sonata_warehouses_cells_create') }}">
-        <i class="fa fa-plus-circle"></i>
-        {{ 'Add new cell'|trans({}, 'SonataAdminBundle') }}</a>
-{#{% endif %}#}
+<a class="sonata-action-element" href="{{ url('sonata_'~object.department.type~'_warehouse_cells_create', { 'warehouseId': object.id } ) }}">
+    <i class="fa fa-plus-circle"></i>
+    {{ 'Add new cell'|trans({}, 'SonataAdminBundle') }}</a>

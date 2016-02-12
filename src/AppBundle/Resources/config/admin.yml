@@ -83,14 +83,21 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Branches, group: Warehouses }
 
+    admin.branch_warehouse_cell:
+        class: AppBundle\Admin\BranchWarehouseCellAdmin
+        arguments: [~, AppBundle\Entity\WarehouseCell, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+
     admin.distribution_center_warehouse:
         class: AppBundle\Admin\DistributionCenterWarehouseAdmin
         arguments: [~, AppBundle\Entity\Warehouse, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Distribution Centers, group: Warehouses }
 
-    admin.warehouse_cell:
-        class: AppBundle\Admin\WarehouseCellAdmin
+    admin.distribution_center_warehouse_cell:
+        class: AppBundle\Admin\DistributionCenterWarehouseCellAdmin
         arguments: [~, AppBundle\Entity\WarehouseCell, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+
