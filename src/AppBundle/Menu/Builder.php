@@ -84,14 +84,4 @@ class Builder implements ContainerAwareInterface
         return $menu;
 
     }
-
-    public function logoutMenu(FactoryInterface $factory, array $options)
-    {
-        $menu = $factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
-
-        $menu->addChild('Logout', array('route' => 'fos_user_security_logout'))->setAttribute('icon', 'glyphicon glyphicon-log-out');
-
-        return $menu;
-    }
 }

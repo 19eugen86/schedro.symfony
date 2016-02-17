@@ -87,19 +87,6 @@
                 <target>Добавить/Редактировать</target>
             </trans-unit>
 
-            <trans-unit id="sign_in_title">
-                <source>Sign In</source>
-                <target>Вход</target>
-            </trans-unit>
-            <trans-unit id="sign_up_title">
-                <source>Sign Up</source>
-                <target>Регистрация</target>
-            </trans-unit>
-            <trans-unit id="logout_title">
-                <source>Logout</source>
-                <target>Выход</target>
-            </trans-unit>
-
             <!--Entities-->
 
             <trans-unit id="factories_title">

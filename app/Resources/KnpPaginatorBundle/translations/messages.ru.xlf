@@ -2,11 +2,11 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
-            <trans-unit id="1">
+            <trans-unit id="prev_title">
                 <source>Previous</source>
                 <target>Назад</target>
             </trans-unit>
-            <trans-unit id="2">
+            <trans-unit id="next_title">
                 <source>Next</source>
                 <target>Вперед</target>
             </trans-unit>

@@ -1,12 +1,12 @@
 {% block user_block %}
     <li>
-        <a href="{{ url('sonata_user_profile_show') }}"><i class="fa fa-user fa-fw"></i> {{ 'User Profile'|trans }}</a>
+        <a href="{{ url('sonata_user_profile_show') }}"><i class="fa fa-user fa-fw"></i> {{ 'sonata_profile_title'|trans({}, 'SonataUserBundle') }}</a>
     </li>
     {#<li>#}
         {#<a href="#"><i class="fa fa-gear fa-fw"></i> {{ 'Settings'|trans }}</a>#}
     {#</li>#}
     <li class="divider"></li>
     <li>
-        <a href="{{ path('sonata_user_admin_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'Logout'|trans }}</a>
+        <a href="{{ path('sonata_user_admin_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'link_logout'|trans({}, 'SonataUserBundle') }}</a>
     </li>
 {% endblock %}
