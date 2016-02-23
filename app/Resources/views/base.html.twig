@@ -8,13 +8,21 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/ie10-viewport-bug-workaround.css') }}">
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% include 'navbar.html.twig' %}
         <div class="container-fluid">
-            {% block body %}{% endblock %}
+            <div class="row">
+                {% include 'modal.html.twig' %}
+                <div class="main">
+                    {% include 'alertsbar.html.twig' %}
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
             {#
             <footer class="text-center">
                 <p>&copy; 2016 Щедро, Inc.</p>
@@ -25,6 +33,35 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/bootstrap-confirmation.min.js') }}"></script>
+        <script src="{{ asset('js/functions.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                $('.dropdown-toggle').dropdown();
+                $('[data-toggle="popover"]').popover();
+                $('[data-toggle="confirmation"]').confirmation({
+                    title: 'Вы уверены?',
+                    btnOkLabel: '<i class="icon-ok-sign icon-white"></i> Да',
+                    btnCancelLabel: '<i class="icon-remove-sign"></i> Нет',
+                    singleton: true,
+                    popout: true
+                });
+            });
+
+            $(function () {
+                $('[data-target="#modal-window"]').click(function(){
+                    $.ajax({
+                        url: $(this).data("action"),
+                        beforeSend: function() {
+                            $("#modal-window-content").html('');
+                        },
+                        success: function(response) {
+                            $("#modal-window-content").html(response);
+                        }
+                    });
+                });
+            });
+        </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

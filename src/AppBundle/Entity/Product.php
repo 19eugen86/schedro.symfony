@@ -50,9 +50,17 @@ class Product
      */
     protected $proportions;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="ProductFactored", mappedBy="product")
+     */
+    protected $productsFactored;
+
     public function __construct()
     {
         $this->proportions = new ArrayCollection();
+        $this->productsFactored = new ArrayCollection();
     }
 
     /**

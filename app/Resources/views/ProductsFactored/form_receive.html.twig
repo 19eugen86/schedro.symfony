@@ -1,0 +1,54 @@
+{{ form_start(form, { 'attr': {'class': 'form-inline'} }) }}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="modal-window-label">{{ 'Receive'|trans }}</h4>
+</div>
+<div class="modal-body">
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">{{ form_label(form.department, 'Factories'|trans) }}</span>
+        {{ form_errors(form.department) }}
+        {{ form_widget(form.department, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+    </div>
+    <br><br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">{{ form_label(form.productCategory, 'Product Category'|trans) }}</span>
+        {{ form_errors(form.productCategory) }}
+        {{ form_widget(form.productCategory, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+    </div>
+    <br><br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">{{ form_label(form.product, 'Product'|trans) }}</span>
+        {{ form_errors(form.product) }}
+        {{ form_widget(form.product, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+    </div>
+    <br><br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">{{ form_label(form.quantity, 'Quantity'|trans) }}</span>
+        {{ form_errors(form.quantity) }}
+        {{ form_widget(form.quantity, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+    </div>
+    <br><br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">{{ form_label(form.unit, 'Unit'|trans) }}</span>
+        {{ form_errors(form.unit) }}
+        {{ form_widget(form.unit, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+    </div>
+    <br><br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">{{ form_label(form.consignment, 'Consignment'|trans) }}</span>
+        {{ form_errors(form.consignment) }}
+        {{ form_widget(form.consignment, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}
+    </div>
+    <br><br>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">{{ form_label(form.date, 'Date'|trans) }}</span>
+        {{ form_errors(form.date) }}
+        {#{{ form_widget(form.date, {'attr': {'class': 'form-control'}, 'aria-describedby': 'basic-addon1'}) }}#}
+        {{ form_widget(form.date) }}
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Cancel'|trans }}</button>
+    <button type="submit" class="btn btn-primary">{{ 'Receive'|trans }}</button>
+</div>
+{{ form_end(form) }}

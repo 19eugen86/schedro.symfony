@@ -73,9 +73,17 @@ class Department
      */
     private $warehouses;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="ProductFactored", mappedBy="department")
+     */
+    private $productsFactored;
+
     public function __construct()
     {
         $this->warehouses = new ArrayCollection();
+        $this->productsFactored = new ArrayCollection();
     }
 
     /**

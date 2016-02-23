@@ -23,23 +23,7 @@ class Builder implements ContainerAwareInterface
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
 
         // Factories menu
-        $menu
-            ->addChild('Factories', array('uri' => '#'))
-            ->setAttributes(array(
-                'class' => 'dropdown',
-                'icon' => 'glyphicon glyphicon-export'
-            ))
-            ->setLinkAttributes(array(
-                'class' => 'dropdown-toggle',
-                'data-toggle' => 'dropdown'
-            ))
-            ->setChildrenAttributes(array(
-                'class' => 'dropdown-menu'
-            ))
-        ;
-        $menu['Factories']->addChild('Reminders', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-compressed');
-        $menu['Factories']->addChild('Arrival', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-save');
-        $menu['Factories']->addChild('Consumption', array('uri' => '#'))->setAttribute('icon', 'glyphicon glyphicon-open');
+        $menu->addChild('Factories', array('route' => 'show_factories_reminders'))->setAttributes(array('icon' => 'glyphicon glyphicon-export'));
 
         // Distribution centers menu
         $menu

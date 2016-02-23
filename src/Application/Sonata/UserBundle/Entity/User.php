@@ -11,6 +11,8 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
@@ -29,6 +31,19 @@ class User extends BaseUser
      * @var int $id
      */
     protected $id;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="ProductFactored", mappedBy="user")
+     */
+    protected $productsFactored;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->productsFactored = new ArrayCollection();
+    }
 
     /**
      * Get id

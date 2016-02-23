@@ -71,10 +71,18 @@ class Unit
      */
     protected $unit2Proportions;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="ProductFactored", mappedBy="unit")
+     */
+    protected $productsFactored;
+
     public function __construct()
     {
         $this->unit1Proportions = new ArrayCollection();
         $this->unit2Proportions = new ArrayCollection();
+        $this->productsFactored = new ArrayCollection();
     }
 
     /**

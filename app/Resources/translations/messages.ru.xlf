@@ -86,6 +86,14 @@
                 <source>Add/Edit</source>
                 <target>Добавить/Редактировать</target>
             </trans-unit>
+            <trans-unit id="receive_title">
+                <source>Receive</source>
+                <target>Принять</target>
+            </trans-unit>
+            <trans-unit id="send_title">
+                <source>Send</source>
+                <target>Отправить</target>
+            </trans-unit>
 
             <!--Entities-->
 
